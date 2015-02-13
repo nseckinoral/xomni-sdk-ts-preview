@@ -1,0 +1,10 @@
+{
+  "name": "xomni-cms-vnext",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "jquery": "~2.0.0",
+    "jasmine": "~2.0.0",
+    "jasmine-ajax": "~2.99.0"
+  }
+}
