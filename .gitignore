@@ -184,3 +184,11 @@ FakesAssemblies/
 
 # Bower packages
 bower_components/
+
+# Visual Studio Js & Map & d.ts outputs
+src/*.js
+src/*.map
+src/*.d.ts
+test/*.js
+test/*.map
+test/*.d.ts
