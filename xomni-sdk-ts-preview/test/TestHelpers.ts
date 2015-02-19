@@ -15,12 +15,15 @@
             });
     }
 
-    export function RequestHttpHeadersTest($: any, expectedHeaders: any) {
+    export function RequestHttpHeadersTest($: any, expectedHeaders? : any) {
         spyOn($, "ajax")
             .and
             .callFake(params => {
                 expect(params.headers).toEqual(expectedHeaders);
             });
     }
-    
+
+    export function InitalizeTestContext() {
+        Xomni.currentContext = new Xomni.ClientContext("u", "p", "s");
+    }
 }
