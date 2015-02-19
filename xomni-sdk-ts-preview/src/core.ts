@@ -21,8 +21,8 @@
         }
 
         getCurrentClientContext(): ClientContext {
-            if (currentContext === undefined || currentContext.username === undefined || currentContext.serviceUri === undefined || currentContext.password === undefined) {
-                throw 'API credential did not set.';
+            if (currentContext == null) {
+                throw new Error("Client context could not be null.");
             }
             else {
                 return currentContext;
@@ -35,6 +35,15 @@
     }
     export class ClientContext {
         constructor(public username: string, public password: string, public serviceUri: string) {
+            if (!username) {
+                throw new Error("username could not be null or empty.");
+            }
+            if (!password) {
+                throw new Error("password could not be null or empty.");
+            }
+            if (!serviceUri) {
+                throw new Error("serviceUri could not be null or empty.");
+            }
         }
     }
     export var currentContext: ClientContext;
