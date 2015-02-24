@@ -1,0 +1,10 @@
+{
+  "name": "xomni-sdk-ts-preview-test",
+  "version": "3.0.0-alpha",
+  "private": true,
+  "dependencies": {
+    "jquery": "~2.0.0",
+    "jasmine": "~2.0.0",
+    "jasmine-ajax": "~2.99.0"
+  }
+}

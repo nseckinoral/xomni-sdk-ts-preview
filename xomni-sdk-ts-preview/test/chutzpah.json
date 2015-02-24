@@ -1,7 +1,0 @@
-﻿{
-   "References" : [
-        { "Path": "../definitions/jasmine/jasmine.d.ts" , "IncludeInTestHarness": "false"},
-        { "Path": "../definitions/jasmine/jquery.d.ts" , "IncludeInTestHarness": "false" },
-        { "Path": "../bower_components/jquery/jquery.js" , "IncludeInTestHarness": "false" }
-   ]
-}

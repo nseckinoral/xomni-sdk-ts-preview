@@ -1,9 +1,4 @@
-﻿/// <chutzpah_reference path="../../src/client-counters.ts" />
-/// <chutzpah_reference path="../../definitions/jasmine/jasmine.d.ts" />
-/// <chutzpah_reference path="../../definitions/jquery/jquery.d.ts" />
-/// <chutzpah_reference path="../test-helpers.ts" />
-
-describe('ClientContext fixture', () => {
+﻿describe('ClientContext fixture', () => {
     it("Should raise exception with invalid parameters. - username", () => {
         expect(() => {
             new Xomni.ClientContext(null, "p", "s")

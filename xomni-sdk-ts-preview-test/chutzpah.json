@@ -1,0 +1,13 @@
+﻿{
+    "References": [
+        { "Path": "definitions/jquery/jquery.d.ts" },
+        { "Path": "bower_components/jquery/jquery.js" },
+        { "Path": "definitions/jasmine/jasmine.d.ts" },
+        { "Path": "test-helpers.ts" },
+        { "Path": "references/xomni.d.ts" },
+        { "Path": "references/xomni.js" }
+    ],
+    "Tests": [
+        { "Path": "fixtures" }
+    ]
+}

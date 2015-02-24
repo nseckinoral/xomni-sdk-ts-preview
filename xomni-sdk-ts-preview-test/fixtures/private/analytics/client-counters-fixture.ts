@@ -1,9 +1,4 @@
-﻿/// <chutzpah_reference path="../../src/client-counters.ts" />
-/// <chutzpah_reference path="../../definitions/jasmine/jasmine.d.ts" />
-/// <chutzpah_reference path="../../definitions/jquery/jquery.d.ts" />
-/// <chutzpah_reference path="../test-helpers.ts" />
-
-TestHelpers.InitalizeTestContext();
+﻿TestHelpers.InitalizeTestContext();
 
 describe('ClientCounterClient.getClientCounterList', () => {
     it("Should hit correct url", () => {

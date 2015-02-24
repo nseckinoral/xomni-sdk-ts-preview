@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xomni-sdk-ts-preview", "xomni-sdk-ts-preview\xomni-sdk-ts-preview.csproj", "{3B9A641D-DB0A-42E4-92AC-2470E9013BA4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xomni-sdk-ts-preview-test", "xomni-sdk-ts-preview-test\xomni-sdk-ts-preview-test.csproj", "{1FCAA132-4563-442A-836D-131CA33A6070}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{3B9A641D-DB0A-42E4-92AC-2470E9013BA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B9A641D-DB0A-42E4-92AC-2470E9013BA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B9A641D-DB0A-42E4-92AC-2470E9013BA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FCAA132-4563-442A-836D-131CA33A6070}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FCAA132-4563-442A-836D-131CA33A6070}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FCAA132-4563-442A-836D-131CA33A6070}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FCAA132-4563-442A-836D-131CA33A6070}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

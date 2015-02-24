@@ -1,9 +1,4 @@
-﻿/// <chutzpah_reference path="../../src/client-side-analytics-summary.ts" />
-/// <chutzpah_reference path="../../definitions/jasmine/jasmine.d.ts" />
-/// <chutzpah_reference path="../../definitions/jquery/jquery.d.ts" />
-/// <chutzpah_reference path="../test-helpers.ts" />
-
-TestHelpers.InitalizeTestContext();
+﻿TestHelpers.InitalizeTestContext();
 var validCounterName: string = "test";
 var validStartOADate: number = 49720;
 var validEndOADate: number = 49721;

@@ -1,4 +1,4 @@
-﻿/// <reference path="core.ts" />
+﻿/// <reference path="../../xomni.ts" />
 module Xomni.Private.Analytics.ClientCounters {
     export class ClientCounterClient extends BaseClient {
         private clientCounterUri: string = '/private/analytics/clientcounters';
