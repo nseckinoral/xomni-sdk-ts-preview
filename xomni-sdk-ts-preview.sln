@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xomni-sdk-ts-preview", "xomni-sdk-ts-preview\xomni-sdk-ts-preview.csproj", "{3B9A641D-DB0A-42E4-92AC-2470E9013BA4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xomni-sdk-ts-preview-test", "xomni-sdk-ts-preview-test\xomni-sdk-ts-preview-test.csproj", "{1FCAA132-4563-442A-836D-131CA33A6070}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3B9A641D-DB0A-42E4-92AC-2470E9013BA4} = {3B9A641D-DB0A-42E4-92AC-2470E9013BA4}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
