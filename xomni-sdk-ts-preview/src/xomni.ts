@@ -1,12 +1,21 @@
 ﻿module Xomni {
     export class HttpProvider {
         get<T>(uri: string, success: (result: T) => void, error: (error: any) => void) {
+            this.sendHttpRequest(HttpMethod.Get, uri, success, error);
+        }
+
+        put<T>(uri: string, data: any, success: (result: T) => void, error: (error: any) => void) {
+            this.sendHttpRequest(HttpMethod.Put, uri, success, error, data);
+        }
+
+        private sendHttpRequest<T>(httpMethod: HttpMethod, uri: string, success: (result: T) => void, error: (error: any) => void, data?: any) {
             var currentClientContext = this.getCurrentClientContext();
             var authorization: string = currentClientContext.username + ":" + currentClientContext.password;
             $.ajax({
-                type: "Get",
+                type: HttpMethod[httpMethod],
                 url: currentClientContext.serviceUri + uri,
                 contentType: "application/json",
+                data : data,
                 headers: {
                     "Authorization": "Basic " + btoa(authorization),
                     "Accept": "application/vnd.xomni.api-v3_0, */*"
@@ -30,6 +39,13 @@
         }
     }
 
+    enum HttpMethod {
+        Get,
+        Post,
+        Put,
+        Patch,
+        Delete
+    }
     export class BaseClient {
         httpProvider: HttpProvider = new HttpProvider();
     }
