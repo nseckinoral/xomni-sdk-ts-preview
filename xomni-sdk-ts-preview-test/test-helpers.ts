@@ -37,4 +37,12 @@
                 p.success(expectedResponseJson, null, null);
             });
     }
+
+    export function RequestParseTest($: any, expectedRequestJson: any) {
+        spyOn($, "ajax")
+            .and
+            .callFake(p => {
+                expect(p.data).toEqual(expectedRequestJson);
+            });
+    }
 }

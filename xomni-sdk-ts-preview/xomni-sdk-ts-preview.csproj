@@ -54,6 +54,7 @@
   </PropertyGroup>
   <ItemGroup>
     <TypeScriptCompile Include="definitions\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="src\management\configuration\trending-action-types.ts" />
     <TypeScriptCompile Include="src\private\analytics\client-counters.ts" />
     <TypeScriptCompile Include="src\private\analytics\client-side-analytics-summary.ts" />
     <TypeScriptCompile Include="src\management\social\facebook.ts" />
