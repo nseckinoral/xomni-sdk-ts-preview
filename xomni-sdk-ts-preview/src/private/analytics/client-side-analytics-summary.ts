@@ -1,4 +1,9 @@
-﻿/// <reference path="../../xomni.ts" />
+﻿/// <reference path="../../models/private/analytics/base-analytics-summary.ts" />
+/// <reference path="../../models/private/analytics/yearly-summary.ts" />
+/// <reference path="../../models/private/analytics/monthly-summary.ts" />
+/// <reference path="../../models/private/analytics/weekly-summary.ts" />
+/// <reference path="../../models/private/analytics/daily-summary.ts" />
+/// <reference path="../../xomni.ts" />
 module Xomni.Private.Analytics.ClientSideAnalyticsSummary {
     export class ClientSideAnalyticsLogSummaryClient extends BaseClient {
         private weeklyLogSummaryUri: string = '/private/analytics/clientcounters/{counterName}/summary/weekly?';
@@ -6,25 +11,25 @@ module Xomni.Private.Analytics.ClientSideAnalyticsSummary {
         private monthlyLogSummaryUri: string = '/private/analytics/clientcounters/{counterName}/summary/monthly?';
         private yearlyLogSummaryUri: string = '/private/analytics/clientcounters/{counterName}/summary/yearly?';
 
-        getDailyLogs(counterName: string, startOADate: number, endOADate: number, success: (result: DailyCountSummary[]) => void, error: (error: any) => void) {
+        getDailyLogs(counterName: string, startOADate: number, endOADate: number, success: (result: Models.Private.Analytics.DailyCountSummary[]) => void, error: (error: any) => void) {
             this.ValidateParameters(counterName, startOADate, endOADate);
             var uri = this.PrepareUri(this.dailyLogSummaryUri, counterName, startOADate, endOADate);
             this.httpProvider.get(uri, success, error);
         }
 
-        getWeeklyLogs(counterName: string, startOADate: number, endOADate: number, success: (result: WeeklyCountSummary[]) => void, error: (error: any) => void) {
+        getWeeklyLogs(counterName: string, startOADate: number, endOADate: number, success: (result: Models.Private.Analytics.WeeklyCountSummary[]) => void, error: (error: any) => void) {
             this.ValidateParameters(counterName, startOADate, endOADate);
             var uri = this.PrepareUri(this.weeklyLogSummaryUri, counterName, startOADate, endOADate);
             this.httpProvider.get(uri, success, error);
         }
 
-        getMonthlyLogs(counterName: string, startOADate: number, endOADate: number, success: (result: MonthlyCountSummary[]) => void, error: (error: any) => void) {
+        getMonthlyLogs(counterName: string, startOADate: number, endOADate: number, success: (result: Models.Private.Analytics.MonthlyCountSummary[]) => void, error: (error: any) => void) {
             this.ValidateParameters(counterName, startOADate, endOADate);
             var uri = this.PrepareUri(this.monthlyLogSummaryUri, counterName, startOADate, endOADate);
             this.httpProvider.get(uri, success, error);
         }
 
-        getYearlyLogs(counterName: string, startOADate: number, endOADate: number, success: (result: YearlyCountSummary[]) => void, error: (error: any) => void) {
+        getYearlyLogs(counterName: string, startOADate: number, endOADate: number, success: (result: Models.Private.Analytics.YearlyCountSummary[]) => void, error: (error: any) => void) {
             this.ValidateParameters(counterName, startOADate, endOADate);
             var uri = this.PrepareUri(this.yearlyLogSummaryUri, counterName, startOADate, endOADate);
             this.httpProvider.get(uri, success, error);
@@ -52,25 +57,5 @@ module Xomni.Private.Analytics.ClientSideAnalyticsSummary {
                 throw new Error("startOADate could not be greater than endOADate");
             }
         }
-    }
-
-    export interface BaseAnalyticsCountSummary {
-        TotalCount: number;
-    }
-
-    export interface YearlyCountSummary extends BaseAnalyticsCountSummary {
-        Year: number;
-    }
-
-    export interface MonthlyCountSummary extends YearlyCountSummary {
-        Month: number;
-    }
-
-    export interface WeeklyCountSummary extends MonthlyCountSummary {
-        WeekOfYear: number;
-    }
-
-    export interface DailyCountSummary extends WeeklyCountSummary {
-        Day: number;
     }
 }
