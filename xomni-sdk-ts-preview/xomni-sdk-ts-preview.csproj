@@ -55,6 +55,27 @@
   <ItemGroup>
     <TypeScriptCompile Include="definitions\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="src\management\configuration\trending-action-types.ts" />
+    <TypeScriptCompile Include="src\models\management\configuration\trending-action-type-value.ts">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\models\private\analytics\base-analytics-summary.ts">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\models\private\analytics\client-counter-list-container.ts">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\models\private\analytics\daily-summary.ts">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\models\private\analytics\monthly-summary.ts">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\models\private\analytics\weekly-summary.ts">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\models\private\analytics\yearly-summary.ts">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\private\analytics\client-counters.ts" />
     <TypeScriptCompile Include="src\private\analytics\client-side-analytics-summary.ts" />
     <TypeScriptCompile Include="src\management\social\facebook.ts" />
