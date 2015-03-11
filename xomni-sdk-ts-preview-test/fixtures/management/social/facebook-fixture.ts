@@ -4,20 +4,20 @@ describe('Facebook.FacebookClient.getClientCounterList', () => {
     it("Should hit correct url", () => {
         TestHelpers.RequestUriTest($, "/management/social/facebookdisplaytypes");
         var testClient = new Xomni.Management.Social.Facebook.FacebookClient();
-        testClient.getFacebookDisplayTypes(suc => { }, err => { });
+        testClient.get(suc => { }, err => { });
     });
 
     it("Should use correct http method", () => {
         TestHelpers.RequestHttpMethodTest($, "Get");
         var testClient = new Xomni.Management.Social.Facebook.FacebookClient();
-        testClient.getFacebookDisplayTypes(suc => { }, err => { });
+        testClient.get(suc => { }, err => { });
 
     });
 
     it("Should use correct http headers", () => {
         TestHelpers.RequestHttpHeadersTest($);
         var testClient = new Xomni.Management.Social.Facebook.FacebookClient();
-        testClient.getFacebookDisplayTypes(suc => { }, err => { });
+        testClient.get(suc => { }, err => { });
     });
 
     it("Should parse response successfully", () => {
@@ -30,6 +30,6 @@ describe('Facebook.FacebookClient.getClientCounterList', () => {
         };
 
         var testClient = new Xomni.Management.Social.Facebook.FacebookClient();
-        testClient.getFacebookDisplayTypes(expectedSuccess, err => { });
+        testClient.get(expectedSuccess, err => { });
     });
 });
