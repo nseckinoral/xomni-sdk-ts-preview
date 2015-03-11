@@ -1,6 +1,6 @@
 ﻿TestHelpers.InitalizeTestContext();
 
-var samplePutRequest: Array<Xomni.Management.Configuration.TrendingActionTypes.TrendingActionTypeContainer> = [{ Id: 1, Description: "SocialLike", ImpactValue: 5.1 }];
+var samplePutRequest: Array<Models.Management.Configuration.TrendingActionTypeValue> = [{ Id: 1, Description: "SocialLike", ImpactValue: 5.1 }];
 
 describe('TrendingActionTypesClient.updateTrendingActionTypeValues', () => {
 
@@ -36,7 +36,7 @@ describe('TrendingActionTypesClient.updateTrendingActionTypeValues', () => {
             ]
         );
 
-        var expectedSuccess = (trendingActionTypes: Xomni.Management.Configuration.TrendingActionTypes.TrendingActionTypeContainer[]) => {
+        var expectedSuccess = (trendingActionTypes: Models.Management.Configuration.TrendingActionTypeValue[]) => {
             expect(trendingActionTypes[0].Id).toEqual(1);
             expect(trendingActionTypes[0].Description).toEqual("SocialLike");
             expect(trendingActionTypes[0].ImpactValue).toEqual(5.1);
@@ -87,7 +87,7 @@ describe('TrendingActionTypesClient.getTrendingActionTypes', () => {
             ]
             );
 
-        var expectedSuccess = (trendingActionTypes: Xomni.Management.Configuration.TrendingActionTypes.TrendingActionTypeContainer[]) => {
+        var expectedSuccess = (trendingActionTypes: Models.Management.Configuration.TrendingActionTypeValue[]) => {
             expect(trendingActionTypes[0].Id).toEqual(1);
             expect(trendingActionTypes[0].Description).toEqual("SocialLike");
             expect(trendingActionTypes[0].ImpactValue).toEqual(5.1);

@@ -88,7 +88,7 @@ describe('ClientSideAnalyticsLogSummaryClient.getDailyLogs', () => {
                 }
             ]);
 
-        var expectedSuccess = (dailySummary: Xomni.Private.Analytics.ClientSideAnalyticsSummary.DailyCountSummary[]) => {
+        var expectedSuccess = (dailySummary: Models.Private.Analytics.DailyCountSummary[]) => {
             expect(dailySummary[0].Day).toEqual(21);
             expect(dailySummary[0].WeekOfYear).toEqual(12);
             expect(dailySummary[0].Month).toEqual(3);
@@ -179,7 +179,7 @@ describe('ClientSideAnalyticsLogSummaryClient.getWeeklyLogs', () => {
                 }
             ]);
 
-        var expectedSuccess = (weeklySummary: Xomni.Private.Analytics.ClientSideAnalyticsSummary.WeeklyCountSummary[]) => {
+        var expectedSuccess = (weeklySummary: Models.Private.Analytics.WeeklyCountSummary[]) => {
             expect(weeklySummary[0].WeekOfYear).toEqual(12);
             expect(weeklySummary[0].Month).toEqual(3);
             expect(weeklySummary[0].Year).toEqual(2015);
@@ -263,7 +263,7 @@ describe('ClientSideAnalyticsLogSummaryClient.getMonthlyLogs', () => {
                 }
             ]);
 
-        var expectedSuccess = (monthlySummary: Xomni.Private.Analytics.ClientSideAnalyticsSummary.MonthlyCountSummary[]) => {
+        var expectedSuccess = (monthlySummary: Models.Private.Analytics.MonthlyCountSummary[]) => {
             expect(monthlySummary[0].Month).toEqual(3);
             expect(monthlySummary[0].Year).toEqual(2015);
             expect(monthlySummary[0].TotalCount).toEqual(91);
@@ -341,7 +341,7 @@ describe('ClientSideAnalyticsLogSummaryClient.getYearlyLogs', () => {
                 }
             ]);
 
-        var expectedSuccess = (yearlySummary: Xomni.Private.Analytics.ClientSideAnalyticsSummary.YearlyCountSummary[]) => {
+        var expectedSuccess = (yearlySummary: Models.Private.Analytics.YearlyCountSummary[]) => {
             expect(yearlySummary[0].Year).toEqual(2015);
             expect(yearlySummary[0].TotalCount).toEqual(91);
             expect(yearlySummary.length).toEqual(5);

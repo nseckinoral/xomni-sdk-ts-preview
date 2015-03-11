@@ -31,7 +31,7 @@ describe('ClientCounterClient.getClientCounterList', () => {
                     ]
                 });
         
-        var expectedSuccess = (counters: Xomni.Private.Analytics.ClientCounters.ClientCounterListContainer) => {
+        var expectedSuccess = (counters: Models.Private.Analytics.ClientCounterListContainer) => {
             expect(counters.ContinuationToken).toEqual("adqweqwlkasd12312dkslk");
             expect(counters.CounterNames.length).toEqual(3);
             expect(counters.CounterNames[0]).toEqual("categoryClicked");
