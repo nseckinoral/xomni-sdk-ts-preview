@@ -10,8 +10,8 @@
         <description>XOMNI HTTP API Typescript SDK library</description>
     </metadata>
     <files>
-        <file src="dist\xomni.d.ts" target="xomni\xomni.d.ts" />
-        <file src="dist\xomni.js" target="xomni\xomni.js" />
-        <file src="dist\xomni.js.map" target="xomni\xomni.js.map" />
+        <file src="dist\xomni.d.ts" target="content\definitions\xomni\xomni.d.ts" />
+        <file src="dist\xomni.js" target="content\definitions\xomni\xomni.js" />
+        <file src="dist\xomni.js.map" target="content\definitions\xomni\xomni.js.map" />
     </files>
 </package>
