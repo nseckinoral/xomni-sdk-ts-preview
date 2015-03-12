@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
+    <metadata>
+        <id>xomni-sdk-ts</id>
+        <version>3.0.0-alpha</version>
+        <authors>XOMNI Inc</authors>
+        <owners>XOMNI Inc</owners>
+        <projectUrl>https://github.com/XomniCloud/xomni-sdk-ts-preview</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>XOMNI HTTP API Typescript SDK library</description>
+    </metadata>
+    <files>
+        <file src="dist\xomni.d.ts" target="xomni\xomni.d.ts" />
+        <file src="dist\xomni.js" target="xomni\xomni.js" />
+        <file src="dist\xomni.js.map" target="xomni\xomni.js.map" />
+    </files>
+</package>
