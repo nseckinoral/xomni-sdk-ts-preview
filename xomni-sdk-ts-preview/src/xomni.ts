@@ -1,10 +1,10 @@
 ﻿module Xomni {
     export class HttpProvider {
-        get<T>(uri: string, success: (result: T) => void, error: (error: any) => void) {
+        get<T>(uri: string, success: (result: T) => void, error: (error: Models.ExceptionResult) => void) {
             this.sendHttpRequest(HttpMethod.Get, uri, success, error);
         }
 
-        put<T>(uri: string, data: any, success: (result: T) => void, error: (error: any) => void) {
+        put<T>(uri: string, data: any, success: (result: T) => void, error: (error: Models.ExceptionResult) => void) {
             this.sendHttpRequest(HttpMethod.Put, uri, success, error, data);
         }
 
