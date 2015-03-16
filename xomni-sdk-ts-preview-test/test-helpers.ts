@@ -1,4 +1,10 @@
 ﻿module TestHelpers {
+    export var genericErrorResponse = '{\
+    "IdentifierGuid": "7358fe16-3925-4951-9a77-fca4f9e167b0",\
+    "IdentifierTick": 635585478999549713,\
+    "FriendlyDescription": "Generic error friendly description."\
+}';
+
     export function RequestUriTest($: any, expectedUrl: string) {
         spyOn($, "ajax")
             .and
@@ -43,6 +49,18 @@
             .and
             .callFake(p => {
                 expect(p.data).toEqual(expectedRequestJson);
+            });
+    }
+
+    export function APIExceptionResponseTest($: any, statusCode: number) {
+        spyOn($, "ajax")
+            .and
+            .callFake(p=> {
+                var jqXHR: JQueryXHR = <JQueryXHR>{
+                    responseText: genericErrorResponse,
+                    status: statusCode,
+                };
+                p.error(jqXHR, null, null);
             });
     }
 }

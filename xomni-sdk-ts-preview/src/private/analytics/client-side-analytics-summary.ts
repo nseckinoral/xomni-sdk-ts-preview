@@ -11,25 +11,25 @@ module Xomni.Private.Analytics.ClientSideAnalyticsSummary {
         private monthlyLogSummaryUri: string = '/private/analytics/clientcounters/{counterName}/summary/monthly?';
         private yearlyLogSummaryUri: string = '/private/analytics/clientcounters/{counterName}/summary/yearly?';
 
-        getDailyLogs(counterName: string, startOADate: number, endOADate: number, success: (result: Models.Private.Analytics.DailyCountSummary[]) => void, error: (error: any) => void) {
+        getDailyLogs(counterName: string, startOADate: number, endOADate: number, success: (result: Models.Private.Analytics.DailyCountSummary[]) => void, error: (error: Models.ExceptionResult) => void) {
             this.ValidateParameters(counterName, startOADate, endOADate);
             var uri = this.PrepareUri(this.dailyLogSummaryUri, counterName, startOADate, endOADate);
             this.httpProvider.get(uri, success, error);
         }
 
-        getWeeklyLogs(counterName: string, startOADate: number, endOADate: number, success: (result: Models.Private.Analytics.WeeklyCountSummary[]) => void, error: (error: any) => void) {
+        getWeeklyLogs(counterName: string, startOADate: number, endOADate: number, success: (result: Models.Private.Analytics.WeeklyCountSummary[]) => void, error: (error: Models.ExceptionResult) => void) {
             this.ValidateParameters(counterName, startOADate, endOADate);
             var uri = this.PrepareUri(this.weeklyLogSummaryUri, counterName, startOADate, endOADate);
             this.httpProvider.get(uri, success, error);
         }
 
-        getMonthlyLogs(counterName: string, startOADate: number, endOADate: number, success: (result: Models.Private.Analytics.MonthlyCountSummary[]) => void, error: (error: any) => void) {
+        getMonthlyLogs(counterName: string, startOADate: number, endOADate: number, success: (result: Models.Private.Analytics.MonthlyCountSummary[]) => void, error: (error: Models.ExceptionResult) => void) {
             this.ValidateParameters(counterName, startOADate, endOADate);
             var uri = this.PrepareUri(this.monthlyLogSummaryUri, counterName, startOADate, endOADate);
             this.httpProvider.get(uri, success, error);
         }
 
-        getYearlyLogs(counterName: string, startOADate: number, endOADate: number, success: (result: Models.Private.Analytics.YearlyCountSummary[]) => void, error: (error: any) => void) {
+        getYearlyLogs(counterName: string, startOADate: number, endOADate: number, success: (result: Models.Private.Analytics.YearlyCountSummary[]) => void, error: (error: Models.ExceptionResult) => void) {
             this.ValidateParameters(counterName, startOADate, endOADate);
             var uri = this.PrepareUri(this.yearlyLogSummaryUri, counterName, startOADate, endOADate);
             this.httpProvider.get(uri, success, error);

@@ -100,6 +100,18 @@ describe('ClientSideAnalyticsLogSummaryClient.getDailyLogs', () => {
         var testClient = new Xomni.Private.Analytics.ClientSideAnalyticsSummary.ClientSideAnalyticsLogSummaryClient();
         testClient.getDailyLogs(validCounterName, validStartOADate, validEndOADate, expectedSuccess, err => { });
     });
+
+    it("Should parse api exception response successfully", () => {
+        var expectedError = (exception: Models.ExceptionResult) => {
+            expect(exception.HttpStatusCode).toEqual(400);
+            expect(exception.FriendlyDescription).toEqual("Generic error friendly description.");
+            expect(exception.IdentifierGuid).toEqual("7358fe16-3925-4951-9a77-fca4f9e167b0");
+            expect(exception.IdentifierTick).toEqual(635585478999549713);
+        };
+
+        var testClient = new Xomni.Private.Analytics.ClientSideAnalyticsSummary.ClientSideAnalyticsLogSummaryClient();
+        testClient.getDailyLogs(validCounterName, validStartOADate, validEndOADate, suc=> { }, expectedError);
+    });
 });
 
 
@@ -190,6 +202,20 @@ describe('ClientSideAnalyticsLogSummaryClient.getWeeklyLogs', () => {
         var testClient = new Xomni.Private.Analytics.ClientSideAnalyticsSummary.ClientSideAnalyticsLogSummaryClient();
         testClient.getWeeklyLogs(validCounterName, validStartOADate, validEndOADate, expectedSuccess, err => { });
     });
+
+    it("Should parse api exception response successfully", () => {
+        TestHelpers.APIExceptionResponseTest($, 400);
+
+        var expectedError = (exception: Models.ExceptionResult) => {
+            expect(exception.HttpStatusCode).toEqual(400);
+            expect(exception.FriendlyDescription).toEqual("Generic error friendly description.");
+            expect(exception.IdentifierGuid).toEqual("7358fe16-3925-4951-9a77-fca4f9e167b0");
+            expect(exception.IdentifierTick).toEqual(635585478999549713);
+        };
+
+        var testClient = new Xomni.Private.Analytics.ClientSideAnalyticsSummary.ClientSideAnalyticsLogSummaryClient();
+        testClient.getWeeklyLogs(validCounterName, validStartOADate, validEndOADate, suc=> { }, expectedError);
+    });
 });
 
 describe('ClientSideAnalyticsLogSummaryClient.getMonthlyLogs', () => {
@@ -273,6 +299,20 @@ describe('ClientSideAnalyticsLogSummaryClient.getMonthlyLogs', () => {
         var testClient = new Xomni.Private.Analytics.ClientSideAnalyticsSummary.ClientSideAnalyticsLogSummaryClient();
         testClient.getMonthlyLogs(validCounterName, validStartOADate, validEndOADate, expectedSuccess, err => { });
     });
+
+    it("Should parse api exception response successfully", () => {
+        TestHelpers.APIExceptionResponseTest($, 400);
+
+        var expectedError = (exception: Models.ExceptionResult) => {
+            expect(exception.HttpStatusCode).toEqual(400);
+            expect(exception.FriendlyDescription).toEqual("Generic error friendly description.");
+            expect(exception.IdentifierGuid).toEqual("7358fe16-3925-4951-9a77-fca4f9e167b0");
+            expect(exception.IdentifierTick).toEqual(635585478999549713);
+        };
+
+        var testClient = new Xomni.Private.Analytics.ClientSideAnalyticsSummary.ClientSideAnalyticsLogSummaryClient();
+        testClient.getMonthlyLogs(validCounterName, validStartOADate, validEndOADate, suc=> { }, expectedError);
+    });
 });
 
 describe('ClientSideAnalyticsLogSummaryClient.getYearlyLogs', () => {
@@ -349,5 +389,19 @@ describe('ClientSideAnalyticsLogSummaryClient.getYearlyLogs', () => {
 
         var testClient = new Xomni.Private.Analytics.ClientSideAnalyticsSummary.ClientSideAnalyticsLogSummaryClient();
         testClient.getYearlyLogs(validCounterName, validStartOADate, validEndOADate, expectedSuccess, err => { });
+    });
+
+    it("Should parse api exception response successfully", () => {
+        TestHelpers.APIExceptionResponseTest($, 400);
+
+        var expectedError = (exception: Models.ExceptionResult) => {
+            expect(exception.HttpStatusCode).toEqual(400);
+            expect(exception.FriendlyDescription).toEqual("Generic error friendly description.");
+            expect(exception.IdentifierGuid).toEqual("7358fe16-3925-4951-9a77-fca4f9e167b0");
+            expect(exception.IdentifierTick).toEqual(635585478999549713);
+        };
+
+        var testClient = new Xomni.Private.Analytics.ClientSideAnalyticsSummary.ClientSideAnalyticsLogSummaryClient();
+        testClient.getYearlyLogs(validCounterName, validStartOADate, validEndOADate, suc=> { }, expectedError);
     });
 });
