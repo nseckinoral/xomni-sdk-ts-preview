@@ -1,5 +1,5 @@
 ﻿module Models.Private.Analytics {
-    export class BaseAnalyticsCountSummary {
+    export interface BaseAnalyticsCountSummary {
         TotalCount: number;
     }
 } 
