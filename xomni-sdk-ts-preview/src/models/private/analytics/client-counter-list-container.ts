@@ -1,5 +1,5 @@
 ﻿module Models.Private.Analytics {
-    export class ClientCounterListContainer {
+    export interface ClientCounterListContainer {
         ContinuationToken: string;
         CounterNames: string[];
     }

@@ -1,6 +1,6 @@
 ﻿/// <reference path="monthly-summary.ts" />
 module Models.Private.Analytics {
-    export class WeeklyCountSummary extends MonthlyCountSummary {
+    export interface WeeklyCountSummary extends MonthlyCountSummary {
         WeekOfYear : number;
     }
 }  

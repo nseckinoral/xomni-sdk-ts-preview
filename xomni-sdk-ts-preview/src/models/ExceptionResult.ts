@@ -1,5 +1,5 @@
 ﻿module Models {
-    export class ExceptionResult {
+    export interface ExceptionResult {
         IdentifierGuid: string;
         IdentifierTick: number;
         FriendlyDescription: string;
