@@ -16,5 +16,9 @@ module Xomni.Management.Configuration.Settings {
             }
             this.httpProvider.put(this.uri, settings, success, error);
         }
+
+        get(success: (result: Models.Management.Configuration.Settings) => void, error: (error: Models.ExceptionResult) => void) {
+            this.httpProvider.get(this.uri, success, error);
+        }
     }
 }

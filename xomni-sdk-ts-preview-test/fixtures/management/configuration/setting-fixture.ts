@@ -175,4 +175,33 @@ describe('SettingsClient.put', () => {
         testClient.put(validRequest, suc=> { }, expectedError);
     });
 });
- 
+
+describe('SettingsClient.get', () => {
+        it("Should hit correct url", () => {
+            TestHelpers.RequestUriTest($, "/management/configuration/settings");
+
+            var testClient = new Xomni.Management.Configuration.Settings.SettingsClient();
+            testClient.get(suc => { }, err => { });
+        })
+    
+        it("Should use correct http method", () => {
+            TestHelpers.RequestHttpMethodTest($, "Get");
+        
+            var testClient = new Xomni.Management.Configuration.Settings.SettingsClient();
+            testClient.get(suc => { }, err => { });
+        });
+    
+        it("Should use correct http headers", () => {
+            TestHelpers.RequestHttpHeadersTest($);
+        
+            var testClient = new Xomni.Management.Configuration.Settings.SettingsClient();
+            testClient.get(suc => { }, err => { });
+        });
+    
+        it("Should parse response successfully", () => {
+            TestHelpers.ResponseParseTest($, validResponseAndRequestJson);
+        
+            var testClient = new Xomni.Management.Configuration.Settings.SettingsClient();
+            testClient.get(expectedSuccess, err => { });
+    });
+});
