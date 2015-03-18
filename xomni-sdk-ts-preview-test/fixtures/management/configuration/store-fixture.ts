@@ -4,6 +4,16 @@ var validSkip: number = 1;
 var validTake: number = 1000;
 var validUri: string = "/management/configuration/store/" + validStoreId;
 var validUriForGetList: string = "/management/configuration/stores?skip=" + validSkip + "&take=" + validTake;
+var validUriForPostAndPut: string = "/management/configuration/store/";
+var validStoreForPost: Models.Management.Configuration.Store = <Models.Management.Configuration.Store>{
+    Name: "Relationed Store",
+    Description: "The Description",
+    Address: "Sample Data Address",
+    Location: {
+        "Longitude": 23.54,
+        "Latitude": 35.41
+    }
+}
 
 describe('StoreClient.get', () => {
     it("Should hit correct url", () => {
@@ -26,7 +36,7 @@ describe('StoreClient.get', () => {
 
     it("Should raise exception with invalid parameters", () => {
         var testClient = new Xomni.Management.Configuration.Store.StoreClient();
-        
+
         expect(() => { testClient.get(-1, suc => { }, err => { }) })
             .toThrow(new Error("storeId could not be less than 0."));
 
@@ -260,4 +270,108 @@ describe('StoreClient.getList', () => {
     });
 });
 
+describe('StoreClient.post', () => {
+    it("Should hit correct url", () => {
+        TestHelpers.RequestUriTest($, validUriForPostAndPut);
+        var testClient = new Xomni.Management.Configuration.Store.StoreClient();
+        testClient.post(validStoreForPost, suc => { }, err => { });
+    });
 
+    it("Should use correct http method", () => {
+        TestHelpers.RequestHttpMethodTest($, "Post");
+        var testClient = new Xomni.Management.Configuration.Store.StoreClient();
+        testClient.post(validStoreForPost, suc => { }, err => { });
+    });
+
+    it("Should use correct http headers", () => {
+        TestHelpers.RequestHttpHeadersTest($);
+        var testClient = new Xomni.Management.Configuration.Store.StoreClient();
+        testClient.post(validStoreForPost, suc => { }, err => { });
+    });
+
+    it("Should parse response successfully", () => {
+        TestHelpers.ResponseParseTest($, {
+            "Id": 84,
+            "Name": "Relationed Store",
+            "Description": "The Description",
+            "Address": "Sample Data Address",
+            "Location": {
+                "Longitude": 23.54,
+                "Latitude": 35.41
+            },
+            "Licenses": [
+            ]
+        });
+
+        var expectedSuccess = (store: Models.Management.Configuration.Store) => {
+            expect(store.Id).toEqual(84);
+            expect(store.Name).toEqual("Relationed Store");
+            expect(store.Description).toEqual("The Description");
+            expect(store.Address).toEqual("Sample Data Address");
+            expect(store.Location.Longitude).toEqual(23.54);
+            expect(store.Location.Latitude).toEqual(35.41);
+            expect(store.Licenses.length).toEqual(0);
+        };
+
+        var testClient = new Xomni.Management.Configuration.Store.StoreClient();
+        testClient.post(validStoreForPost, expectedSuccess, err => { });
+    });
+
+    it("Should parse request successfully", () => {
+        var parseMethod = (request: Models.Management.Configuration.Store) => {
+            expect(request).toEqual({
+                "Name": "Relationed Store",
+                "Description": "The Description",
+                "Address": "Sample Data Address",
+                "Location": {
+                    "Longitude": 23.54,
+                    "Latitude": 35.41
+                }
+            });
+            expect(request.Name).toEqual(validStoreForPost.Name);
+            expect(request.Description).toEqual(validStoreForPost.Description);
+            expect(request.Address).toEqual(validStoreForPost.Address);
+            expect(request.Location.Longitude).toEqual(validStoreForPost.Location.Longitude);
+            expect(request.Location.Latitude).toEqual(validStoreForPost.Location.Latitude);
+        };
+
+        TestHelpers.RequestParseTest($, parseMethod);
+
+        var testClient = new Xomni.Management.Configuration.Store.StoreClient();
+        testClient.post(validStoreForPost, succ=> { }, err => { });
+    });
+
+    it("Should raise exception with invalid parameters", () => {
+        var testClient = new Xomni.Management.Configuration.Store.StoreClient();
+
+        expect(() => {
+            var nullStoreName = <Models.Management.Configuration.Store>{
+                Name: null
+            };
+
+            testClient.post(nullStoreName, suc => { }, err => { })
+        }).toThrow(new Error("name could not be null or empty."));
+
+        expect(() => {
+            var undefinedStoreName = <Models.Management.Configuration.Store>{
+                Name: undefined
+            };
+
+            testClient.post(undefinedStoreName, suc => { }, err => { })
+        }).toThrow(new Error("name could not be null or empty."));
+    });
+
+    it("Should parse api exception response successfully", () => {
+        TestHelpers.APIExceptionResponseTest($, 409);
+
+        var expectedError = (exception: Models.ExceptionResult) => {
+            expect(exception.HttpStatusCode).toEqual(409);
+            expect(exception.FriendlyDescription).toEqual("Generic error friendly description.");
+            expect(exception.IdentifierGuid).toEqual("7358fe16-3925-4951-9a77-fca4f9e167b0");
+            expect(exception.IdentifierTick).toEqual(635585478999549713);
+        };
+
+        var testClient = new Xomni.Management.Configuration.Store.StoreClient();
+        testClient.delete(validStoreId, expectedError);
+    });
+});

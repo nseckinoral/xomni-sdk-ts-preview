@@ -18,6 +18,13 @@ module Xomni.Management.Configuration.Store {
             this.httpProvider.delete(uri, success=> { }, error);
         }
 
+        post(store: Models.Management.Configuration.Store, success: (result: Models.Management.Configuration.Store) => void, error: (error: Models.ExceptionResult) => void) {
+            if (!store.Name) {
+                throw new Error("name could not be null or empty.");
+            }
+            this.httpProvider.post(this.singleOperationBaseUrl, store, success, error);
+        }
+
         getList(skip: number, take: number, success: (result: Models.PaginatedContainer<Models.Management.Configuration.Store>) => void, error: (error: Models.ExceptionResult) => void) {
             this.ValidateSkipTake(skip, take);
             var uri = this.PrepareListOperationUrl(skip, take);
