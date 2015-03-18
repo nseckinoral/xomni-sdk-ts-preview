@@ -1,6 +1,9 @@
 ﻿TestHelpers.InitalizeTestContext();
-var validStoreId: number = 49720;
+var validStoreId: number = 0;
+var validSkip: number = 1;
+var validTake: number = 1000;
 var validUri: string = "/management/configuration/store/" + validStoreId;
+var validUriForGetList: string = "/management/configuration/stores?skip=" + validSkip + "&take=" + validTake;
 
 describe('StoreClient.get', () => {
     it("Should hit correct url", () => {
@@ -146,6 +149,114 @@ describe('StoreClient.delete', () => {
 
         var testClient = new Xomni.Management.Configuration.Store.StoreClient();
         testClient.delete(validStoreId, expectedError);
+    });
+});
+
+describe('StoreClient.getList', () => {
+    it("Should hit correct url", () => {
+        TestHelpers.RequestUriTest($, validUriForGetList);
+        var testClient = new Xomni.Management.Configuration.Store.StoreClient();
+        testClient.getList(validSkip, validTake, suc => { }, err => { });
+    });
+
+    it("Should use correct http method", () => {
+        TestHelpers.RequestHttpMethodTest($, "Get");
+        var testClient = new Xomni.Management.Configuration.Store.StoreClient();
+        testClient.getList(validSkip, validTake, suc => { }, err => { });
+    });
+
+    it("Should use correct http headers", () => {
+        TestHelpers.RequestHttpHeadersTest($);
+        var testClient = new Xomni.Management.Configuration.Store.StoreClient();
+        testClient.getList(validSkip, validTake, suc => { }, err => { });
+    });
+
+    it("Should raise exception with invalid parameters", () => {
+        var testClient = new Xomni.Management.Configuration.Store.StoreClient();
+
+        expect(() => { testClient.getList(null, 1, suc => { }, err => { }) })
+            .toThrow(new Error("skip could not be null or empty."));
+
+        expect(() => { testClient.getList(undefined, 1, suc => { }, err => { }) })
+            .toThrow(new Error("skip could not be null or empty."));
+
+        expect(() => { testClient.getList(-5, 1, suc => { }, err => { }) })
+            .toThrow(new Error("skip could not be less than 0."));
+
+        expect(() => { testClient.getList(5, null, suc => { }, err => { }) })
+            .toThrow(new Error("take could not be null or empty."));
+
+        expect(() => { testClient.getList(5, undefined, suc => { }, err => { }) })
+            .toThrow(new Error("take could not be null or empty."));
+
+        expect(() => { testClient.getList(5, 0, suc => { }, err => { }) })
+            .toThrow(new Error("take could not be less than 1."));
+
+    });
+
+    it("Should parse response successfully", () => {
+        TestHelpers.ResponseParseTest($, {
+            "Results": [
+                {
+                    "Id": 1004,
+                    "Name": "Relationed Store",
+                    "Description": "The Description",
+                    "Address": "Adres",
+                    "Location": {
+                        "Longitude": 23.54,
+                        "Latitude": 35.41
+                    },
+                    "Licenses": [
+                        {
+                            "Id": 4,
+                            "Username": "SampleLicenceUsername",
+                            "Name": "Sample Licence",
+                            "Password": "123",
+                            "StoreId": 1004
+                        }
+                    ]
+                },
+                {
+                    "Id": 1011,
+                    "Name": "New Store",
+                    "Description": "Description of New Store",
+                    "Address": "Adres",
+                    "Location": {
+                        "Longitude": 37.65,
+                        "Latitude": 23.41
+                    },
+                    "Licenses": []
+                }
+            ],
+            "TotalCount": 6
+        });
+
+        var expectedSuccess = (list: Models.PaginatedContainer<Models.Management.Configuration.Store>) => {
+            expect(list.TotalCount).toEqual(6);
+            expect(list.Results[0].Id).toEqual(1004);
+            expect(list.Results[0].Name).toEqual("Relationed Store");
+            expect(list.Results[0].Description).toEqual("The Description");
+            expect(list.Results[0].Address).toEqual("Adres");
+            expect(list.Results[0].Location.Longitude).toEqual(23.54);
+            expect(list.Results[0].Location.Latitude).toEqual(35.41);
+            expect(list.Results[0].Licenses.length).toEqual(1);
+            expect(list.Results[0].Licenses[0].Id).toEqual(4);
+            expect(list.Results[0].Licenses[0].Username).toEqual("SampleLicenceUsername");
+            expect(list.Results[0].Licenses[0].Name).toEqual("Sample Licence");
+            expect(list.Results[0].Licenses[0].Password).toEqual("123");
+            expect(list.Results[0].Licenses[0].StoreId).toEqual(1004);
+
+            expect(list.Results[1].Id).toEqual(1011);
+            expect(list.Results[1].Name).toEqual("New Store");
+            expect(list.Results[1].Description).toEqual("Description of New Store");
+            expect(list.Results[1].Address).toEqual("Adres");
+            expect(list.Results[1].Location.Longitude).toEqual(37.65);
+            expect(list.Results[1].Location.Latitude).toEqual(23.41);
+            expect(list.Results[1].Licenses.length).toEqual(0);
+        };
+
+        var testClient = new Xomni.Management.Configuration.Store.StoreClient();
+        testClient.getList(validSkip, validTake, expectedSuccess, err => { });
     });
 });
 
