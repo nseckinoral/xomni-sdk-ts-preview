@@ -19,5 +19,11 @@ module Xomni.Management.Security.PrivateApiUser {
             var uri: string = Xomni.Utils.UrlGenerator.PrepareSingleOperationUrl(this.singleOperationBaseUrl, privateApiUserId.toString());
             this.httpProvider.get(uri, success, error);
         }
+
+        delete(privateApiUserId: number, success: () => void, error: (error: Models.ExceptionResult) => void) {
+            Xomni.Utils.Validator.isGreaterThanOrEqual("privateApiUserId", privateApiUserId, 0);
+            var uri: string = Xomni.Utils.UrlGenerator.PrepareSingleOperationUrl(this.singleOperationBaseUrl, privateApiUserId.toString());
+            this.httpProvider.delete(uri, success, error);
+        }
     }
 } 
