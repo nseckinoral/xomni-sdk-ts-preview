@@ -47,7 +47,7 @@ describe('TrendingActionTypesClient.put', () => {
     });
 
     it("Should parse request successfully", () => {
-        TestHelpers.RequestParseTest($, [{ 'Id': 1, 'Description': 'SocialLike', 'ImpactValue': 5.1 }]);
+        TestHelpers.RequestJsonTest($, [{ 'Id': 1, 'Description': 'SocialLike', 'ImpactValue': 5.1 }]);
 
         var testClient = new Xomni.Management.Configuration.TrendingActionTypes.TrendingActionTypesClient();
         testClient.put(samplePutRequest, suc=> { }, err=> { });

@@ -54,10 +54,13 @@
   </PropertyGroup>
   <ItemGroup>
     <TypeScriptCompile Include="definitions\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="src\management\configuration\settings.ts" />
     <TypeScriptCompile Include="src\management\configuration\trending-action-types.ts" />
     <TypeScriptCompile Include="src\models\ExceptionResult.ts">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="src\models\management\configuration\facebook-display-type.ts" />
+    <TypeScriptCompile Include="src\models\management\configuration\settings.ts" />
     <TypeScriptCompile Include="src\models\management\configuration\trending-action-type-value.ts">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </TypeScriptCompile>
