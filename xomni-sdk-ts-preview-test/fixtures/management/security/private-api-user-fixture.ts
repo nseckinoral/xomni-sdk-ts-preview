@@ -4,6 +4,14 @@ var validSkip: number = 1;
 var validTake: number = 2;
 var validUriForGetList: string = "/management/security/privateapiusers?skip=" + validSkip + "&take=" + validTake;
 var validUri: string = "/management/security/privateapiuser/" + validPrivateApiUserId;
+var validUriForPostAndPut: string = "/management/security/privateapiuser";
+
+var validPrivateApiUserForPost: Models.Management.Security.ApiUser = <Models.Management.Security.ApiUser> {
+    Username: "NewPrivateApiUserName",
+    Name: "New Private Api User",
+    Password: "MyPassword",
+    StoreId: null
+};
 
 describe('PrivateApiUserClient.getList', () => {
     it("Should hit correct url", () => {
@@ -223,5 +231,133 @@ describe('PrivateApiUserClient.delete', () => {
         };
         var testClient = new Xomni.Management.Security.PrivateApiUser.PrivateApiUserClient();
         testClient.delete(validPrivateApiUserId, () => { }, expectedError);
+    });
+});
+
+describe('PrivateApiUserClient.post', () => {
+    it("Should hit correct url", () => {
+        TestHelpers.RequestUriTest($, validUriForPostAndPut);
+        var testClient = new Xomni.Management.Security.PrivateApiUser.PrivateApiUserClient();
+        testClient.post(validPrivateApiUserForPost, suc => { }, err => { });
+    })
+
+    it("Should use correct http method", () => {
+        TestHelpers.RequestHttpMethodTest($, "Post");
+        var testClient = new Xomni.Management.Security.PrivateApiUser.PrivateApiUserClient();
+        testClient.post(validPrivateApiUserForPost, suc => { }, err => { });
+    });
+
+    it("Should use correct http headers", () => {
+        TestHelpers.RequestHttpHeadersTest($);
+        var testClient = new Xomni.Management.Security.PrivateApiUser.PrivateApiUserClient();
+        testClient.post(validPrivateApiUserForPost, suc => { }, err => { });
+    });
+
+    it("Should parse response successfully", () => {
+        TestHelpers.ResponseParseTest($, {
+            "Id": 13,
+            "Username": "NewPrivateApiUserName",
+            "Name": "New Private Api User",
+            "Password": "MyPassword",
+            "StoreId": null,
+            "Rights": [
+                {
+                    "Id": 1,
+                    "Description": "PublicAPI"
+                }
+            ]
+        });
+
+        var expectedSuccess = (user: Models.Management.Security.ApiUser) => {
+            expect(user.Id).toEqual(13);
+            expect(user.Username).toEqual("NewPrivateApiUserName");
+            expect(user.Name).toEqual("New Private Api User");
+            expect(user.Password).toEqual("MyPassword");
+            expect(user.StoreId).toEqual(null);
+            expect(user.Rights.length).toEqual(1);
+            expect(user.Rights[0].Id).toEqual(1);
+            expect(user.Rights[0].Description).toEqual("PublicAPI");
+        };
+
+        var testClient = new Xomni.Management.Security.PrivateApiUser.PrivateApiUserClient();
+        testClient.post(validPrivateApiUserForPost, expectedSuccess, err=> { });
+    });
+
+    it("Should parse request successfully", () => {
+        var parseMethod = (request: Models.Management.Security.ApiUser) => {
+            expect(request).toEqual({
+                "Username": "NewPrivateApiUserName",
+                "Name": "New Private Api User",
+                "Password": "MyPassword",
+                "StoreId": null
+            });
+            expect(request.Name).toEqual(validPrivateApiUserForPost.Name);
+            expect(request.Password).toEqual(validPrivateApiUserForPost.Password);
+            expect(request.StoreId).toEqual(validPrivateApiUserForPost.StoreId);
+            expect(request.Username).toEqual(validPrivateApiUserForPost.Username);
+        };
+        TestHelpers.RequestParseTest($, parseMethod);
+
+        var testClient = new Xomni.Management.Security.PrivateApiUser.PrivateApiUserClient();
+        testClient.post(validPrivateApiUserForPost, succ=> { }, err=> { });
+    });
+
+    it("Should raise exception with invalid parameters", () => {
+        var testClient = new Xomni.Management.Security.PrivateApiUser.PrivateApiUserClient();
+
+        expect(() => { testClient.post(null, suc => { }, err => { }) })
+            .toThrow(new Error("privateApiUser could not be null or empty"));
+
+        expect(() => { testClient.post(undefined, suc => { }, err => { }) })
+            .toThrow(new Error("privateApiUser could not be null or empty"));
+
+        expect(() => {
+            var nullNameApiUser = <Models.Management.Security.ApiUser> {
+                Name: null,
+                Password: "password"
+            };
+
+            testClient.post(nullNameApiUser, suc => { }, err => { })
+        }).toThrow(new Error("name could not be null or empty"));
+
+        expect(() => {
+            var undefinedNameApiUser = <Models.Management.Security.ApiUser> {
+                Name: undefined,
+                Password: "password"
+            };
+
+            testClient.post(undefinedNameApiUser, suc => { }, err => { })
+       }).toThrow(new Error("name could not be null or empty"));
+
+        expect(() => {
+            var nullPassword = <Models.Management.Security.ApiUser> {
+                Name: "name",
+                Password: null
+            };
+
+            testClient.post(nullPassword, suc => { }, err => { })
+        }).toThrow(new Error("password could not be null or empty"));
+
+        expect(() => {
+            var undefinedPassword = <Models.Management.Security.ApiUser> {
+                Name: "name",
+                Password: undefined
+            };
+
+            testClient.post(undefinedPassword, suc => { }, err => { })
+        }).toThrow(new Error("password could not be null or empty"));
+    });
+
+    it("Should parse api exception response successfully", () => {
+        TestHelpers.APIExceptionResponseTest($, 409);
+
+        var expectedError = (exception: Models.ExceptionResult) => {
+            expect(exception.HttpStatusCode).toEqual(409);
+            expect(exception.FriendlyDescription).toEqual("Generic error friendly description.");
+            expect(exception.IdentifierGuid).toEqual("7358fe16-3925-4951-9a77-fca4f9e167b0");
+            expect(exception.IdentifierTick).toEqual(635585478999549713);
+        };
+        var testClient = new Xomni.Management.Security.PrivateApiUser.PrivateApiUserClient();
+        testClient.post(validPrivateApiUserForPost, succ=> { }, expectedError);
     });
 });
