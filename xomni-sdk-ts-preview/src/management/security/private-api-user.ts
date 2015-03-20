@@ -32,5 +32,14 @@ module Xomni.Management.Security.PrivateApiUser {
             Xomni.Utils.Validator.isDefined("password", privateApiUser.Password);
             this.httpProvider.post(this.singleOperationBaseUrl, privateApiUser, success, error);
         }
+
+        put(privateApiUser: Models.Management.Security.ApiUser, success: (result: Models.Management.Security.ApiUser) => void, error: (error: Models.ExceptionResult) => void) {
+            Xomni.Utils.Validator.isDefined("privateApiUser", privateApiUser);
+            Xomni.Utils.Validator.isGreaterThanOrEqual("id", privateApiUser.Id, 0);
+            Xomni.Utils.Validator.isDefined("name", privateApiUser.Name);
+            Xomni.Utils.Validator.isDefined("password", privateApiUser.Password);
+
+            this.httpProvider.put(this.singleOperationBaseUrl, privateApiUser, success, error);
+        }
     }
 } 
