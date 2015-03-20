@@ -8,6 +8,14 @@
             this.sendHttpRequest(HttpMethod.Put, uri, success, error, data);
         }
 
+        post<T>(uri: string, data: any, success: (result: T) => void, error: (error: Models.ExceptionResult) => void) {
+            this.sendHttpRequest(HttpMethod.Post, uri, success, error, data);
+        }
+
+        delete<T>(uri: string, success: (result: T) => void, error: (error: Models.ExceptionResult) => void) {
+            this.sendHttpRequest(HttpMethod.Delete, uri, success, error);
+        }
+
         private sendHttpRequest<T>(httpMethod: HttpMethod, uri: string, success: (result: T) => void, error: (error: Models.ExceptionResult) => void, data?: any) {
             var currentClientContext = this.getCurrentClientContext();
             var authorization: string = currentClientContext.username + ":" + currentClientContext.password;
