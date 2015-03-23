@@ -12,10 +12,10 @@ module Xomni.Management.Configuration.Store {
             this.httpProvider.get(uri, success, error);
         }
 
-        delete(storeId: number , error: (error: Models.ExceptionResult) => void) {
+        delete(storeId: number, success: () => void, error: (error: Models.ExceptionResult) => void) {
             this.ValidateStoreId(storeId);
             var uri = this.PrepareSingleOperationUrl(storeId);
-            this.httpProvider.delete(uri, success=> { }, error);
+            this.httpProvider.delete(uri, success, error);
         }
 
         post(store: Models.Management.Configuration.Store, success: (result: Models.Management.Configuration.Store) => void, error: (error: Models.ExceptionResult) => void) {

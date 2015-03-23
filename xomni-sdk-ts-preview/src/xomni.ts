@@ -12,8 +12,8 @@
             this.sendHttpRequest(HttpMethod.Post, uri, success, error, data);
         }
 
-        delete<T>(uri: string, success: (result: T) => void, error: (error: Models.ExceptionResult) => void) {
-            this.sendHttpRequest(HttpMethod.Delete, uri, success, error);
+        delete(uri: string, success: () => void, error: (error: Models.ExceptionResult) => void) {
+            this.sendHttpRequest<any>(HttpMethod.Delete, uri, success, error);
         }
 
         private sendHttpRequest<T>(httpMethod: HttpMethod, uri: string, success: (result: T) => void, error: (error: Models.ExceptionResult) => void, data?: any) {
