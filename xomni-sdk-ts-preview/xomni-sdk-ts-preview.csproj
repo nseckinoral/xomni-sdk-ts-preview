@@ -56,6 +56,7 @@
     <TypeScriptCompile Include="definitions\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="src\management\configuration\store.ts" />
     <TypeScriptCompile Include="src\management\configuration\settings.ts" />
+    <TypeScriptCompile Include="src\dictionary.ts" />
     <TypeScriptCompile Include="src\management\configuration\trending-action-types.ts" />
     <TypeScriptCompile Include="src\models\ExceptionResult.ts">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
