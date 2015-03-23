@@ -115,31 +115,31 @@ describe('StoreClient.delete', () => {
     it("Should hit correct url", () => {
         TestHelpers.RequestUriTest($, validUri);
         var testClient = new Xomni.Management.Configuration.Store.StoreClient();
-        testClient.delete(validStoreId, err => { });
+        testClient.delete(validStoreId, () => { }, err => { });
     });
 
     it("Should use correct http method", () => {
         TestHelpers.RequestHttpMethodTest($, "Delete");
         var testClient = new Xomni.Management.Configuration.Store.StoreClient();
-        testClient.delete(validStoreId, err => { });
+        testClient.delete(validStoreId, () => { }, err => { });
     });
 
     it("Should use correct http headers", () => {
         TestHelpers.RequestHttpHeadersTest($);
         var testClient = new Xomni.Management.Configuration.Store.StoreClient();
-        testClient.delete(validStoreId, err => { });
+        testClient.delete(validStoreId, () => { }, err => { });
     });
 
     it("Should raise exception with invalid parameters", () => {
         var testClient = new Xomni.Management.Configuration.Store.StoreClient();
 
-        expect(() => { testClient.delete(null, err => { }) })
+        expect(() => { testClient.delete(null, () => { }, err => { }) })
             .toThrow(new Error("storeId could not be null or empty."));
 
-        expect(() => { testClient.delete(undefined, err => { }) })
+        expect(() => { testClient.delete(undefined, () => { }, err => { }) })
             .toThrow(new Error("storeId could not be null or empty."));
 
-        expect(() => { testClient.delete(-1, err => { }) })
+        expect(() => { testClient.delete(-1, () => { }, err => { }) })
             .toThrow(new Error("storeId could not be less than 0."));
     });
 
@@ -154,7 +154,7 @@ describe('StoreClient.delete', () => {
         };
 
         var testClient = new Xomni.Management.Configuration.Store.StoreClient();
-        testClient.delete(validStoreId, expectedError);
+        testClient.delete(validStoreId, () => { }, expectedError);
     });
 
     it("Should parse api exception response successfully (400)", () => {
@@ -168,7 +168,7 @@ describe('StoreClient.delete', () => {
         };
 
         var testClient = new Xomni.Management.Configuration.Store.StoreClient();
-        testClient.delete(validStoreId, expectedError);
+        testClient.delete(validStoreId, () => { }, expectedError);
     });
 });
 
