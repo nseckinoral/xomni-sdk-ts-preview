@@ -102,6 +102,8 @@ describe('ClientSideAnalyticsLogSummaryClient.getDailyLogs', () => {
     });
 
     it("Should parse api exception response successfully", () => {
+        TestHelpers.APIExceptionResponseTest($, 400);
+
         var expectedError = (exception: Models.ExceptionResult) => {
             expect(exception.HttpStatusCode).toEqual(400);
             expect(exception.FriendlyDescription).toEqual("Generic error friendly description.");
