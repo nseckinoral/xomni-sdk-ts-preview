@@ -382,7 +382,7 @@ describe('StoreClient.post', () => {
         };
 
         var testClient = new Xomni.Management.Configuration.Store.StoreClient();
-        testClient.delete(validStoreId, expectedError);
+        testClient.post(validStoreForPost, suc => { }, expectedError);
     });
 });
 
