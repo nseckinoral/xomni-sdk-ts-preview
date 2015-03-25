@@ -94,7 +94,7 @@ describe('TrendingActionTypesClient.put', () => {
             expect(request[3].ImpactValue).toEqual(samplePutRequest[3].ImpactValue);
             expect(request[4].Id).toEqual(samplePutRequest[4].Id);
             expect(request[4].Description).toEqual(samplePutRequest[4].Description);
-            expect(request[4].ImpactValue).toEqual(samplePutRequest[4].ImpactValue);            
+            expect(request[4].ImpactValue).toEqual(samplePutRequest[4].ImpactValue);
         };
         TestHelpers.RequestParseTest($, parseMethod);
 
@@ -142,20 +142,24 @@ describe('TrendingActionTypesClient.get', () => {
     });
 
     it("Should parse response successfully", () => {
-        TestHelpers.ResponseParseTest($,
-            [
-                {
-                    "Id": 1,
-                    "Description": "SocialLike",
-                    "ImpactValue": 5.1
-                }
-            ]
-            );
+        TestHelpers.ResponseParseTest($, sampleRequestResponseJson);
 
         var expectedSuccess = (trendingActionTypes: Models.Management.Configuration.TrendingActionTypeValue[]) => {
             expect(trendingActionTypes[0].Id).toEqual(1);
             expect(trendingActionTypes[0].Description).toEqual("SocialLike");
             expect(trendingActionTypes[0].ImpactValue).toEqual(5.1);
+            expect(trendingActionTypes[1].Id).toEqual(2);
+            expect(trendingActionTypes[1].Description).toEqual("SocialShare");
+            expect(trendingActionTypes[1].ImpactValue).toEqual(2.1);
+            expect(trendingActionTypes[2].Id).toEqual(3);
+            expect(trendingActionTypes[2].Description).toEqual("ShoppingCartItemIInsert");
+            expect(trendingActionTypes[2].ImpactValue).toEqual(3.0);
+            expect(trendingActionTypes[3].Id).toEqual(4);
+            expect(trendingActionTypes[3].Description).toEqual("WishlistItemInsert");
+            expect(trendingActionTypes[3].ImpactValue).toEqual(4.0);
+            expect(trendingActionTypes[4].Id).toEqual(5);
+            expect(trendingActionTypes[4].Description).toEqual("ItemView");
+            expect(trendingActionTypes[4].ImpactValue).toEqual(5.0);
         };
 
         var testClient = new Xomni.Management.Configuration.TrendingActionTypes.TrendingActionTypesClient();
