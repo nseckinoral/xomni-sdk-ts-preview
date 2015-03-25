@@ -44,14 +44,6 @@
             });
     }
 
-    export function RequestJsonTest($: any, expectedRequestJson: any) {
-        spyOn($, "ajax")
-            .and
-            .callFake(p => {
-                expect(p.data).toEqual(expectedRequestJson);
-            });
-    }
-
     export function RequestParseTest($: any, parseMethod: (requestJson: any) => void) {
         spyOn($, "ajax")
             .and
