@@ -1,6 +1,6 @@
 ﻿module Models.Management.Integration {
     export interface EndpointCreateRequest {
-        AdminEmail: string;
+        AdminMail: string;
         ServiceName: string;
         ServiceTier: ServiceTierType;
     }
