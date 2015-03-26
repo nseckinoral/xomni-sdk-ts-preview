@@ -6,10 +6,10 @@
 /// <reference path="../../xomni.ts" />
 module Xomni.Private.Analytics.ClientSideAnalyticsSummary {
     export class ClientSideAnalyticsLogSummaryClient extends BaseClient {
-        private weeklyLogSummaryUri: string = '/private/analytics/clientcounters/{counterName}/summary/weekly?';
-        private dailyLogSummaryUri: string = '/private/analytics/clientcounters/{counterName}/summary/daily?';
-        private monthlyLogSummaryUri: string = '/private/analytics/clientcounters/{counterName}/summary/monthly?';
-        private yearlyLogSummaryUri: string = '/private/analytics/clientcounters/{counterName}/summary/yearly?';
+        private weeklyLogSummaryUri: string = '/private/analytics/clientcounters/{counterName}/summary/weekly';
+        private dailyLogSummaryUri: string = '/private/analytics/clientcounters/{counterName}/summary/daily';
+        private monthlyLogSummaryUri: string = '/private/analytics/clientcounters/{counterName}/summary/monthly';
+        private yearlyLogSummaryUri: string = '/private/analytics/clientcounters/{counterName}/summary/yearly';
 
         getDailyLogs(counterName: string, startOADate: number, endOADate: number, success: (result: Models.Private.Analytics.DailyCountSummary[]) => void, error: (error: Models.ExceptionResult) => void) {
             Xomni.Utils.Validator.isDefined("counterName", counterName);
@@ -49,7 +49,11 @@ module Xomni.Private.Analytics.ClientSideAnalyticsSummary {
 
         private PrepareUri(baseUri: string, counterName: string, startOADate: number, endOADate: number): string {
             var uri = baseUri.replace("{counterName}", counterName);
-            return uri + "startOADate=" + startOADate + "&endOADate=" + endOADate;
+            uri = Xomni.Utils.UrlGenerator.PrepareListOperationUrl(uri, new Dictionary<string, string>([
+                { key: "startOADate", value: startOADate.toString() },
+                { key: "endOADate", value: endOADate.toString() }
+            ]));
+            return uri;
         }
     }
 }

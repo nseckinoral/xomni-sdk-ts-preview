@@ -8,13 +8,13 @@ module Xomni.Management.Configuration.Store {
 
         get(storeId: number, success: (result: Models.Management.Configuration.Store) => void, error: (error: Models.ExceptionResult) => void) {
             Xomni.Utils.Validator.isGreaterThanOrEqual("storeId", storeId, 0);
-            var uri: string = this.PrepareSingleOperationUrl(storeId);
+            var uri: string = Xomni.Utils.UrlGenerator.PrepareSingleOperationUrl(this.singleOperationBaseUrl, storeId.toString());
             this.httpProvider.get(uri, success, error);
         }
 
         delete(storeId: number, success: () => void, error: (error: Models.ExceptionResult) => void) {
             Xomni.Utils.Validator.isGreaterThanOrEqual("storeId", storeId, 0);
-            var uri = this.PrepareSingleOperationUrl(storeId);
+            var uri = Xomni.Utils.UrlGenerator.PrepareSingleOperationUrl(this.singleOperationBaseUrl, storeId.toString());
             this.httpProvider.delete(uri, success, error);
         }
 
@@ -32,16 +32,11 @@ module Xomni.Management.Configuration.Store {
         getList(skip: number, take: number, success: (result: Models.PaginatedContainer<Models.Management.Configuration.Store>) => void, error: (error: Models.ExceptionResult) => void) {
             Xomni.Utils.Validator.isGreaterThanOrEqual("skip", skip, 0);
             Xomni.Utils.Validator.isGreaterThanOrEqual("take", take, 1);
-            var uri = this.PrepareListOperationUrl(skip, take);
+            var uri = Xomni.Utils.UrlGenerator.PrepareListOperationUrl(this.listOperationBaseUrl, new Dictionary<string, string>([
+                { key: "skip", value: skip.toString() },
+                { key: "take", value: take.toString() }
+            ]));
             this.httpProvider.get(uri, success, error);
-        }
-
-        PrepareSingleOperationUrl(storeId: number): string {
-            return this.singleOperationBaseUrl + storeId;
-        }
-
-        PrepareListOperationUrl(skip: number, take: number): string {
-            return this.listOperationBaseUrl + "?skip=" + skip + "&take=" + take;
         }
     }
 }
