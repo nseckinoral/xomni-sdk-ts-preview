@@ -17,55 +17,7 @@ var validCreateRequest : Models.Management.Integration.EndpointCreateRequest = {
     "ServiceTier": 0
 };
 
-describe('EndpointClient.get', () => {
-    it("Should hit correct url", () => {
-        TestHelpers.RequestUriTest($, "/management/integration/endpoint");
 
-        var testClient = new Xomni.Management.Integration.Endpoint.EndpointClient();
-        testClient.get(suc => { }, err => { });
-    });
-
-    it("Should use correct http method", () => {
-        TestHelpers.RequestHttpMethodTest($, "Get");
-
-        var testClient = new Xomni.Management.Integration.Endpoint.EndpointClient();
-        testClient.get(suc => { }, err => { });
-    });
-
-    it("Should use correct http headers", () => {
-        TestHelpers.RequestHttpHeadersTest($);
-
-        var testClient = new Xomni.Management.Integration.Endpoint.EndpointClient();
-        testClient.get(suc => { }, err => { });
-    });
-
-    it("Should parse response successfully", () => {
-        TestHelpers.ResponseParseTest($, validResponse);
-
-        var testClient = new Xomni.Management.Integration.Endpoint.EndpointClient();
-        testClient.get(
-            (r: Models.Management.Integration.EndpointDetail) => {
-                expect(r.ServiceName).toEqual("test");
-                expect(r.ManagementPortalUrl).toEqual("http://xomni.com");
-            },
-            err => {
-        });
-    });
-
-    it("Should parse api exception response successfully", () => {
-        TestHelpers.APIExceptionResponseTest($, 400);
-
-        var expectedError = (exception: Models.ExceptionResult) => {
-            expect(exception.HttpStatusCode).toEqual(400);
-            expect(exception.FriendlyDescription).toEqual("Generic error friendly description.");
-            expect(exception.IdentifierGuid).toEqual("7358fe16-3925-4951-9a77-fca4f9e167b0");
-            expect(exception.IdentifierTick).toEqual(635585478999549713);
-        };
-
-        var testClient = new Xomni.Management.Integration.Endpoint.EndpointClient();
-        testClient.get(suc => { }, expectedError);
-    });
-});
 
 describe('EndpointClient.post', () => {
     it("Should hit correct url", () => {
@@ -141,5 +93,42 @@ describe('EndpointClient.post', () => {
 
         var testClientX = new Xomni.Management.Integration.Endpoint.EndpointClient();
         testClientX.post(validCreateRequest, () => { }, expectedError);
+    });
+});
+
+describe('EndpointClient.delete', () => {
+    it("Should hit correct url", () => {
+        TestHelpers.RequestUriTest($, "/management/integration/endpoint");
+
+        var testClient = new Xomni.Management.Integration.Endpoint.EndpointClient();
+        testClient.delete(() => { }, err => { });
+    });
+
+    it("Should use correct http method", () => {
+        TestHelpers.RequestHttpMethodTest($, "Delete");
+
+        var testClient = new Xomni.Management.Integration.Endpoint.EndpointClient();
+        testClient.delete(() => { }, err => { });
+    });
+
+    it("Should use correct http headers", () => {
+        TestHelpers.RequestHttpHeadersTest($);
+
+        var testClient = new Xomni.Management.Integration.Endpoint.EndpointClient();
+        testClient.delete(() => { }, err => { });
+    });
+
+    it("Should parse api exception response successfully", () => {
+        TestHelpers.APIExceptionResponseTest($, 400);
+
+        var expectedError = (exception: Models.ExceptionResult) => {
+            expect(exception.HttpStatusCode).toEqual(400);
+            expect(exception.FriendlyDescription).toEqual("Generic error friendly description.");
+            expect(exception.IdentifierGuid).toEqual("7358fe16-3925-4951-9a77-fca4f9e167b0");
+            expect(exception.IdentifierTick).toEqual(635585478999549713);
+        };
+
+        var testClient = new Xomni.Management.Integration.Endpoint.EndpointClient();
+        testClient.delete(() => { }, expectedError);
     });
 });
