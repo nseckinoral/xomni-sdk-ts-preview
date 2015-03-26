@@ -1,9 +1,4 @@
-﻿/// <reference path="../../models/private/analytics/base-analytics-summary.ts" />
-/// <reference path="../../models/private/analytics/yearly-summary.ts" />
-/// <reference path="../../models/private/analytics/monthly-summary.ts" />
-/// <reference path="../../models/private/analytics/weekly-summary.ts" />
-/// <reference path="../../models/private/analytics/daily-summary.ts" />
-/// <reference path="../../xomni.ts" />
+﻿/// <reference path="../../xomni.ts" />
 module Xomni.Private.Analytics.ClientSideAnalyticsSummary {
     export class ClientSideAnalyticsLogSummaryClient extends BaseClient {
         private weeklyLogSummaryUri: string = '/private/analytics/clientcounters/{counterName}/summary/weekly';

@@ -1,6 +1,4 @@
-﻿/// <reference path="../../models/paginatedcontainer.ts" />
-/// <reference path="../../models/management/configuration/store.ts" />
-/// <reference path="../../xomni.ts" />
+﻿/// <reference path="../../xomni.ts" />
 module Xomni.Management.Configuration.Store {
     export class StoreClient extends BaseClient {
         private singleOperationBaseUrl: string = "/management/configuration/store/";

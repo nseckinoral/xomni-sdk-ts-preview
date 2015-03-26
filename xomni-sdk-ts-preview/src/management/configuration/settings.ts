@@ -1,5 +1,4 @@
-﻿/// <reference path="../../models/management/configuration/settings.ts" />
-/// <reference path="../../xomni.ts" />
+﻿/// <reference path="../../xomni.ts" />
 module Xomni.Management.Configuration.Settings {
     export class SettingsClient extends BaseClient {
         private uri: string = "/management/configuration/settings";
