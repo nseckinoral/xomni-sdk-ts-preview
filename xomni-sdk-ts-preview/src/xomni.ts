@@ -26,7 +26,7 @@
                 data : data,
                 headers: {
                     "Authorization": "Basic " + btoa(authorization),
-                    "Accept": "application/vnd.xomni.api-v3_0, */*"
+                    "Accept": "application/vnd.xomni.api-v3_1, */*"
                 },
                 success: (d, t, s) => {
                     success(<T>d);

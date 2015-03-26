@@ -23,7 +23,7 @@
 
     export function RequestHttpHeadersTest($: any, expectedHeaders: any = {
         "Authorization": "Basic " + btoa(Xomni.currentContext.username + ":" + Xomni.currentContext.password),
-        "Accept": "application/vnd.xomni.api-v3_0, */*"
+        "Accept": "application/vnd.xomni.api-v3_1, */*"
     }) {
         spyOn($, "ajax")
             .and
