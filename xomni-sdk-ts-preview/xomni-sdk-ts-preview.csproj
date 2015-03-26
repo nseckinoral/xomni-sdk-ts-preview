@@ -72,6 +72,7 @@
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\models\management\integration\endpoint-create-request.ts" />
     <TypeScriptCompile Include="src\models\management\integration\endpoint-detail.ts" />
+    <TypeScriptCompile Include="src\models\management\integration\endpoint-status-type.ts" />
     <TypeScriptCompile Include="src\models\management\integration\service-tier-type.ts" />
     <TypeScriptCompile Include="src\models\PaginatedContainer.ts" />
     <TypeScriptCompile Include="src\models\private\analytics\base-analytics-summary.ts">
