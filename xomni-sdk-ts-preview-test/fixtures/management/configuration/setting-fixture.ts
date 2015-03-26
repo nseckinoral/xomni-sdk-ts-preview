@@ -138,7 +138,7 @@ describe('SettingsClient.put', () => {
 
             new Xomni.Management.Configuration.Settings.SettingsClient().
                 put(invalidRequest, suc=> { }, err => { })
-        }).toThrow(new Error("Length of PassbookCertificatePassword must be lower than or equal to 250 character.")); 
+        }).toThrow(new Error("PassbookCertificatePassword could not be greater than 250")); 
 
         expect(() => {
             var invalidRequest = <Models.Management.Configuration.Settings>
@@ -148,7 +148,7 @@ describe('SettingsClient.put', () => {
 
             new Xomni.Management.Configuration.Settings.SettingsClient().
                 put(invalidRequest, suc=> { }, err => { })
-        }).toThrow(new Error("Length of PassbookTeamIdentifier must be lower than or equal to 250 character.")); 
+        }).toThrow(new Error("PassbookTeamIdentifier could not be greater than 250")); 
 
         expect(() => {
             var invalidRequest = <Models.Management.Configuration.Settings>
@@ -158,7 +158,7 @@ describe('SettingsClient.put', () => {
 
             new Xomni.Management.Configuration.Settings.SettingsClient().
                 put(invalidRequest, suc=> { }, err => { })
-        }).toThrow(new Error("Length of PassbookOrganizationName must be lower than or equal to 250 character.")); 
+        }).toThrow(new Error("PassbookOrganizationName could not be greater than 250")); 
     });
 
     it("Should parse api exception response successfully", () => {

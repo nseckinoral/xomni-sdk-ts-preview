@@ -96,6 +96,7 @@
     <TypeScriptCompile Include="src\private\analytics\client-counters.ts" />
     <TypeScriptCompile Include="src\private\analytics\client-side-analytics-summary.ts" />
     <TypeScriptCompile Include="src\management\social\facebook.ts" />
+    <TypeScriptCompile Include="src\utils\validator.ts" />
     <TypeScriptCompile Include="src\xomni.ts" />
   </ItemGroup>
   <ItemGroup>
@@ -104,6 +105,7 @@
   <ItemGroup>
     <Content Include="bower.json" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <TypeScriptGeneratesDeclarations>True</TypeScriptGeneratesDeclarations>
     <TypeScriptOutFile>dist/xomni.js</TypeScriptOutFile>

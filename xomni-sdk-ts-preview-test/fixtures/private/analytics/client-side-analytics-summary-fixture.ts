@@ -39,10 +39,10 @@ describe('ClientSideAnalyticsLogSummaryClient.getDailyLogs', () => {
             .toThrow(new Error("counterName could not be null or empty"));
 
         expect(() => { testClient.getDailyLogs(validCounterName, 0, validEndOADate, suc => { }, err => { }) })
-            .toThrow(new Error("startOADate could not be less than 1"));
+            .toThrow(new Error("startOADate must be greater than or equal to 1"));
 
         expect(() => { testClient.getDailyLogs(validCounterName, validStartOADate, 0, suc => { }, err => { }) })
-            .toThrow(new Error("endOADate could not be less than 1"));
+            .toThrow(new Error("endOADate must be greater than or equal to 1"));
 
         expect(() => { testClient.getDailyLogs(validCounterName, validEndOADate, validStartOADate, suc => { }, err => { }) })
             .toThrow(new Error("startOADate could not be greater than endOADate"));
@@ -149,10 +149,10 @@ describe('ClientSideAnalyticsLogSummaryClient.getWeeklyLogs', () => {
             .toThrow(new Error("counterName could not be null or empty"));
 
         expect(() => { testClient.getWeeklyLogs(validCounterName, 0, validEndOADate, suc => { }, err => { }) })
-            .toThrow(new Error("startOADate could not be less than 1"));
+            .toThrow(new Error("startOADate must be greater than or equal to 1"));
 
         expect(() => { testClient.getWeeklyLogs(validCounterName, validStartOADate, 0, suc => { }, err => { }) })
-            .toThrow(new Error("endOADate could not be less than 1"));
+            .toThrow(new Error("endOADate must be greater than or equal to 1"));
 
         expect(() => { testClient.getWeeklyLogs(validCounterName, validEndOADate, validStartOADate, suc => { }, err => { }) })
             .toThrow(new Error("startOADate could not be greater than endOADate"));
@@ -252,10 +252,10 @@ describe('ClientSideAnalyticsLogSummaryClient.getMonthlyLogs', () => {
             .toThrow(new Error("counterName could not be null or empty"));
 
         expect(() => { testClient.getMonthlyLogs(validCounterName, 0, validEndOADate, suc => { }, err => { }) })
-            .toThrow(new Error("startOADate could not be less than 1"));
+            .toThrow(new Error("startOADate must be greater than or equal to 1"));
 
         expect(() => { testClient.getMonthlyLogs(validCounterName, validStartOADate, 0, suc => { }, err => { }) })
-            .toThrow(new Error("endOADate could not be less than 1"));
+            .toThrow(new Error("endOADate must be greater than or equal to 1"));
 
         expect(() => { testClient.getMonthlyLogs(validCounterName, validEndOADate, validStartOADate, suc => { }, err => { }) })
             .toThrow(new Error("startOADate could not be greater than endOADate"));
@@ -349,10 +349,10 @@ describe('ClientSideAnalyticsLogSummaryClient.getYearlyLogs', () => {
             .toThrow(new Error("counterName could not be null or empty"));
 
         expect(() => { testClient.getYearlyLogs(validCounterName, 0, validEndOADate, suc => { }, err => { }) })
-            .toThrow(new Error("startOADate could not be less than 1"));
+            .toThrow(new Error("startOADate must be greater than or equal to 1"));
 
         expect(() => { testClient.getYearlyLogs(validCounterName, validStartOADate, 0, suc => { }, err => { }) })
-            .toThrow(new Error("endOADate could not be less than 1"));
+            .toThrow(new Error("endOADate must be greater than or equal to 1"));
 
         expect(() => { testClient.getYearlyLogs(validCounterName, validEndOADate, validStartOADate, suc => { }, err => { }) })
             .toThrow(new Error("startOADate could not be greater than endOADate"));
