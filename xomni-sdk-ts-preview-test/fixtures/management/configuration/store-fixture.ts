@@ -48,13 +48,13 @@ describe('StoreClient.get', () => {
         var testClient = new Xomni.Management.Configuration.Store.StoreClient();
 
         expect(() => { testClient.get(-1, suc => { }, err => { }) })
-            .toThrow(new Error("storeId could not be less than 0."));
+            .toThrow(new Error("storeId must be greater than or equal to 0"));
 
         expect(() => { testClient.get(null, suc => { }, err => { }) })
-            .toThrow(new Error("storeId could not be null or empty."));
+            .toThrow(new Error("storeId could not be null or empty"));
 
         expect(() => { testClient.get(undefined, suc => { }, err => { }) })
-            .toThrow(new Error("storeId could not be null or empty."));
+            .toThrow(new Error("storeId could not be null or empty"));
     });
 
     it("Should parse response successfully", () => {
@@ -134,13 +134,13 @@ describe('StoreClient.delete', () => {
         var testClient = new Xomni.Management.Configuration.Store.StoreClient();
 
         expect(() => { testClient.delete(null, () => { }, err => { }) })
-            .toThrow(new Error("storeId could not be null or empty."));
+            .toThrow(new Error("storeId could not be null or empty"));
 
         expect(() => { testClient.delete(undefined, () => { }, err => { }) })
-            .toThrow(new Error("storeId could not be null or empty."));
+            .toThrow(new Error("storeId could not be null or empty"));
 
         expect(() => { testClient.delete(-1, () => { }, err => { }) })
-            .toThrow(new Error("storeId could not be less than 0."));
+            .toThrow(new Error("storeId must be greater than or equal to 0"));
     });
 
     it("Should parse api exception response successfully (404)", () => {
@@ -195,22 +195,22 @@ describe('StoreClient.getList', () => {
         var testClient = new Xomni.Management.Configuration.Store.StoreClient();
 
         expect(() => { testClient.getList(null, 1, suc => { }, err => { }) })
-            .toThrow(new Error("skip could not be null or empty."));
+            .toThrow(new Error("skip could not be null or empty"));
 
         expect(() => { testClient.getList(undefined, 1, suc => { }, err => { }) })
-            .toThrow(new Error("skip could not be null or empty."));
+            .toThrow(new Error("skip could not be null or empty"));
 
         expect(() => { testClient.getList(-5, 1, suc => { }, err => { }) })
-            .toThrow(new Error("skip could not be less than 0."));
+            .toThrow(new Error("skip must be greater than or equal to 0"));
 
         expect(() => { testClient.getList(5, null, suc => { }, err => { }) })
-            .toThrow(new Error("take could not be null or empty."));
+            .toThrow(new Error("take could not be null or empty"));
 
         expect(() => { testClient.getList(5, undefined, suc => { }, err => { }) })
-            .toThrow(new Error("take could not be null or empty."));
+            .toThrow(new Error("take could not be null or empty"));
 
         expect(() => { testClient.getList(5, 0, suc => { }, err => { }) })
-            .toThrow(new Error("take could not be less than 1."));
+            .toThrow(new Error("take must be greater than or equal to 1"));
 
     });
 
@@ -360,7 +360,7 @@ describe('StoreClient.post', () => {
             };
 
             testClient.post(nullStoreName, suc => { }, err => { })
-        }).toThrow(new Error("name could not be null or empty."));
+        }).toThrow(new Error("name could not be null or empty"));
 
         expect(() => {
             var undefinedStoreName = <Models.Management.Configuration.Store>{
@@ -368,7 +368,7 @@ describe('StoreClient.post', () => {
             };
 
             testClient.post(undefinedStoreName, suc => { }, err => { })
-        }).toThrow(new Error("name could not be null or empty."));
+        }).toThrow(new Error("name could not be null or empty"));
     });
 
     it("Should parse api exception response successfully", () => {
@@ -481,7 +481,7 @@ describe('StoreClient.put', () => {
             };
 
             testClient.put(nullStoreName, suc => { }, err => { })
-        }).toThrow(new Error("name could not be null or empty."));
+        }).toThrow(new Error("name could not be null or empty"));
 
         expect(() => {
             var undefinedStoreName = <Models.Management.Configuration.Store>{
@@ -490,7 +490,7 @@ describe('StoreClient.put', () => {
             };
 
             testClient.put(undefinedStoreName, suc => { }, err => { })
-        }).toThrow(new Error("name could not be null or empty."));
+        }).toThrow(new Error("name could not be null or empty"));
 
         expect(() => {
             var undefinedStoreName = <Models.Management.Configuration.Store>{
@@ -499,7 +499,7 @@ describe('StoreClient.put', () => {
             };
 
             testClient.put(undefinedStoreName, suc => { }, err => { })
-        }).toThrow(new Error("name could not be null or empty."));
+        }).toThrow(new Error("name could not be null or empty"));
 
         expect(() => {
             var nullStoreName = <Models.Management.Configuration.Store>{
@@ -508,7 +508,7 @@ describe('StoreClient.put', () => {
             };
 
             testClient.put(nullStoreName, suc => { }, err => { })
-        }).toThrow(new Error("storeId could not be null or empty."));
+        }).toThrow(new Error("id could not be null or empty"));
 
         expect(() => {
             var undefinedStoreName = <Models.Management.Configuration.Store>{
@@ -517,7 +517,7 @@ describe('StoreClient.put', () => {
             };
 
             testClient.put(undefinedStoreName, suc => { }, err => { })
-        }).toThrow(new Error("storeId could not be null or empty."));
+        }).toThrow(new Error("id could not be null or empty"));
 
         expect(() => {
             var undefinedStoreName = <Models.Management.Configuration.Store>{
@@ -526,7 +526,7 @@ describe('StoreClient.put', () => {
             };
 
             testClient.put(undefinedStoreName, suc => { }, err => { })
-        }).toThrow(new Error("storeId could not be less than 0."));
+        }).toThrow(new Error("id must be greater than or equal to 0"));
     });
 
     it("Should parse api exception response successfully (404)", () => {

@@ -1,5 +1,4 @@
-﻿/// <reference path="facebook-display-type.ts" />
-module Models.Management.Configuration {
+﻿module Models.Management.Configuration {
     export interface Settings {
         FacebookDisplayType: FacebookDisplayType;
         FacebookApplicationId: string;

@@ -1,6 +1,4 @@
-﻿/// <reference path="location.ts" />
-/// <reference path="licenses.ts" />
-module Models.Management.Configuration {
+﻿module Models.Management.Configuration {
     export interface Store {
         Id: number;
         Name: string;
