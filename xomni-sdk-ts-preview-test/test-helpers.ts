@@ -48,7 +48,7 @@
         spyOn($, "ajax")
             .and
             .callFake(p => {
-                parseMethod(p.data);
+                parseMethod(JSON.parse(p.data));
             });
     }
 
