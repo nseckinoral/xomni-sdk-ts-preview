@@ -6,7 +6,7 @@ module Xomni.Private.Analytics.ClientCounters {
         get(success: (result: Models.Private.Analytics.ClientCounterListContainer) => void, error: (error: Models.ExceptionResult) => void, continuationKey?: string) {
             var uri = this.clientCounterUri;
             if (continuationKey != undefined) {
-                uri = Xomni.Utils.UrlGenerator.PrepareListOperationUrl(uri, new Dictionary<string, string>([
+                uri = Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameter(uri, new Dictionary<string, string>([
                     { key: "continuationKey", value: continuationKey },
                 ]));
             }

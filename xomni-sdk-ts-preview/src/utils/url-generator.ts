@@ -1,12 +1,12 @@
 ﻿module Xomni.Utils {
     export class UrlGenerator {
-        static PrepareSingleOperationUrl(baseUrl: string, additionalQueryString: string): string {
+        static PrepareOperationUrl(baseUrl: string, additionalQueryString: string): string {
             Xomni.Utils.Validator.isDefined("baseUrl", baseUrl);
             Xomni.Utils.Validator.isDefined("additionalQueryString", additionalQueryString);
             return baseUrl + additionalQueryString;
         }
 
-        static PrepareListOperationUrl(baseUrl: string, additionalQueryString: Dictionary<string, string>): string {
+        static PrepareOperationUrlWithMultipleParameter(baseUrl: string, additionalQueryString: Dictionary<string, string>): string {
             Xomni.Utils.Validator.isDefined("baseUrl", baseUrl);
             Xomni.Utils.Validator.isDefined("additionalQueryString", additionalQueryString);
             baseUrl += "?";
