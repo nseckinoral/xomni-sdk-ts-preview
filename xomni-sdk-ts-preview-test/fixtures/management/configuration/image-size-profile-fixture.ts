@@ -2,7 +2,7 @@
 var validImageSizeProfileId: number = 1;
 var validSkip: number = 1;
 var validTake: number = 1000;
-var validUri: string = "/management/configuration/imagesizeprofile?id=1";
+var validUriGetAndDelete: string = "/management/configuration/imagesizeprofile?id=1";
 var validUriForGetList: string = "/management/configuration/imagesizeprofiles?skip=" + validSkip + "&take=" + validTake;
 var validUriForPost: string = "/management/configuration/imagesizeprofile";
 var validImageSizeProfile: Models.Management.Configuration.ImageSizeProfile = <Models.Management.Configuration.ImageSizeProfile>{
@@ -87,7 +87,7 @@ describe('ImageSizeProfileClient.getList', () => {
 
 describe('ImageSizeProfileClient.get', () => {
     it("Should hit correct url", () => {
-        TestHelpers.RequestUriTest($, validUri);
+        TestHelpers.RequestUriTest($, validUriGetAndDelete);
         var testClient = new Xomni.Management.Configuration.ImageSizeProfile.ImageSizeProfileClient();
         testClient.get(validImageSizeProfileId, suc => { }, err => { });
     });
@@ -279,5 +279,52 @@ describe('ImageSizeProfileClient.post', () => {
 
         var testClient = new Xomni.Management.Configuration.ImageSizeProfile.ImageSizeProfileClient();
         testClient.post(validImageSizeProfile, suc => { }, expectedError);
+    });
+});
+
+describe('ImageSizeProfileClient.delete', () => {
+    it("Should hit correct url", () => {
+        TestHelpers.RequestUriTest($, validUriGetAndDelete);
+        var testClient = new Xomni.Management.Configuration.ImageSizeProfile.ImageSizeProfileClient();
+        testClient.delete(validImageSizeProfileId, () => { }, err => { });
+    });
+
+    it("Should use correct http method", () => {
+        TestHelpers.RequestHttpMethodTest($, "Delete");
+        var testClient = new Xomni.Management.Configuration.ImageSizeProfile.ImageSizeProfileClient();
+        testClient.delete(validImageSizeProfileId, () => { }, err => { });
+    });
+
+    it("Should use correct http headers", () => {
+        TestHelpers.RequestHttpHeadersTest($);
+        var testClient = new Xomni.Management.Configuration.ImageSizeProfile.ImageSizeProfileClient();
+        testClient.delete(validImageSizeProfileId, () => { }, err => { });
+    });
+
+    it("Should raise exception with invalid parameters", () => {
+        var testClient = new Xomni.Management.Configuration.ImageSizeProfile.ImageSizeProfileClient();
+
+        expect(() => { testClient.delete(-1, () => { }, err => { }) })
+            .toThrow(new Error("imageSizeProfileId must be greater than or equal to 0"));
+
+        expect(() => { testClient.delete(null, () => { }, err => { }) })
+            .toThrow(new Error("imageSizeProfileId could not be null or empty"));
+
+        expect(() => { testClient.delete(undefined, () => { }, err => { }) })
+            .toThrow(new Error("imageSizeProfileId could not be null or empty"));
+    });
+
+    it("Should parse api exception response ()cessfully", () => {
+        TestHelpers.APIExceptionResponseTest($, 404);
+
+        var expectedError = (exception: Models.ExceptionResult) => {
+            expect(exception.HttpStatusCode).toEqual(404);
+            expect(exception.FriendlyDescription).toEqual("Generic error friendly description.");
+            expect(exception.IdentifierGuid).toEqual("7358fe16-3925-4951-9a77-fca4f9e167b0");
+            expect(exception.IdentifierTick).toEqual(635585478999549713);
+        };
+
+        var testClient = new Xomni.Management.Configuration.ImageSizeProfile.ImageSizeProfileClient();
+        testClient.delete(validImageSizeProfileId, ()=> { }, expectedError);
     });
 });

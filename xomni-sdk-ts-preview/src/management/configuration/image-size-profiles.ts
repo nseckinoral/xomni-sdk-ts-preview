@@ -28,5 +28,13 @@ module Xomni.Management.Configuration.ImageSizeProfile {
             Xomni.Utils.Validator.isGreaterThanOrEqual("width", imageSizeProfile.Width, 1);
             this.httpProvider.post(this.singleOperationBaseUrl, imageSizeProfile, success, error);
         }
+
+        delete(imageSizeProfileId: number, success: () => void, error: (error: Models.ExceptionResult) => void) {
+            Xomni.Utils.Validator.isGreaterThanOrEqual("imageSizeProfileId", imageSizeProfileId, 0);
+            var uri: string = Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameter(this.singleOperationBaseUrl, new Dictionary<string, string>([
+                { key: "id", value: imageSizeProfileId.toString() }
+            ]));
+            this.httpProvider.delete(uri, success, error);
+        }
     }
 } 
