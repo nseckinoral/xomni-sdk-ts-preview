@@ -3,9 +3,11 @@ var validSkip: number = 1;
 var validTake: number = 2;
 var validLicenseId: number = 1;
 var validUriForGet: string = "/management/security/license/" + validLicenseId;
+var validOnlyUnassignedUsers: boolean = true;
 var validUriForGetList = "/management/security/licenses?skip=" + validSkip + "&take=" + validTake;;
 var validUriForPostPutAndDelete: string = "/management/security/license/";
 var validUriForGetAuditLogs: string = "/management/security/licenses/audits?skip=" + validSkip + "&take=" + validTake;
+var validUriForGetUnassignedLicenses: string = "/management/security/licenses?onlyUnassignedUsers=" + validOnlyUnassignedUsers;
 
 var validLicenseForPost: Models.Management.Security.License = <Models.Management.Security.License>{
     Username: "SampleLicenceUsername",
@@ -561,5 +563,75 @@ describe('LicenseClient.getAuditLogs', () => {
 
         var testClient = new Xomni.Management.Security.License.LicenseClient();
         testClient.getAuditLogs(validSkip, validTake, expectedSuccess, err => { });
+    });
+});
+
+describe('LicenseClient.getUnassignedLicenses', () => {
+    it("Should hit correct url", () => {
+        TestHelpers.RequestUriTest($, validUriForGetUnassignedLicenses);
+        var testClient = new Xomni.Management.Security.License.LicenseClient();
+        testClient.getUnassignedLicenses(validOnlyUnassignedUsers, suc => { }, err => { });
+    });
+
+    it("Should use correct http method", () => {
+        TestHelpers.RequestHttpMethodTest($, "Get");
+        var testClient = new Xomni.Management.Security.License.LicenseClient();
+        testClient.getUnassignedLicenses(validOnlyUnassignedUsers, suc => { }, err => { });
+    });
+
+    it("Should use correct http headers", () => {
+        TestHelpers.RequestHttpHeadersTest($);
+        var testClient = new Xomni.Management.Security.License.LicenseClient();
+        testClient.getUnassignedLicenses(validOnlyUnassignedUsers, suc => { }, err => { });
+    });
+
+    it("Should raise exception with invalid parameters", () => {
+        var testClient = new Xomni.Management.Security.License.LicenseClient();
+
+        expect(() => { testClient.getUnassignedLicenses(null, suc => { }, err => { }) })
+            .toThrow(new Error("onlyUnassignedUsers could not be null or empty"));
+
+        expect(() => { testClient.getUnassignedLicenses(undefined, suc => { }, err => { }) })
+            .toThrow(new Error("onlyUnassignedUsers could not be null or empty"));
+    });
+
+    it("Should parse response successfully", () => {
+        TestHelpers.ResponseParseTest($, {
+           "Results":[
+              {
+                 "Id":1,
+                 "Username":"DebugApiTestUser",
+                 "Name":"Debug Public Api User",
+                 "Password":"DebugApiTestPass",
+                 "StoreId":56
+              },
+              {
+                 "Id":4,
+                 "Username":"SampleLicenceUsername",
+                 "Name":"Sample Licence Record",
+                 "Password":"123",
+                 "StoreId":78
+              }
+           ],
+           "TotalCount":2
+        });
+
+        var expectedSuccess = (licenses: Models.PaginatedContainer<Models.Management.Security.License>) => {
+            expect(licenses.Results.length).toEqual(2);
+            expect(licenses.TotalCount).toEqual(2);
+            expect(licenses.Results[0].Id).toEqual(1);
+            expect(licenses.Results[0].Username).toEqual("DebugApiTestUser");
+            expect(licenses.Results[0].Name).toEqual("Debug Public Api User");
+            expect(licenses.Results[0].Password).toEqual("DebugApiTestPass");
+            expect(licenses.Results[0].StoreId).toEqual(56);
+            expect(licenses.Results[1].Id).toEqual(4);
+            expect(licenses.Results[1].Username).toEqual("SampleLicenceUsername");
+            expect(licenses.Results[1].Name).toEqual("Sample Licence Record");
+            expect(licenses.Results[1].Password).toEqual("123");
+            expect(licenses.Results[1].StoreId).toEqual(78);
+        };
+
+        var testClient = new Xomni.Management.Security.License.LicenseClient();
+        testClient.getUnassignedLicenses(validOnlyUnassignedUsers, expectedSuccess, err => { });
     });
 });

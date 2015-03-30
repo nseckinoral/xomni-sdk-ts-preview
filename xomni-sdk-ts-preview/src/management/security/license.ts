@@ -50,5 +50,13 @@ module Xomni.Management.Security.License {
             ]));
             this.httpProvider.get(uri, success, error);
         }
+
+        getUnassignedLicenses(onlyUnassignedUsers: boolean, success: (result: Models.PaginatedContainer<Models.Management.Security.License>) => void, error: (error: Models.ExceptionResult) => void) {
+            Xomni.Utils.Validator.isDefined("onlyUnassignedUsers", onlyUnassignedUsers);
+            var uri: string = Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameter(this.listOperationBaseUrl, new Dictionary<string, string>([
+                { key: "onlyUnassignedUsers", value: String(onlyUnassignedUsers) },
+            ]));
+            this.httpProvider.get(uri, success, error);
+        }
     }
 }
