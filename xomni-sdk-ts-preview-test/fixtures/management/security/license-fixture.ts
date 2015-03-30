@@ -4,6 +4,13 @@ var validTake: number = 2;
 var validLicenseId: number = 1;
 var validUriForGet: string = "/management/security/license/" + validLicenseId;
 var validUriForGetList = "/management/security/licenses?skip=" + validSkip + "&take=" + validTake;;
+var validUriForPost: string = "/management/security/license/";
+var validLicenseForPost: Models.Management.Security.License = <Models.Management.Security.License>{
+    Username: "SampleLicenceUsername",
+    Name: "Sample Licence",
+    Password: "123",
+    StoreId: 78
+};
 
 describe('LicenseClient.get', () => {
     it("Should hit correct url", () => {
@@ -153,5 +160,128 @@ describe('LicenseClient.getList', () => {
 
         var testClient = new Xomni.Management.Security.License.LicenseClient();
         testClient.getList(validSkip, validTake, expectedSuccess, err => { });
+    });
+});
+
+describe('LicenseClient.post', () => {
+    it("Should hit correct url", () => {
+        TestHelpers.RequestUriTest($, validUriForPost);
+        var testClient = new Xomni.Management.Security.License.LicenseClient();
+        testClient.post(validLicenseForPost, suc => { }, err => { });
+    });
+
+    it("Should use correct http method", () => {
+        TestHelpers.RequestHttpMethodTest($, "Post");
+        var testClient = new Xomni.Management.Security.License.LicenseClient();
+        testClient.post(validLicenseForPost, suc => { }, err => { });
+    });
+
+    it("Should use correct http headers", () => {
+        TestHelpers.RequestHttpHeadersTest($);
+        var testClient = new Xomni.Management.Security.License.LicenseClient();
+        testClient.post(validLicenseForPost, suc => { }, err => { });
+    });
+
+    it("Should parse response successfully", () => {
+        TestHelpers.ResponseParseTest($, {
+            "Id": 4,
+            "Username": "SampleLicenceUsername",
+            "Name": "Sample Licence",
+            "Password": "123",
+            "StoreId": 78
+        });
+
+        var expectedSuccess = (license: Models.Management.Security.License) => {
+            expect(license.Id).toEqual(4);
+            expect(license.Username).toEqual("SampleLicenceUsername");
+            expect(license.Name).toEqual("Sample Licence");
+            expect(license.Password).toEqual("123");
+            expect(license.StoreId).toEqual(78);
+        };
+
+        var testClient = new Xomni.Management.Security.License.LicenseClient();
+        testClient.post(validLicenseForPost, expectedSuccess, err => { });
+    });
+
+    it("Should parse request successfully", () => {
+        var parseMethod = (request: Models.Management.Security.License) => {
+            expect(request).toEqual({
+                "Username": "SampleLicenceUsername",
+                "Name": "Sample Licence",
+                "Password": "123",
+                "StoreId": 78
+            });
+            expect(request.Username).toEqual(validLicenseForPost.Username);
+            expect(request.Name).toEqual(validLicenseForPost.Name);
+            expect(request.Password).toEqual(validLicenseForPost.Password);
+            expect(request.StoreId).toEqual(validLicenseForPost.StoreId);
+        };
+
+        TestHelpers.RequestParseTest($, parseMethod);
+
+        var testClient = new Xomni.Management.Security.License.LicenseClient();
+        testClient.post(validLicenseForPost, succ=> { }, err => { });
+    });
+
+    it("Should raise exception with invalid parameters", () => {
+        var testClient = new Xomni.Management.Security.License.LicenseClient();
+
+        expect(() => {
+            testClient.post(null, suc => { }, err => { })
+        }).toThrow(new Error("license could not be null or empty"));
+
+        expect(() => {
+            testClient.post(undefined, suc => { }, err => { })
+        }).toThrow(new Error("license could not be null or empty"));
+
+        expect(() => {
+            var nullUserName = <Models.Management.Security.License>{
+                Username: null,
+                Password: "Password"
+            };
+
+            testClient.post(nullUserName, suc => { }, err => { })
+        }).toThrow(new Error("username could not be null or empty"));
+
+        expect(() => {
+            var undefinedUserName = <Models.Management.Security.License>{
+                Username: undefined,
+                Password: "Password"
+            };
+
+            testClient.post(undefinedUserName, suc => { }, err => { })
+        }).toThrow(new Error("username could not be null or empty"));
+
+        expect(() => {
+            var nullPassword = <Models.Management.Security.License>{
+                Username: "Username",
+                Password: null
+            };
+
+            testClient.post(nullPassword, suc => { }, err => { })
+        }).toThrow(new Error("password could not be null or empty"));
+
+        expect(() => {
+            var undefinedPassword = <Models.Management.Security.License>{
+                Username: "Username",
+                Password: undefined
+            };
+
+            testClient.post(undefinedPassword, suc => { }, err => { })
+        }).toThrow(new Error("password could not be null or empty"));
+    });
+
+    it("Should parse api exception response successfully", () => {
+        TestHelpers.APIExceptionResponseTest($, 409);
+
+        var expectedError = (exception: Models.ExceptionResult) => {
+            expect(exception.HttpStatusCode).toEqual(409);
+            expect(exception.FriendlyDescription).toEqual("Generic error friendly description.");
+            expect(exception.IdentifierGuid).toEqual("7358fe16-3925-4951-9a77-fca4f9e167b0");
+            expect(exception.IdentifierTick).toEqual(635585478999549713);
+        };
+
+        var testClient = new Xomni.Management.Security.License.LicenseClient();
+        testClient.post(validLicenseForPost, suc => { }, expectedError);
     });
 });
