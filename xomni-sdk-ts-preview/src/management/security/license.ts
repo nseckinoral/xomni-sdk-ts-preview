@@ -34,5 +34,10 @@ module Xomni.Management.Security.License {
             Xomni.Utils.Validator.isDefined("password", license.Password);
             this.httpProvider.put(this.singleOperationBaseUrl, license, success, error);
         }
+
+        delete(licenseId: number, success: () => void, error: (error: Models.ExceptionResult) => void) {
+            Xomni.Utils.Validator.isGreaterThanOrEqual("licenseId", licenseId, 0);
+            this.httpProvider.delete(this.singleOperationBaseUrl, success, error);
+        }
     }
 }

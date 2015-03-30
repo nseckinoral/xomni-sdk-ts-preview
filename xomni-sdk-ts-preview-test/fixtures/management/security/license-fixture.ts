@@ -4,7 +4,7 @@ var validTake: number = 2;
 var validLicenseId: number = 1;
 var validUriForGet: string = "/management/security/license/" + validLicenseId;
 var validUriForGetList = "/management/security/licenses?skip=" + validSkip + "&take=" + validTake;;
-var validUriForPostAndPut: string = "/management/security/license/";
+var validUriForPostPutAndDelete: string = "/management/security/license/";
 var validLicenseForPost: Models.Management.Security.License = <Models.Management.Security.License>{
     Username: "SampleLicenceUsername",
     Name: "Sample Licence",
@@ -173,7 +173,7 @@ describe('LicenseClient.getList', () => {
 
 describe('LicenseClient.post', () => {
     it("Should hit correct url", () => {
-        TestHelpers.RequestUriTest($, validUriForPostAndPut);
+        TestHelpers.RequestUriTest($, validUriForPostPutAndDelete);
         var testClient = new Xomni.Management.Security.License.LicenseClient();
         testClient.post(validLicenseForPost, suc => { }, err => { });
     });
@@ -296,7 +296,7 @@ describe('LicenseClient.post', () => {
 
 describe('LicenseClient.put', () => {
     it("Should hit correct url", () => {
-        TestHelpers.RequestUriTest($, validUriForPostAndPut);
+        TestHelpers.RequestUriTest($, validUriForPostPutAndDelete);
         var testClient = new Xomni.Management.Security.License.LicenseClient();
         testClient.put(validLicenseForPut, suc => { }, err => { });
     });
@@ -440,5 +440,52 @@ describe('LicenseClient.put', () => {
 
         var testClient = new Xomni.Management.Security.License.LicenseClient();
         testClient.put(validLicenseForPut, suc => { }, expectedError);
+    });
+});
+
+describe('LicenseClient.delete', () => {
+    it("Should hit correct url", () => {
+        TestHelpers.RequestUriTest($, validUriForPostPutAndDelete);
+        var testClient = new Xomni.Management.Security.License.LicenseClient();
+        testClient.delete(validLicenseId, () => { }, err => { });
+    });
+
+    it("Should use correct http method", () => {
+        TestHelpers.RequestHttpMethodTest($, "Delete");
+        var testClient = new Xomni.Management.Security.License.LicenseClient();
+        testClient.delete(validLicenseId, () => { }, err => { });
+    });
+
+    it("Should use correct http headers", () => {
+        TestHelpers.RequestHttpHeadersTest($);
+        var testClient = new Xomni.Management.Security.License.LicenseClient();
+        testClient.delete(validLicenseId, () => { }, err => { });
+    });
+
+    it("Should raise exception with invalid parameters", () => {
+        var testClient = new Xomni.Management.Security.License.LicenseClient();
+
+        expect(() => { testClient.delete(-1, () => { }, err => { }) })
+            .toThrow(new Error("licenseId must be greater than or equal to 0"));
+
+        expect(() => { testClient.delete(null, () => { }, err => { }) })
+            .toThrow(new Error("licenseId could not be null or empty"));
+
+        expect(() => { testClient.delete(undefined, () => { }, err => { }) })
+            .toThrow(new Error("licenseId could not be null or empty"));
+    });
+
+    it("Should parse api exception response ()cessfully", () => {
+        TestHelpers.APIExceptionResponseTest($, 404);
+
+        var expectedError = (exception: Models.ExceptionResult) => {
+            expect(exception.HttpStatusCode).toEqual(404);
+            expect(exception.FriendlyDescription).toEqual("Generic error friendly description.");
+            expect(exception.IdentifierGuid).toEqual("7358fe16-3925-4951-9a77-fca4f9e167b0");
+            expect(exception.IdentifierTick).toEqual(635585478999549713);
+        };
+
+        var testClient = new Xomni.Management.Security.License.LicenseClient();
+        testClient.delete(validLicenseId, ()=> { }, expectedError);
     });
 });
