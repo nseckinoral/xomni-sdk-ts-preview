@@ -44,7 +44,7 @@ module Xomni.Private.Analytics.ClientSideAnalyticsSummary {
 
         private PrepareUri(baseUri: string, counterName: string, startOADate: number, endOADate: number): string {
             var uri = baseUri.replace("{counterName}", counterName);
-            uri = Xomni.Utils.UrlGenerator.PrepareListOperationUrl(uri, new Dictionary<string, string>([
+            uri = Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameter(uri, new Dictionary<string, string>([
                 { key: "startOADate", value: startOADate.toString() },
                 { key: "endOADate", value: endOADate.toString() }
             ]));
