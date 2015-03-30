@@ -26,5 +26,13 @@ module Xomni.Management.Security.License {
             Xomni.Utils.Validator.isDefined("password", license.Password);
             this.httpProvider.post(this.singleOperationBaseUrl, license, success, error);
         }
+
+        put(license: Models.Management.Security.License, success: (result: Models.Management.Security.License) => void, error: (error: Models.ExceptionResult) => void) {
+            Xomni.Utils.Validator.isDefined("license", license);
+            Xomni.Utils.Validator.isDefined("id", license.Id);
+            Xomni.Utils.Validator.isDefined("username", license.Username);
+            Xomni.Utils.Validator.isDefined("password", license.Password);
+            this.httpProvider.put(this.singleOperationBaseUrl, license, success, error);
+        }
     }
 }
