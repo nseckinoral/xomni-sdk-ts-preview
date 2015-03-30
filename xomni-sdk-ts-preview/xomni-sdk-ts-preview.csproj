@@ -60,6 +60,7 @@
     <TypeScriptCompile Include="src\dictionary.ts" />
     <TypeScriptCompile Include="src\management\configuration\trending-action-types.ts" />
     <TypeScriptCompile Include="src\management\integration\endpoint.ts" />
+    <TypeScriptCompile Include="src\management\security\license.ts" />
     <TypeScriptCompile Include="src\models\ExceptionResult.ts">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </TypeScriptCompile>
@@ -82,6 +83,7 @@
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\models\management\security\api-user-rights.ts" />
     <TypeScriptCompile Include="src\models\management\security\api-user.ts" />
+    <TypeScriptCompile Include="src\models\management\security\license.ts" />
     <TypeScriptCompile Include="src\models\PaginatedContainer.ts" />
     <TypeScriptCompile Include="src\models\private\analytics\base-analytics-summary.ts">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
