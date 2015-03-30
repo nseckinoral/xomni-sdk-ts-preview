@@ -5,6 +5,8 @@ var validLicenseId: number = 1;
 var validUriForGet: string = "/management/security/license/" + validLicenseId;
 var validUriForGetList = "/management/security/licenses?skip=" + validSkip + "&take=" + validTake;;
 var validUriForPostPutAndDelete: string = "/management/security/license/";
+var validUriForGetAuditLogs: string = "/management/security/licenses/audits?skip=" + validSkip + "&take=" + validTake;
+
 var validLicenseForPost: Models.Management.Security.License = <Models.Management.Security.License>{
     Username: "SampleLicenceUsername",
     Name: "Sample Licence",
@@ -486,6 +488,78 @@ describe('LicenseClient.delete', () => {
         };
 
         var testClient = new Xomni.Management.Security.License.LicenseClient();
-        testClient.delete(validLicenseId, ()=> { }, expectedError);
+        testClient.delete(validLicenseId, () => { }, expectedError);
+    });
+});
+
+describe('LicenseClient.getAuditLogs', () => {
+    it("Should hit correct url", () => {
+        TestHelpers.RequestUriTest($, validUriForGetAuditLogs);
+        var testClient = new Xomni.Management.Security.License.LicenseClient();
+        testClient.getAuditLogs(validSkip, validTake, suc => { }, err => { });
+    });
+
+    it("Should use correct http method", () => {
+        TestHelpers.RequestHttpMethodTest($, "Get");
+        var testClient = new Xomni.Management.Security.License.LicenseClient();
+        testClient.getAuditLogs(validSkip, validTake, suc => { }, err => { });
+    });
+
+    it("Should use correct http headers", () => {
+        TestHelpers.RequestHttpHeadersTest($);
+        var testClient = new Xomni.Management.Security.License.LicenseClient();
+        testClient.getAuditLogs(validSkip, validTake, suc => { }, err => { });
+    });
+
+    it("Should raise exception with invalid parameters", () => {
+        var testClient = new Xomni.Management.Security.License.LicenseClient();
+
+        expect(() => { testClient.getAuditLogs(null, validTake, suc => { }, err => { }) })
+            .toThrow(new Error("skip could not be null or empty"));
+
+        expect(() => { testClient.getAuditLogs(undefined, validTake, suc => { }, err => { }) })
+            .toThrow(new Error("skip could not be null or empty"));
+
+        expect(() => { testClient.getAuditLogs(-5, validTake, suc => { }, err => { }) })
+            .toThrow(new Error("skip must be greater than or equal to 0"));
+
+        expect(() => { testClient.getAuditLogs(validSkip, null, suc => { }, err => { }) })
+            .toThrow(new Error("take could not be null or empty"));
+
+        expect(() => { testClient.getAuditLogs(validSkip, undefined, suc => { }, err => { }) })
+            .toThrow(new Error("take could not be null or empty"));
+
+        expect(() => { testClient.getAuditLogs(validSkip, -5, suc => { }, err => { }) })
+            .toThrow(new Error("take must be greater than or equal to 1"));
+    });
+
+    it("Should parse response successfully", () => {
+        TestHelpers.ResponseParseTest($, {
+            "Results": [
+                {
+                    "Username": "TestUser",
+                    "Name": "Test License User",
+                    "CreatedAt": "2013-10-08T00:00:00",
+                    "DeletedAt": "2013-10-09T00:00:00",
+                    "CreatedApiUserName": "admin",
+                    "DeletedApiUserName": "admin"
+                }
+            ],
+            "TotalCount": 10
+        });
+
+        var expectedSuccess = (licenseAuditLogs: Models.PaginatedContainer<Models.Management.Security.LicenseAuditLogs>) => {
+            expect(licenseAuditLogs.Results.length).toEqual(1);
+            expect(licenseAuditLogs.TotalCount).toEqual(10);
+            expect(licenseAuditLogs.Results[0].Username).toEqual("TestUser");
+            expect(licenseAuditLogs.Results[0].Name).toEqual("Test License User");
+            expect(licenseAuditLogs.Results[0].CreatedAt).toEqual("2013-10-08T00:00:00");
+            expect(licenseAuditLogs.Results[0].DeletedAt).toEqual("2013-10-09T00:00:00");
+            expect(licenseAuditLogs.Results[0].CreatedApiUserName).toEqual("admin");
+            expect(licenseAuditLogs.Results[0].DeletedApiUserName).toEqual("admin");
+        };
+
+        var testClient = new Xomni.Management.Security.License.LicenseClient();
+        testClient.getAuditLogs(validSkip, validTake, expectedSuccess, err => { });
     });
 });

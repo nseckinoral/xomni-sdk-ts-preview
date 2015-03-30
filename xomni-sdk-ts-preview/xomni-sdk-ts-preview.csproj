@@ -83,6 +83,7 @@
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\models\management\security\api-user-rights.ts" />
     <TypeScriptCompile Include="src\models\management\security\api-user.ts" />
+    <TypeScriptCompile Include="src\models\management\security\license-audit-logs.ts" />
     <TypeScriptCompile Include="src\models\management\security\license.ts" />
     <TypeScriptCompile Include="src\models\PaginatedContainer.ts" />
     <TypeScriptCompile Include="src\models\private\analytics\base-analytics-summary.ts">
