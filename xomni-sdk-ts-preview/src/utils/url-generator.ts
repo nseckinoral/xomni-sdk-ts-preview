@@ -20,9 +20,13 @@
             return baseUrl;
         }
 
-        static ReplaceUri(baseUri: string, oldStringPattern: string, newStringPattern: string) {
-            var uri = baseUri.replace(oldStringPattern, newStringPattern);
-            return uri;
+        static ReplaceUri(baseUrl: string, patterns: Dictionary<string, string>) {
+            Xomni.Utils.Validator.isDefined("baseUrl", baseUrl);
+            Xomni.Utils.Validator.isDefined("patterns", patterns);
+            for (var i = 0; i < patterns.keys().length; i++) {
+                baseUrl = baseUrl.replace(patterns.keys()[i], patterns.values()[i]);
+            }
+            return baseUrl;
         }
     }
 } 

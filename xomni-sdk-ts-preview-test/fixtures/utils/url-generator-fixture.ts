@@ -1,13 +1,23 @@
-﻿var singleOperationUrl: string = "management/configuration/store/";
+﻿var sampleLicenseId: number = 1;
+var skip: number = 2;
+var take: number = 5;
+var baseUrlForReplace: string = "/management/company/licences/{licenceId}/devices/{deviceId}/metadata";
+var singleOperationUrl: string = "management/configuration/store/";
 var singleOperationAdditionalQuery: string = "1";
 var listOperationUrl: string = "management/configuration/stores";
 var listOperationAdditionalQuery: Xomni.Dictionary<string, string> = new Xomni.Dictionary<string, string>([
-    { key: "skip", value: "2" },
-    { key: "take", value: "5" }
+    { key: "skip", value: skip.toString() },
+    { key: "take", value: take.toString() }
 ]);
+
+var patterns: Xomni.Dictionary<string, string> = new Xomni.Dictionary<string, string>([
+    { key: "{licenceId}", value: sampleLicenseId.toString() },
+    { key: "{deviceId}", value: TestHelpers.uniqeId },
+]);
+
 describe('UrlGenerator.PrepareOperationUrl', () => {
     it("Should throw could not be null or empty exception", () => {
-        expect(() => { Xomni.Utils.UrlGenerator.PrepareOperationUrl(singleOperationUrl,null) })
+        expect(() => { Xomni.Utils.UrlGenerator.PrepareOperationUrl(singleOperationUrl, null) })
             .toThrow(new Error("additionalQueryString could not be null or empty"));
 
         expect(() => { Xomni.Utils.UrlGenerator.PrepareOperationUrl(singleOperationUrl, undefined) })
@@ -57,6 +67,34 @@ describe('UrlGenerator.PrepareOperationUrlWithMultipleParameter', () => {
     });
 
     it("Should generate right url", () => {
-        expect(Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameter(listOperationUrl, listOperationAdditionalQuery)).toEqual(listOperationUrl + "?skip=2&take=5");
+        expect(Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameter(listOperationUrl, listOperationAdditionalQuery)).toEqual(listOperationUrl + "?skip=" + skip + "&take=" + take);
+    });
+});
+
+describe('UrlGenerator.ReplaceUri', () => {
+    it("Should throw could not be null or empty exception", () => {
+        expect(() => { Xomni.Utils.UrlGenerator.ReplaceUri(null, patterns) })
+            .toThrow(new Error("baseUrl could not be null or empty"));
+
+        expect(() => { Xomni.Utils.UrlGenerator.ReplaceUri(undefined, patterns) })
+            .toThrow(new Error("baseUrl could not be null or empty"));
+
+        expect(() => { Xomni.Utils.UrlGenerator.ReplaceUri(baseUrlForReplace, null) })
+            .toThrow(new Error("patterns could not be null or empty"));
+
+        expect(() => { Xomni.Utils.UrlGenerator.ReplaceUri(baseUrlForReplace, undefined) })
+            .toThrow(new Error("patterns could not be null or empty"));
+    });
+
+    it("Should not throw could not be null or empty exception", () => {
+        expect(() => { Xomni.Utils.UrlGenerator.ReplaceUri(baseUrlForReplace, patterns) })
+            .not.toThrow(new Error("baseUrl could not be null or empty"));
+
+        expect(() => { Xomni.Utils.UrlGenerator.ReplaceUri(baseUrlForReplace, patterns) })
+            .not.toThrow(new Error("patterns could not be null or empty"));
+    });
+
+    it("Should generate right url", () => {
+        expect(Xomni.Utils.UrlGenerator.ReplaceUri(baseUrlForReplace, patterns)).toEqual("/management/company/licences/" + sampleLicenseId + "/devices/" + TestHelpers.uniqeId + "/metadata");
     });
 });
