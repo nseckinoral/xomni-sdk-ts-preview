@@ -316,3 +316,53 @@ describe('DeviceMetadataClient.delete', () => {
         testClient.delete(validLicenseId, TestHelpers.uniqeId, validMetadataKey, () => { }, expectedError);
     });
 });
+
+describe('DeviceMetadataClient.deleteAll', () => {
+    it("Should hit correct url", () => {
+        TestHelpers.RequestUriTest($, validUri);
+        var testClient = new Xomni.Management.Company.DeviceMetadata.DeviceMetadataClient();
+        testClient.deleteAll(validLicenseId, TestHelpers.uniqeId,  () => { }, err => { });
+    });
+
+    it("Should use correct http method", () => {
+        TestHelpers.RequestHttpMethodTest($, "Delete");
+        var testClient = new Xomni.Management.Company.DeviceMetadata.DeviceMetadataClient();
+        testClient.deleteAll(validLicenseId, TestHelpers.uniqeId,  () => { }, err => { });
+    });
+
+    it("Should use correct http headers", () => {
+        TestHelpers.RequestHttpHeadersTest($);
+        var testClient = new Xomni.Management.Company.DeviceMetadata.DeviceMetadataClient();
+        testClient.deleteAll(validLicenseId, TestHelpers.uniqeId,  () => { }, err => { });
+    });
+
+    it("Should raise exception with invalid parameters", () => {
+        var testClient = new Xomni.Management.Company.DeviceMetadata.DeviceMetadataClient();
+
+        expect(() => { testClient.deleteAll(null, TestHelpers.uniqeId,  () => { }, err => { }) })
+            .toThrow(new Error("licenceId could not be null or empty"));
+
+        expect(() => { testClient.deleteAll(undefined, TestHelpers.uniqeId,  () => { }, err => { }) })
+            .toThrow(new Error("licenceId could not be null or empty"));
+
+        expect(() => { testClient.deleteAll(validLicenseId, null,  () => { }, err => { }) })
+            .toThrow(new Error("deviceId could not be null or empty"));
+
+        expect(() => { testClient.deleteAll(validLicenseId, undefined,  () => { }, err => { }) })
+            .toThrow(new Error("deviceId could not be null or empty"));
+    });
+
+    it("Should parse api exception response ()cessfully", () => {
+        TestHelpers.APIExceptionResponseTest($, 404);
+
+        var expectedError = (exception: Models.ExceptionResult) => {
+            expect(exception.HttpStatusCode).toEqual(404);
+            expect(exception.FriendlyDescription).toEqual("Generic error friendly description.");
+            expect(exception.IdentifierGuid).toEqual("7358fe16-3925-4951-9a77-fca4f9e167b0");
+            expect(exception.IdentifierTick).toEqual(635585478999549713);
+        };
+
+        var testClient = new Xomni.Management.Company.DeviceMetadata.DeviceMetadataClient();
+        testClient.deleteAll(validLicenseId, TestHelpers.uniqeId,  () => { }, expectedError);
+    });
+});

@@ -43,5 +43,16 @@ module Xomni.Management.Company.DeviceMetadata {
 
             this.httpProvider.delete(uri, success, error);
         }
+
+        deleteAll(licenceId: number, deviceId: string, success: () => void, error: (error: Models.ExceptionResult) => void) {
+            Xomni.Utils.Validator.isGreaterThanOrEqual("licenceId", licenceId, 0);
+            Xomni.Utils.Validator.isDefined("deviceId", deviceId);
+            var uri = Xomni.Utils.UrlGenerator.ReplaceUri(this.baseUri, new Dictionary<string, string>([
+                { key: "{licenceId}", value: licenceId.toString() },
+                { key: "{deviceId}", value: deviceId },
+            ]));
+
+            this.httpProvider.delete(uri, success, error);
+        }
     }
 } 
