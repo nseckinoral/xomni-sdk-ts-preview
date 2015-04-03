@@ -302,7 +302,7 @@ describe('DeviceMetadataClient.delete', () => {
             .toThrow(new Error("metadataKey could not be null or empty"));
     });
 
-    it("Should parse api exception response ()cessfully", () => {
+    it("Should parse api exception response successfully", () => {
         TestHelpers.APIExceptionResponseTest($, 404);
 
         var expectedError = (exception: Models.ExceptionResult) => {
@@ -352,7 +352,7 @@ describe('DeviceMetadataClient.deleteAll', () => {
             .toThrow(new Error("deviceId could not be null or empty"));
     });
 
-    it("Should parse api exception response ()cessfully", () => {
+    it("Should parse api exception response successfully", () => {
         TestHelpers.APIExceptionResponseTest($, 404);
 
         var expectedError = (exception: Models.ExceptionResult) => {
