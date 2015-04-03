@@ -63,31 +63,31 @@ describe('UrlGenerator.PrepareOperationUrl', () => {
     });
 });
 
-describe('UrlGenerator.PrepareOperationUrlWithMultipleParameter', () => {
+describe('UrlGenerator.PrepareOperationUrlWithMultipleParameters', () => {
     it("Should throw could not be null or empty exception", () => {
-        expect(() => { Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameter(listOperationUrl, null) })
+        expect(() => { Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameters(listOperationUrl, null) })
             .toThrow(new Error("additionalQueryString could not be null or empty"));
 
-        expect(() => { Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameter(listOperationUrl, undefined) })
+        expect(() => { Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameters(listOperationUrl, undefined) })
             .toThrow(new Error("additionalQueryString could not be null or empty"));
 
-        expect(() => { Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameter(null, listOperationAdditionalQuery) })
+        expect(() => { Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameters(null, listOperationAdditionalQuery) })
             .toThrow(new Error("baseUrl could not be null or empty"));
 
-        expect(() => { Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameter(undefined, listOperationAdditionalQuery) })
+        expect(() => { Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameters(undefined, listOperationAdditionalQuery) })
             .toThrow(new Error("baseUrl could not be null or empty"));
     });
 
     it("Should not throw could not be null or empty exception", () => {
-        expect(() => { Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameter(listOperationUrl, listOperationAdditionalQuery) })
+        expect(() => { Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameters(listOperationUrl, listOperationAdditionalQuery) })
             .not.toThrow(new Error("additionalQueryString could not be null or empty"));
 
-        expect(() => { Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameter(listOperationUrl, listOperationAdditionalQuery) })
+        expect(() => { Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameters(listOperationUrl, listOperationAdditionalQuery) })
             .not.toThrow(new Error("baseUrl could not be null or empty"));
     });
 
     it("Should generate right url", () => {
-        expect(Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameter(listOperationUrl, listOperationAdditionalQuery)).toEqual(listOperationUrl + "?skip=" + skip + "&take=" + take);
+        expect(Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameters(listOperationUrl, listOperationAdditionalQuery)).toEqual(listOperationUrl + "?skip=" + skip + "&take=" + take);
     });
 });
 
@@ -116,5 +116,6 @@ describe('UrlGenerator.ReplaceUri', () => {
 
     it("Should generate right url", () => {
         expect(Xomni.Utils.UrlGenerator.ReplaceUri(baseUrlForReplace, patterns)).toEqual("/management/company/licences/" + sampleLicenseId + "/devices/" + TestHelpers.uniqeId + "/metadata");
+        expect(Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameters(listOperationUrl, listOperationAdditionalQuery)).toEqual(listOperationUrl + "?skip=2&take=5");
     });
 });

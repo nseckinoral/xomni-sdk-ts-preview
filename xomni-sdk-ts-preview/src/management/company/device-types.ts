@@ -33,7 +33,7 @@ module Xomni.Management.Company.DeviceTypes {
         getList(skip: number, take: number, succes: (result: Models.PaginatedContainer<Models.Management.Company.DeviceType>) => void, error: (error: Models.ExceptionResult) => void) {
             Xomni.Utils.Validator.isGreaterThanOrEqual("skip", skip, 0);
             Xomni.Utils.Validator.isGreaterThanOrEqual("take", take, 1);
-            var uri = Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameter(this.baseUri, new Dictionary<string, string>([
+            var uri = Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameters(this.baseUri, new Dictionary<string, string>([
                 { key: "skip", value: skip.toString() },
                 { key: "take", value: take.toString() }
             ]));

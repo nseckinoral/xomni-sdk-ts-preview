@@ -9,7 +9,7 @@
             return baseUrl + additionalQueryString;
         }
 
-        static PrepareOperationUrlWithMultipleParameter(baseUrl: string, additionalQueryString: Dictionary<string, string>): string {
+        static PrepareOperationUrlWithMultipleParameters(baseUrl: string, additionalQueryString: Dictionary<string, string>): string {
             Xomni.Utils.Validator.isDefined("baseUrl", baseUrl);
             Xomni.Utils.Validator.isDefined("additionalQueryString", additionalQueryString);
             baseUrl += "?";

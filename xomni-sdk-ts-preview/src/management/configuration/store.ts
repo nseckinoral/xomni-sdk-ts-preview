@@ -30,7 +30,7 @@ module Xomni.Management.Configuration.Store {
         getList(skip: number, take: number, success: (result: Models.PaginatedContainer<Models.Management.Configuration.Store>) => void, error: (error: Models.ExceptionResult) => void) {
             Xomni.Utils.Validator.isGreaterThanOrEqual("skip", skip, 0);
             Xomni.Utils.Validator.isGreaterThanOrEqual("take", take, 1);
-            var uri = Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameter(this.listOperationBaseUrl, new Dictionary<string, string>([
+            var uri = Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameters(this.listOperationBaseUrl, new Dictionary<string, string>([
                 { key: "skip", value: skip.toString() },
                 { key: "take", value: take.toString() }
             ]));

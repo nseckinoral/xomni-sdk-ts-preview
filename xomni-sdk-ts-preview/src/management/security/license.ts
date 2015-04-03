@@ -14,7 +14,7 @@ module Xomni.Management.Security.License {
         getList(skip: number, take: number, success: (result: Models.PaginatedContainer<Models.Management.Security.License>) => void, error: (error: Models.ExceptionResult) => void) {
             Xomni.Utils.Validator.isGreaterThanOrEqual("skip", skip, 0);
             Xomni.Utils.Validator.isGreaterThanOrEqual("take", take, 1);
-            var uri: string = Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameter(this.listOperationBaseUrl, new Dictionary<string, string>([
+            var uri: string = Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameters(this.listOperationBaseUrl, new Dictionary<string, string>([
                 { key: "skip", value: skip.toString() },
                 { key: "take", value: take.toString() }
             ]));
@@ -44,7 +44,7 @@ module Xomni.Management.Security.License {
         getAuditLogs(skip: number, take: number, success: (result: Models.PaginatedContainer<Models.Management.Security.LicenseAuditLogs>) => void, error: (error: Models.ExceptionResult) => void) {
             Xomni.Utils.Validator.isGreaterThanOrEqual("skip", skip, 0);
             Xomni.Utils.Validator.isGreaterThanOrEqual("take", take, 1);
-            var uri: string = Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameter(this.auditBaseUrl, new Dictionary<string, string>([
+            var uri: string = Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameters(this.auditBaseUrl, new Dictionary<string, string>([
                 { key: "skip", value: skip.toString() },
                 { key: "take", value: take.toString() }
             ]));
@@ -53,7 +53,7 @@ module Xomni.Management.Security.License {
 
         getUnassignedLicenses(onlyUnassignedUsers: boolean, success: (result: Models.PaginatedContainer<Models.Management.Security.License>) => void, error: (error: Models.ExceptionResult) => void) {
             Xomni.Utils.Validator.isDefined("onlyUnassignedUsers", onlyUnassignedUsers);
-            var uri: string = Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameter(this.listOperationBaseUrl, new Dictionary<string, string>([
+            var uri: string = Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameters(this.listOperationBaseUrl, new Dictionary<string, string>([
                 { key: "onlyUnassignedUsers", value: String(onlyUnassignedUsers) },
             ]));
             this.httpProvider.get(uri, success, error);
