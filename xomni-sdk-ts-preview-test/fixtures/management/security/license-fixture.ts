@@ -479,7 +479,7 @@ describe('LicenseClient.delete', () => {
             .toThrow(new Error("licenseId could not be null or empty"));
     });
 
-    it("Should parse api exception response ()cessfully", () => {
+    it("Should parse api exception response successfully", () => {
         TestHelpers.APIExceptionResponseTest($, 404);
 
         var expectedError = (exception: Models.ExceptionResult) => {
