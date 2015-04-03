@@ -227,7 +227,7 @@ describe('PrivateApiUserClient.delete', () => {
             .toThrow(new Error("privateApiUserId must be greater than or equal to 0"));
     });
 
-    it("Should parse api exception response ()cessfully", () => {
+    it("Should parse api exception response successfully", () => {
         TestHelpers.APIExceptionResponseTest($, 404);
 
         var expectedError = (exception: Models.ExceptionResult) => {
