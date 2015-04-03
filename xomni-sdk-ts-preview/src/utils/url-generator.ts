@@ -3,6 +3,9 @@
         static PrepareOperationUrl(baseUrl: string, additionalQueryString: string): string {
             Xomni.Utils.Validator.isDefined("baseUrl", baseUrl);
             Xomni.Utils.Validator.isDefined("additionalQueryString", additionalQueryString);
+            if (baseUrl.substring(baseUrl.length - 1) != "/") {
+                baseUrl += "/";
+            }
             return baseUrl + additionalQueryString;
         }
 

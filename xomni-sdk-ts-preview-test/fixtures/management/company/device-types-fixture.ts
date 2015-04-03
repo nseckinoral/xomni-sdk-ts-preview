@@ -7,6 +7,8 @@ var requestAndResponseJson = {
     "Description": "Sample Device Type Description"
 };
 
+var validUriForDelete: string = validUri + "/" + validId;
+
 var validDeviceTypeForPost = <Models.Management.Company.DeviceType> {
     Description: "Sample Device Type Description"
 };
@@ -273,4 +275,80 @@ describe('DeviceTypesClient.put', () => {
         var testClient = new Xomni.Management.Company.DeviceTypes.DeviceTypesClient();
         testClient.put(validDeviceTypeForPut, suc => { }, expectedError);
     });
+});
+
+describe('DeviceTypesClient.delete', () => {
+    it("Should hit correct url", () => {
+        TestHelpers.RequestUriTest($, validUriForDelete);
+        var testClient = new Xomni.Management.Company.DeviceTypes.DeviceTypesClient();
+        testClient.delete(validId, () => { }, err => { });
+    });
+
+    it("Should use correct http method", () => {
+        TestHelpers.RequestHttpMethodTest($, "Delete");
+        var testClient = new Xomni.Management.Company.DeviceTypes.DeviceTypesClient();
+        testClient.delete(validId, () => { }, err => { });
+    });
+
+    it("Should use correct http headers", () => {
+        TestHelpers.RequestHttpHeadersTest($);
+        var testClient = new Xomni.Management.Company.DeviceTypes.DeviceTypesClient();
+        testClient.delete(validId, () => { }, err => { });
+    });
+
+    it("Should raise exception with invalid parameters", () => {
+        var testClient = new Xomni.Management.Company.DeviceTypes.DeviceTypesClient();
+
+        expect(() => { testClient.delete(-1, () => { }, err => { }) })
+            .toThrow(new Error("deviceTypeId must be greater than or equal to 1"));
+
+        expect(() => { testClient.delete(null, () => { }, err => { }) })
+            .toThrow(new Error("deviceTypeId could not be null or empty"));
+
+        expect(() => { testClient.delete(undefined, () => { }, err => { }) })
+            .toThrow(new Error("deviceTypeId could not be null or empty"));
+    });
+
+    it("Should parse api exception response successfully (400)", () => {
+        TestHelpers.APIExceptionResponseTest($, 400);
+
+        var expectedError = (exception: Models.ExceptionResult) => {
+            expect(exception.HttpStatusCode).toEqual(400);
+            expect(exception.FriendlyDescription).toEqual("Generic error friendly description.");
+            expect(exception.IdentifierGuid).toEqual("7358fe16-3925-4951-9a77-fca4f9e167b0");
+            expect(exception.IdentifierTick).toEqual(635585478999549713);
+        };
+
+        var testClient = new Xomni.Management.Company.DeviceTypes.DeviceTypesClient();
+        testClient.delete(validId, () => { }, expectedError);
+    });
+
+    it("Should parse api exception response successfully (403)", () => {
+        TestHelpers.APIExceptionResponseTest($, 403);
+
+        var expectedError = (exception: Models.ExceptionResult) => {
+            expect(exception.HttpStatusCode).toEqual(403);
+            expect(exception.FriendlyDescription).toEqual("Generic error friendly description.");
+            expect(exception.IdentifierGuid).toEqual("7358fe16-3925-4951-9a77-fca4f9e167b0");
+            expect(exception.IdentifierTick).toEqual(635585478999549713);
+        };
+
+        var testClient = new Xomni.Management.Company.DeviceTypes.DeviceTypesClient();
+        testClient.delete(validId, () => { }, expectedError);
+    });
+
+    it("Should parse api exception response successfully (404)", () => {
+        TestHelpers.APIExceptionResponseTest($, 404);
+
+        var expectedError = (exception: Models.ExceptionResult) => {
+            expect(exception.HttpStatusCode).toEqual(404);
+            expect(exception.FriendlyDescription).toEqual("Generic error friendly description.");
+            expect(exception.IdentifierGuid).toEqual("7358fe16-3925-4951-9a77-fca4f9e167b0");
+            expect(exception.IdentifierTick).toEqual(635585478999549713);
+        };
+
+        var testClient = new Xomni.Management.Company.DeviceTypes.DeviceTypesClient();
+        testClient.delete(validId, () => { }, expectedError);
+    });
+
 });
