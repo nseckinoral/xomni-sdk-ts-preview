@@ -52,6 +52,25 @@ module Xomni.Management.Storage.Assets {
             }, success, error);
         }
 
+        put(tenantAssetDetail: Models.Management.Storage.TenantAssetDetail, success: (result: Models.Management.Storage.TenantAsset) => void, error: (error: Models.ExceptionResult) => void) {
+            Xomni.Utils.Validator.isDefined("tenantAssetDetail", tenantAssetDetail);
+            Xomni.Utils.Validator.isDefined("Id", tenantAssetDetail.Id);
+            Xomni.Utils.Validator.isDefined("FileName", tenantAssetDetail.FileName);
+            Xomni.Utils.Validator.isDefined("MimeType", tenantAssetDetail.MimeType);
+            Xomni.Utils.Validator.isDefined("FileBody", tenantAssetDetail.FileBody);
+            Xomni.Utils.Validator.isGreaterThanOrEqual("Id", tenantAssetDetail.Id, 1);
+            Xomni.Utils.Validator.isGreaterThanOrEqual("FileName length", tenantAssetDetail.FileName.length, 1);
+            Xomni.Utils.Validator.isGreaterThanOrEqual("Mimetype length", tenantAssetDetail.MimeType.length, 1);
+            Xomni.Utils.Validator.isGreaterThanOrEqual("File body", tenantAssetDetail.FileBody.length, 1);
+            this.httpProvider.put(this.singleOperationBaseUrl, {
+                Id: tenantAssetDetail.Id,
+                FileName: tenantAssetDetail.FileName,
+                FileBody: btoa(this.Uint8ArrayToString(tenantAssetDetail.FileBody)),
+                MimeType: tenantAssetDetail.MimeType
+            }, success, error);
+        }
+
+
         private StringToUint8Array(str: string): ArrayBuffer {
             var bufView = new Uint8Array(str.length);
             for (var i = 0, strLen = str.length; i < strLen; i++) {

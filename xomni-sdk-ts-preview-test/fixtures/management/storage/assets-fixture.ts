@@ -200,7 +200,6 @@ describe('AssetClient.delete', () => {
     });
 });
 
-
 describe('AssetClient.post', () => {
     it("Should hit correct url", () => {
         TestHelpers.RequestUriTest($, validUriForPost);
@@ -290,6 +289,112 @@ describe('AssetClient.post', () => {
                 FileBody: null
             };
             testClient.post(nullFileBody, suc => { }, err => { })
+        }).toThrow(new Error("FileBody could not be null or empty"));
+    });
+});
+
+describe('AssetClient.put', () => {
+    it("Should hit correct url", () => {
+        TestHelpers.RequestUriTest($, validUriForPost);
+        var testClient = new Xomni.Management.Storage.Assets.AssetClient();
+        testClient.put(validTenantAssetDetail, suc => { }, err => { });
+    });
+
+    it("Should use correct http method", () => {
+        TestHelpers.RequestHttpMethodTest($, "Put");
+        var testClient = new Xomni.Management.Storage.Assets.AssetClient();
+        testClient.put(validTenantAssetDetail, suc => { }, err => { });
+    });
+
+    it("Should use correct http headers", () => {
+        TestHelpers.RequestHttpHeadersTest($);
+        var testClient = new Xomni.Management.Storage.Assets.AssetClient();
+        testClient.put(validTenantAssetDetail, suc => { }, err => { });
+    });
+
+    it("Should parse response successfully", () => {
+        TestHelpers.ResponseParseTest($, {
+            "Id": 1,
+            "FileName": "sampleImage.jpg",
+            "MimeType": "image/jpeg"
+        });
+
+        var expectedSuccess = (validAsset: Models.Management.Storage.TenantAsset) => {
+            expect(validAsset.Id).toEqual(1);
+            expect(validAsset.FileName).toEqual("sampleImage.jpg");
+            expect(validAsset.MimeType).toEqual("image/jpeg");
+        };
+
+        var testClient = new Xomni.Management.Storage.Assets.AssetClient();
+        testClient.put(validTenantAssetDetail, expectedSuccess, err => { });
+    });
+
+    it("Should parse request successfully", () => {
+        var parseMethod = (request: Models.Management.Storage.TenantAssetDetail) => {
+            expect(request).toEqual({
+                "Id": 1,
+                "FileName": "sampleImage.jpg",
+                "MimeType": "image/jpeg",
+                "FileBody": "YXJtdXQ=" //btoa("armut") :)
+            });
+            expect(request.Id).toEqual(1);
+            expect(request.FileName).toEqual("sampleImage.jpg");
+            expect(request.MimeType).toEqual("image/jpeg");
+            expect(request.FileBody).toEqual("YXJtdXQ=");
+        };
+
+        TestHelpers.RequestParseTest($, parseMethod);
+
+        var testClient = new Xomni.Management.Storage.Assets.AssetClient();
+        testClient.put(validTenantAssetDetail, succ=> { }, err => { });
+    });
+
+    it("Should raise exception with invalid parameters", () => {
+        var testClient = new Xomni.Management.Storage.Assets.AssetClient();
+
+        expect(() => {
+            testClient.put(null, suc => { }, err => { })
+        }).toThrow(new Error("tenantAssetDetail could not be null or empty"));
+
+        expect(() => {
+            testClient.put(undefined, suc => { }, err => { })
+        }).toThrow(new Error("tenantAssetDetail could not be null or empty"));
+
+        expect(() => {
+            var nullFileName = <Models.Management.Storage.TenantAssetDetail>{
+                Id: null
+            };
+
+            testClient.put(nullFileName, suc => { }, err => { })
+        }).toThrow(new Error("Id could not be null or empty"));
+
+        expect(() => {
+            var nullFileName = <Models.Management.Storage.TenantAssetDetail>{
+                Id: 1,
+                FileName: null
+            };
+
+            testClient.put(nullFileName, suc => { }, err => { })
+        }).toThrow(new Error("FileName could not be null or empty"));
+
+        expect(() => {
+            var nullMimeType = <Models.Management.Storage.TenantAssetDetail>{
+                Id: 1,
+                FileName: "a",
+                MimeType: null
+            };
+
+            testClient.put(nullMimeType, suc => { }, err => { })
+        }).toThrow(new Error("MimeType could not be null or empty"));
+
+        expect(() => {
+            var nullFileBody = <Models.Management.Storage.TenantAssetDetail>{
+                Id: 1,
+                FileName: "a",
+                MimeType: "a",
+                FileBody: null
+            };
+            testClient.put(nullFileBody, suc => { }, err => { })
         }).toThrow(new Error("FileBody could not be null or empty"));
     });
 });
