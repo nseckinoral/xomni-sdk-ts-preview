@@ -1,8 +1,8 @@
 ﻿TestHelpers.InitalizeTestContext();
 
-var validRequest : Models.Management.Configuration.Settings = {
+var validRequest: Models.Management.Configuration.Settings = {
     FacebookDisplayType: 1,
-    FacebookApplicationId : "01e7efe0-5f20-4913-a4a7-fe539e7c762f",
+    FacebookApplicationId: "01e7efe0-5f20-4913-a4a7-fe539e7c762f",
     FacebookApplicavalidRequesttionId: "01e7efe0-5f20-4913-a4a7-fe539e7c762f",
     FacebookRedirectUri: "59b14e8b-71e4-42a2-96eb-a4fa624a7245",
     FacebookApplicationSecretKey: "93687750-d936-45ab-a306-5696bb7f97bd",
@@ -21,6 +21,7 @@ var validRequest : Models.Management.Configuration.Settings = {
     TwitterConsumerKey: "01e7efe0-5f20-4913-a4a7-fe539e7c762f",
     TwitterConsumerKeySecret: "59b14e8b-71e4-42a2-96eb-a4fa624a7245",
     TwitterRedirectUri: "93687750-d936-45ab-a306-5696bb7f97bd",
+    MailUnsubscribeRedirectionUri:"www.xomni.com"
 };
        
 var validResponseAndRequestJson = {
@@ -44,6 +45,7 @@ var validResponseAndRequestJson = {
     "TwitterConsumerKey": "01e7efe0-5f20-4913-a4a7-fe539e7c762f",
     "TwitterConsumerKeySecret": "59b14e8b-71e4-42a2-96eb-a4fa624a7245",
     "TwitterRedirectUri": "93687750-d936-45ab-a306-5696bb7f97bd",
+    "MailUnsubscribeRedirectionUri": "www.xomni.com"
 };
 
 var expectedSuccess = (settings: Models.Management.Configuration.Settings) => {
@@ -66,6 +68,7 @@ var expectedSuccess = (settings: Models.Management.Configuration.Settings) => {
     expect(settings.TwitterConsumerKey).toEqual("01e7efe0-5f20-4913-a4a7-fe539e7c762f");
     expect(settings.TwitterConsumerKeySecret).toEqual("59b14e8b-71e4-42a2-96eb-a4fa624a7245");
     expect(settings.TwitterRedirectUri).toEqual("93687750-d936-45ab-a306-5696bb7f97bd");
+    expect(settings.MailUnsubscribeRedirectionUri).toEqual("www.xomni.com");
 };
 
 describe('SettingsClient.put', () => {
@@ -109,6 +112,7 @@ describe('SettingsClient.put', () => {
             expect(request.TwitterConsumerKey).toEqual(validRequest.TwitterConsumerKey);
             expect(request.TwitterConsumerKeySecret).toEqual(validRequest.TwitterConsumerKeySecret);
             expect(request.TwitterRedirectUri).toEqual(validRequest.TwitterRedirectUri);
+            expect(request.MailUnsubscribeRedirectionUri).toEqual(validRequest.MailUnsubscribeRedirectionUri);
         };
         TestHelpers.RequestParseTest($, parseMethod);
 
