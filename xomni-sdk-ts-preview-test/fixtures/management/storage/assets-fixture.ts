@@ -118,7 +118,7 @@ describe('AssetClient.get', () => {
             "Id": 1,
             "FileName": "sampleImage.jpg",
             "MimeType": "image/jpeg",
-            "FileBody": "YXJtdXQ="
+            "FileBody": "YXJtdXQ=" //btoa("armut") :)
         });
 
         var expectedSuccess = (imageSizeProfile: Models.Management.Storage.TenantAssetDetail) => {
@@ -144,5 +144,52 @@ describe('AssetClient.get', () => {
 
         var testClient = new Xomni.Management.Storage.Assets.AssetClient();
         testClient.get(validAssetId, suc=> { }, expectedError);
+    });
+});
+
+describe('AssetClient.delete', () => {
+    it("Should hit correct url", () => {
+        TestHelpers.RequestUriTest($, validUriGetAndDelete);
+        var testClient = new Xomni.Management.Storage.Assets.AssetClient();
+        testClient.delete(validAssetId, () => { }, err => { });
+    });
+
+    it("Should use correct http method", () => {
+        TestHelpers.RequestHttpMethodTest($, "Delete");
+        var testClient = new Xomni.Management.Storage.Assets.AssetClient();
+        testClient.delete(validAssetId, () => { }, err => { });
+    });
+
+    it("Should use correct http headers", () => {
+        TestHelpers.RequestHttpHeadersTest($);
+        var testClient = new Xomni.Management.Storage.Assets.AssetClient();
+        testClient.delete(validAssetId, () => { }, err => { });
+    });
+
+    it("Should raise exception with invalid parameters", () => {
+        var testClient = new Xomni.Management.Storage.Assets.AssetClient();
+
+        expect(() => { testClient.delete(-1, () => { }, err => { }) })
+            .toThrow(new Error("imageSizeProfileId must be greater than or equal to 0"));
+
+        expect(() => { testClient.delete(null, () => { }, err => { }) })
+            .toThrow(new Error("imageSizeProfileId could not be null or empty"));
+
+        expect(() => { testClient.delete(undefined, () => { }, err => { }) })
+            .toThrow(new Error("imageSizeProfileId could not be null or empty"));
+    });
+
+    it("Should parse api exception response successfully", () => {
+        TestHelpers.APIExceptionResponseTest($, 404);
+
+        var expectedError = (exception: Models.ExceptionResult) => {
+            expect(exception.HttpStatusCode).toEqual(404);
+            expect(exception.FriendlyDescription).toEqual("Generic error friendly description.");
+            expect(exception.IdentifierGuid).toEqual("7358fe16-3925-4951-9a77-fca4f9e167b0");
+            expect(exception.IdentifierTick).toEqual(635585478999549713);
+        };
+
+        var testClient = new Xomni.Management.Storage.Assets.AssetClient();
+        testClient.delete(validImageSizeProfileId, () => { }, expectedError);
     });
 });

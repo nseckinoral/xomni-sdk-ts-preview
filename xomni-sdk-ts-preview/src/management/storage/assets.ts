@@ -29,6 +29,14 @@ module Xomni.Management.Storage.Assets{
             }), error);
         }
 
+        delete(assetId: number, success: () => void, error: (error: Models.ExceptionResult) => void) {
+            Xomni.Utils.Validator.isGreaterThanOrEqual("assetId", assetId, 0);
+            var uri: string = Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameter(this.singleOperationBaseUrl, new Dictionary<string, string>([
+                { key: "id", value: assetId.toString() }
+            ]));
+            this.httpProvider.delete(uri, success, error);
+        }
+
         private StringToUint8Array(str : string) : ArrayBuffer {
             var bufView = new Uint8Array(str.length);
             for (var i = 0, strLen = str.length; i < strLen; i++) {
