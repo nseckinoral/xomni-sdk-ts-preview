@@ -13,5 +13,28 @@ module Xomni.Management.Storage.Assets{
             ]));
             this.httpProvider.get(uri, success, error);
         }
+
+        get(assetId: number, success: (result: Models.Management.Storage.TenantAssetDetail) => void, error: (error: Models.ExceptionResult) => void) {
+            Xomni.Utils.Validator.isGreaterThanOrEqual("assetId", assetId, 0);
+            var uri: string = Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameter(this.singleOperationBaseUrl, new Dictionary<string, string>([
+                { key: "id", value: assetId.toString() }
+            ]));
+            this.httpProvider.get(uri,((r: any) => {
+                success(<Models.Management.Storage.TenantAssetDetail> {
+                    Id: r.Id,
+                    FileName: r.FileName,
+                    MimeType: r.MimeType,
+                    FileBody: this.StringToUint8Array(atob(r.FileBody))
+                });
+            }), error);
+        }
+
+        private StringToUint8Array(str : string) : ArrayBuffer {
+            var bufView = new Uint8Array(str.length);
+            for (var i = 0, strLen = str.length; i < strLen; i++) {
+                bufView[i] = str.charCodeAt(i);
+            }
+            return bufView;
+        }
     }
 }
