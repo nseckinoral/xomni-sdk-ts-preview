@@ -19,5 +19,6 @@
         TwitterConsumerKey: string;
         TwitterConsumerKeySecret: string;
         TwitterRedirectUri: string;
+        MailUnsubscribeRedirectionUri: string;
     }
 }
