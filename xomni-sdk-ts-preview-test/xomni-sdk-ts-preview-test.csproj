@@ -68,6 +68,7 @@
     <TypeScriptCompile Include="fixtures\management\security\private-api-user-fixture.ts" />
     <TypeScriptCompile Include="fixtures\management\security\license-fixture.ts" />
     <TypeScriptCompile Include="fixtures\management\social\facebook-fixture.ts" />
+    <TypeScriptCompile Include="fixtures\management\storage\assets-fixture.ts" />
     <TypeScriptCompile Include="fixtures\private\analytics\client-counters-fixture.ts" />
     <TypeScriptCompile Include="fixtures\private\analytics\client-side-analytics-summary-fixture.ts" />
     <TypeScriptCompile Include="fixtures\utils\url-generator-fixture.ts" />

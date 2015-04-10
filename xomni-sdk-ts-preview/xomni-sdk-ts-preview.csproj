@@ -61,6 +61,7 @@
     <TypeScriptCompile Include="src\management\configuration\trending-action-types.ts" />
     <TypeScriptCompile Include="src\management\integration\endpoint.ts" />
     <TypeScriptCompile Include="src\management\security\license.ts" />
+    <TypeScriptCompile Include="src\management\storage\assets.ts" />
     <TypeScriptCompile Include="src\models\ExceptionResult.ts">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </TypeScriptCompile>
@@ -85,6 +86,7 @@
     <TypeScriptCompile Include="src\models\management\security\api-user.ts" />
     <TypeScriptCompile Include="src\models\management\security\license-audit-logs.ts" />
     <TypeScriptCompile Include="src\models\management\security\license.ts" />
+    <TypeScriptCompile Include="src\models\management\storage\tenant-asset-detail.ts" />
     <TypeScriptCompile Include="src\models\PaginatedContainer.ts" />
     <TypeScriptCompile Include="src\models\private\analytics\base-analytics-summary.ts">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -116,6 +118,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bower.json" />
+    <TypeScriptCompile Include="src\models\management\storage\tenant-asset.ts" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
