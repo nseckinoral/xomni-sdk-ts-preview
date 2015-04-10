@@ -9,8 +9,8 @@
         CacheExpirationTime: number;
         IsPassbookEnabled: boolean;
         PassbookPassTypeIdentifier: string;
-        PassbookWWDRCACertificateTenantAssetId: string;
-        PassbookCertificateTenantAssetId: string;
+        PassbookWWDRCACertificateTenantAssetId: number;
+        PassbookCertificateTenantAssetId: number;
         PassbookCertificatePassword: string;
         PassbookTeamIdentifier: string;
         PassbookOrganizationName: string;

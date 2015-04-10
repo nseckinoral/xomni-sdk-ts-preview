@@ -11,8 +11,8 @@ var validRequest: Models.Management.Configuration.Settings = {
     CacheExpirationTime: 2147483647,
     IsPassbookEnabled: true,
     PassbookPassTypeIdentifier: "bc424b12-85aa-44f7-be36-bdd5e977ff61",
-    PassbookWWDRCACertificateTenantAssetId: "54f25df1-8dee-416b-91e6-1b91258e9945",
-    PassbookCertificateTenantAssetId: "9c0ffcb5-c889-41be-9936-ccd1e028baff",
+    PassbookWWDRCACertificateTenantAssetId: 1,
+    PassbookCertificateTenantAssetId: 1,
     PassbookCertificatePassword: "b85c42da-c80d-4c04-b074-b22e15fce4b6",
     PassbookTeamIdentifier: "67a49a80-ff62-4999-84ec-0f790091bcc3",
     PassbookOrganizationName: "409aa2ea-c619-469f-b2d3-db9723fc6466",
@@ -35,8 +35,8 @@ var validResponseAndRequestJson = {
     "CacheExpirationTime": 2147483647,
     "IsPassbookEnabled": true,
     "PassbookPassTypeIdentifier": "bc424b12-85aa-44f7-be36-bdd5e977ff61",
-    "PassbookWWDRCACertificateTenantAssetId": "54f25df1-8dee-416b-91e6-1b91258e9945",
-    "PassbookCertificateTenantAssetId": "9c0ffcb5-c889-41be-9936-ccd1e028baff",
+    "PassbookWWDRCACertificateTenantAssetId": 1,
+    "PassbookCertificateTenantAssetId": 1,
     "PassbookCertificatePassword": "b85c42da-c80d-4c04-b074-b22e15fce4b6",
     "PassbookTeamIdentifier": "67a49a80-ff62-4999-84ec-0f790091bcc3",
     "PassbookOrganizationName": "409aa2ea-c619-469f-b2d3-db9723fc6466",
@@ -58,8 +58,8 @@ var expectedSuccess = (settings: Models.Management.Configuration.Settings) => {
     expect(settings.CacheExpirationTime).toEqual(2147483647);
     expect(settings.IsPassbookEnabled).toEqual(true);
     expect(settings.PassbookPassTypeIdentifier).toEqual("bc424b12-85aa-44f7-be36-bdd5e977ff61");
-    expect(settings.PassbookWWDRCACertificateTenantAssetId).toEqual("54f25df1-8dee-416b-91e6-1b91258e9945");
-    expect(settings.PassbookCertificateTenantAssetId).toEqual("9c0ffcb5-c889-41be-9936-ccd1e028baff");
+    expect(settings.PassbookWWDRCACertificateTenantAssetId).toEqual(1);
+    expect(settings.PassbookCertificateTenantAssetId).toEqual(1);
     expect(settings.PassbookCertificatePassword).toEqual("b85c42da-c80d-4c04-b074-b22e15fce4b6");
     expect(settings.PassbookTeamIdentifier).toEqual("67a49a80-ff62-4999-84ec-0f790091bcc3");
     expect(settings.PassbookOrganizationName).toEqual("409aa2ea-c619-469f-b2d3-db9723fc6466");
