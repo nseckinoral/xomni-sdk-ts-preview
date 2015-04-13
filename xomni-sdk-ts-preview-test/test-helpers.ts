@@ -5,6 +5,8 @@
     "FriendlyDescription": "Generic error friendly description."\
 }';
 
+    export var uniqeId = "293f1b1e-faed-40cc-a792-04ce4a910749";
+
     export function RequestUriTest($: any, expectedUrl: string) {
         spyOn($, "ajax")
             .and
