@@ -1,34 +1,43 @@
 ﻿TestHelpers.InitalizeTestContext();
+var validId: number = 1;
 var validUri: string = "/management/company/devicetypes";
 
-var validDeviceType = <Models.Management.Company.DeviceType> {
+var requestAndResponseJson = {
+    "Id": 15,
+    "Description": "Sample Device Type Description"
+};
+
+var validDeviceTypeForPost = <Models.Management.Company.DeviceType> {
     Description: "Sample Device Type Description"
 };
+
+var validDeviceTypeForPut = <Models.Management.Company.DeviceType> {
+    Id: 15,
+    Description: "Sample Device Type Description"
+};
+
 
 describe('DeviceTypesClient.post', () => {
     it("Should hit correct url", () => {
         TestHelpers.RequestUriTest($, validUri);
         var testClient = new Xomni.Management.Company.DeviceTypes.DeviceTypesClient();
-        testClient.post(validDeviceType, suc => { }, err => { });
+        testClient.post(validDeviceTypeForPost, suc => { }, err => { });
     });
 
     it("Should use correct http method", () => {
         TestHelpers.RequestHttpMethodTest($, "Post");
         var testClient = new Xomni.Management.Company.DeviceTypes.DeviceTypesClient();
-        testClient.post(validDeviceType, suc => { }, err => { });
+        testClient.post(validDeviceTypeForPost, suc => { }, err => { });
     });
 
     it("Should use correct http headers", () => {
         TestHelpers.RequestHttpHeadersTest($);
         var testClient = new Xomni.Management.Company.DeviceTypes.DeviceTypesClient();
-        testClient.post(validDeviceType, suc => { }, err => { });
+        testClient.post(validDeviceTypeForPost, suc => { }, err => { });
     });
 
     it("Should parse response successfully", () => {
-        TestHelpers.ResponseParseTest($, {
-            "Id": 15,
-            "Description": "Sample Device Type Description"
-        });
+        TestHelpers.ResponseParseTest($, requestAndResponseJson);
 
         var expectedSuccess = (deviceType: Models.Management.Company.DeviceType) => {
             expect(deviceType.Id).toEqual(15);
@@ -36,7 +45,7 @@ describe('DeviceTypesClient.post', () => {
         };
 
         var testClient = new Xomni.Management.Company.DeviceTypes.DeviceTypesClient();
-        testClient.post(validDeviceType, expectedSuccess, err => { });
+        testClient.post(validDeviceTypeForPost, expectedSuccess, err => { });
     });
 
     it("Should parse request successfully", () => {
@@ -44,13 +53,13 @@ describe('DeviceTypesClient.post', () => {
             expect(request).toEqual({
                 "Description": "Sample Device Type Description",
             });
-            expect(request.Description).toEqual(validDeviceType.Description);
+            expect(request.Description).toEqual(validDeviceTypeForPost.Description);
         };
 
         TestHelpers.RequestParseTest($, parseMethod);
 
         var testClient = new Xomni.Management.Company.DeviceTypes.DeviceTypesClient();
-        testClient.post(validDeviceType, succ=> { }, err => { });
+        testClient.post(validDeviceTypeForPost, succ=> { }, err => { });
     });
 
     it("Should raise exception with invalid parameters", () => {
@@ -104,6 +113,164 @@ describe('DeviceTypesClient.post', () => {
         };
 
         var testClient = new Xomni.Management.Company.DeviceTypes.DeviceTypesClient();
-        testClient.post(validDeviceType, suc => { }, expectedError);
+        testClient.post(validDeviceTypeForPost, suc => { }, expectedError);
+    });
+});
+
+describe('DeviceTypesClient.put', () => {
+    it("Should hit correct url", () => {
+        TestHelpers.RequestUriTest($, validUri);
+        var testClient = new Xomni.Management.Company.DeviceTypes.DeviceTypesClient();
+        testClient.put(validDeviceTypeForPut, suc => { }, err => { });
+    });
+
+    it("Should use correct http method", () => {
+        TestHelpers.RequestHttpMethodTest($, "Put");
+        var testClient = new Xomni.Management.Company.DeviceTypes.DeviceTypesClient();
+        testClient.put(validDeviceTypeForPut, suc => { }, err => { });
+    });
+
+    it("Should use correct http headers", () => {
+        TestHelpers.RequestHttpHeadersTest($);
+        var testClient = new Xomni.Management.Company.DeviceTypes.DeviceTypesClient();
+        testClient.put(validDeviceTypeForPut, suc => { }, err => { });
+    });
+
+    it("Should parse response successfully", () => {
+        TestHelpers.ResponseParseTest($, requestAndResponseJson);
+
+        var expectedSuccess = (deviceType: Models.Management.Company.DeviceType) => {
+            expect(deviceType.Id).toEqual(15);
+            expect(deviceType.Description).toEqual("Sample Device Type Description");
+        };
+
+        var testClient = new Xomni.Management.Company.DeviceTypes.DeviceTypesClient();
+        testClient.put(validDeviceTypeForPut, expectedSuccess, err => { });
+    });
+
+    it("Should parse request successfully", () => {
+        var parseMethod = (request: Models.Management.Company.DeviceType) => {
+            expect(request).toEqual(requestAndResponseJson);
+            expect(request.Id).toEqual(validDeviceTypeForPut.Id);
+            expect(request.Description).toEqual(validDeviceTypeForPut.Description);
+        };
+
+        TestHelpers.RequestParseTest($, parseMethod);
+
+        var testClient = new Xomni.Management.Company.DeviceTypes.DeviceTypesClient();
+        testClient.put(validDeviceTypeForPut, succ=> { }, err => { });
+    });
+
+    it("Should raise exception with invalid parameters", () => {
+        var testClient = new Xomni.Management.Company.DeviceTypes.DeviceTypesClient();
+
+        expect(() => {
+            testClient.put(null, suc => { }, err => { })
+        }).toThrow(new Error("deviceType could not be null or empty"));
+
+        expect(() => {
+            testClient.put(undefined, suc => { }, err => { })
+        }).toThrow(new Error("deviceType could not be null or empty"));
+
+        expect(() => {
+            var invalidDeviceType = <Models.Management.Company.DeviceType> {
+                Id: null,
+                Description: "Description"
+            };
+
+            testClient.put(invalidDeviceType, suc => { }, err => { })
+        }).toThrow(new Error("id could not be null or empty"));
+
+        expect(() => {
+            var invalidDeviceType = <Models.Management.Company.DeviceType> {
+                Id: undefined,
+                Description: "Description"
+            };
+
+            testClient.put(invalidDeviceType, suc => { }, err => { })
+        }).toThrow(new Error("id could not be null or empty"));
+
+        expect(() => {
+            var invalidDeviceType = <Models.Management.Company.DeviceType> {
+                Id: -1,
+                Description: "Description"
+            };
+
+            testClient.put(invalidDeviceType, suc => { }, err => { })
+        }).toThrow(new Error("id must be greater than or equal to 1"));
+
+
+        expect(() => {
+            var invalidDeviceType = <Models.Management.Company.DeviceType> {
+                Id: validId,
+                Description: null
+            };
+
+            testClient.put(invalidDeviceType, suc => { }, err => { })
+        }).toThrow(new Error("description could not be null or empty"));
+
+        expect(() => {
+            var invalidDeviceType = <Models.Management.Company.DeviceType> {
+                Id: validId,
+                Description: undefined
+            };
+
+            testClient.put(invalidDeviceType, suc => { }, err => { })
+        }).toThrow(new Error("description could not be null or empty"));
+
+        expect(() => {
+            var invalidDescription: string;
+            for (var i = 0; i < 200; i++) {
+                invalidDescription += "x";
+            }
+            var invalidDeviceType = <Models.Management.Company.DeviceType> {
+                Id: validId,
+                Description: invalidDescription
+            };
+
+            testClient.put(invalidDeviceType, suc => { }, err => { })
+        }).toThrow(new Error("description length could not be greater than 150"));
+    });
+
+    it("Should parse api exception response successfully (403)", () => {
+        TestHelpers.APIExceptionResponseTest($, 403);
+
+        var expectedError = (exception: Models.ExceptionResult) => {
+            expect(exception.HttpStatusCode).toEqual(403);
+            expect(exception.FriendlyDescription).toEqual("Generic error friendly description.");
+            expect(exception.IdentifierGuid).toEqual("7358fe16-3925-4951-9a77-fca4f9e167b0");
+            expect(exception.IdentifierTick).toEqual(635585478999549713);
+        };
+
+        var testClient = new Xomni.Management.Company.DeviceTypes.DeviceTypesClient();
+        testClient.put(validDeviceTypeForPut, suc => { }, expectedError);
+    });
+
+    it("Should parse api exception response successfully (404)", () => {
+        TestHelpers.APIExceptionResponseTest($, 404);
+
+        var expectedError = (exception: Models.ExceptionResult) => {
+            expect(exception.HttpStatusCode).toEqual(404);
+            expect(exception.FriendlyDescription).toEqual("Generic error friendly description.");
+            expect(exception.IdentifierGuid).toEqual("7358fe16-3925-4951-9a77-fca4f9e167b0");
+            expect(exception.IdentifierTick).toEqual(635585478999549713);
+        };
+
+        var testClient = new Xomni.Management.Company.DeviceTypes.DeviceTypesClient();
+        testClient.put(validDeviceTypeForPut, suc => { }, expectedError);
+    });
+
+    it("Should parse api exception response successfully (409)", () => {
+        TestHelpers.APIExceptionResponseTest($, 409);
+
+        var expectedError = (exception: Models.ExceptionResult) => {
+            expect(exception.HttpStatusCode).toEqual(409);
+            expect(exception.FriendlyDescription).toEqual("Generic error friendly description.");
+            expect(exception.IdentifierGuid).toEqual("7358fe16-3925-4951-9a77-fca4f9e167b0");
+            expect(exception.IdentifierTick).toEqual(635585478999549713);
+        };
+
+        var testClient = new Xomni.Management.Company.DeviceTypes.DeviceTypesClient();
+        testClient.put(validDeviceTypeForPut, suc => { }, expectedError);
     });
 });
