@@ -3,10 +3,13 @@
         static PrepareOperationUrl(baseUrl: string, additionalQueryString: string): string {
             Xomni.Utils.Validator.isDefined("baseUrl", baseUrl);
             Xomni.Utils.Validator.isDefined("additionalQueryString", additionalQueryString);
+            if (baseUrl.substring(baseUrl.length - 1) != "/") {
+                baseUrl += "/";
+            }
             return baseUrl + additionalQueryString;
         }
 
-        static PrepareOperationUrlWithMultipleParameter(baseUrl: string, additionalQueryString: Dictionary<string, string>): string {
+        static PrepareOperationUrlWithMultipleParameters(baseUrl: string, additionalQueryString: Dictionary<string, string>): string {
             Xomni.Utils.Validator.isDefined("baseUrl", baseUrl);
             Xomni.Utils.Validator.isDefined("additionalQueryString", additionalQueryString);
             baseUrl += "?";

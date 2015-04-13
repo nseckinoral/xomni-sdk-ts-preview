@@ -7,7 +7,7 @@ module Xomni.Management.Storage.Assets {
         getList(skip: number, take: number, success: (result: Models.PaginatedContainer<Models.Management.Storage.TenantAsset>) => void, error: (error: Models.ExceptionResult) => void) {
             Xomni.Utils.Validator.isGreaterThanOrEqual("skip", skip, 0);
             Xomni.Utils.Validator.isGreaterThanOrEqual("take", take, 1);
-            var uri = Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameter(this.listOperationBaseUrl, new Dictionary<string, string>([
+            var uri = Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameters(this.listOperationBaseUrl, new Dictionary<string, string>([
                 { key: "skip", value: skip.toString() },
                 { key: "take", value: take.toString() }
             ]));
@@ -16,7 +16,7 @@ module Xomni.Management.Storage.Assets {
 
         get(assetId: number, success: (result: Models.Management.Storage.TenantAssetDetail) => void, error: (error: Models.ExceptionResult) => void) {
             Xomni.Utils.Validator.isGreaterThanOrEqual("assetId", assetId, 0);
-            var uri: string = Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameter(this.singleOperationBaseUrl, new Dictionary<string, string>([
+            var uri: string = Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameters(this.singleOperationBaseUrl, new Dictionary<string, string>([
                 { key: "id", value: assetId.toString() }
             ]));
             this.httpProvider.get(uri, ((r: any) => {
@@ -31,7 +31,7 @@ module Xomni.Management.Storage.Assets {
 
         delete(assetId: number, success: () => void, error: (error: Models.ExceptionResult) => void) {
             Xomni.Utils.Validator.isGreaterThanOrEqual("assetId", assetId, 0);
-            var uri: string = Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameter(this.singleOperationBaseUrl, new Dictionary<string, string>([
+            var uri: string = Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameters(this.singleOperationBaseUrl, new Dictionary<string, string>([
                 { key: "id", value: assetId.toString() }
             ]));
             this.httpProvider.delete(uri, success, error);
