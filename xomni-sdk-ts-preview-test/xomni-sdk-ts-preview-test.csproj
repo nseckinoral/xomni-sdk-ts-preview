@@ -61,6 +61,7 @@
     <TypeScriptCompile Include="definitions\jasmine\jasmine.d.ts" />
     <TypeScriptCompile Include="definitions\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="fixtures\management\company\device-metadata-fixture.ts" />
+    <TypeScriptCompile Include="fixtures\management\company\device-types-fixture.ts" />
     <TypeScriptCompile Include="fixtures\management\configuration\image-size-profile-fixture.ts" />
     <TypeScriptCompile Include="fixtures\management\configuration\store-fixture.ts" />
     <TypeScriptCompile Include="fixtures\management\configuration\setting-fixture.ts" />
