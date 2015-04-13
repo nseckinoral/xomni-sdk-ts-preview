@@ -30,10 +30,22 @@ module Xomni.Management.Company.DeviceTypes {
             this.httpProvider.get(uri, success, error);
         }
 
+        getList(skip: number, take: number, succes: (result: Models.PaginatedContainer<Models.Management.Company.DeviceType>) => void, error: (error: Models.ExceptionResult) => void) {
+            Xomni.Utils.Validator.isGreaterThanOrEqual("skip", skip, 0);
+            Xomni.Utils.Validator.isGreaterThanOrEqual("take", take, 1);
+            var uri = Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameter(this.baseUri, new Dictionary<string, string>([
+                { key: "skip", value: skip.toString() },
+                { key: "take", value: take.toString() }
+            ]));
+
+            this.httpProvider.get(uri, succes, error);
+        }
+
         private validateDeviceType(deviceType: Models.Management.Company.DeviceType) {
             Xomni.Utils.Validator.isDefined("deviceType", deviceType);
             Xomni.Utils.Validator.isDefined("description", deviceType.Description);
             Xomni.Utils.Validator.isLessThan(deviceType.Description.length, "description length", 150);
         }
+
     }
 } 

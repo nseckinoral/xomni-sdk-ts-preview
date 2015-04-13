@@ -1,5 +1,7 @@
 ﻿TestHelpers.InitalizeTestContext();
 var validId: number = 1;
+var validSkip: number = 1;
+var validTake: number = 2;
 var validUri: string = "/management/company/devicetypes";
 
 var requestAndResponseJson = {
@@ -8,6 +10,7 @@ var requestAndResponseJson = {
 };
 
 var validUriForDeleteAndGet: string = validUri + "/" + validId;
+var validUriForGetList: string = validUri + "?skip=" + validSkip + "&take=" + validTake;
 
 var validDeviceTypeForPost = <Models.Management.Company.DeviceType> {
     Description: "Sample Device Type Description"
@@ -409,5 +412,82 @@ describe('DeviceTypesClient.get', () => {
 
         var testClient = new Xomni.Management.Company.DeviceTypes.DeviceTypesClient();
         testClient.get(validId, suc=> { }, expectedError);
+    });
+});
+
+describe('DeviceTypesClient.getList', () => {
+    it("Should hit correct url", () => {
+        TestHelpers.RequestUriTest($, validUriForGetList);
+        var testClient = new Xomni.Management.Company.DeviceTypes.DeviceTypesClient();
+        testClient.getList(validSkip, validTake, suc => { }, err => { });
+    });
+
+    it("Should use correct http method", () => {
+        TestHelpers.RequestHttpMethodTest($, "Get");
+        var testClient = new Xomni.Management.Company.DeviceTypes.DeviceTypesClient();
+        testClient.getList(validSkip, validTake, suc => { }, err => { });
+    });
+
+    it("Should use correct http headers", () => {
+        TestHelpers.RequestHttpHeadersTest($);
+        var testClient = new Xomni.Management.Company.DeviceTypes.DeviceTypesClient();
+        testClient.getList(validSkip, validTake, suc => { }, err => { });
+    });
+
+    it("Should raise exception with invalid parameters", () => {
+        var testClient = new Xomni.Management.Company.DeviceTypes.DeviceTypesClient();
+
+        expect(() => { testClient.getList(null, 1, suc => { }, err => { }) })
+            .toThrow(new Error("skip could not be null or empty"));
+
+        expect(() => { testClient.getList(undefined, 1, suc => { }, err => { }) })
+            .toThrow(new Error("skip could not be null or empty"));
+
+        expect(() => { testClient.getList(-5, 1, suc => { }, err => { }) })
+            .toThrow(new Error("skip must be greater than or equal to 0"));
+
+        expect(() => { testClient.getList(5, null, suc => { }, err => { }) })
+            .toThrow(new Error("take could not be null or empty"));
+
+        expect(() => { testClient.getList(5, undefined, suc => { }, err => { }) })
+            .toThrow(new Error("take could not be null or empty"));
+
+        expect(() => { testClient.getList(5, 0, suc => { }, err => { }) })
+            .toThrow(new Error("take must be greater than or equal to 1"));
+
+    });
+
+    it("Should parse response successfully", () => {
+        TestHelpers.ResponseParseTest($, {
+            "Results": [
+                {
+                    "Id": 1,
+                    "Description": " Sample Device Type Description "
+                },
+                {
+                    "Id": 2,
+                    "Description": " Sample Device Type Description 2"
+                },
+                {
+                    "Id": 3,
+                    "Description": " Sample Device Type Description 3"
+                }
+            ],
+            "TotalCount": 3
+        });
+
+        var expectedSuccess = (list: Models.PaginatedContainer<Models.Management.Company.DeviceType>) => {
+            expect(list.TotalCount).toEqual(3);
+            expect(list.Results.length).toEqual(3);
+            expect(list.Results[0].Id).toEqual(1);
+            expect(list.Results[0].Description).toEqual(" Sample Device Type Description ");
+            expect(list.Results[1].Id).toEqual(2);
+            expect(list.Results[1].Description).toEqual(" Sample Device Type Description 2");
+            expect(list.Results[2].Id).toEqual(3);
+            expect(list.Results[2].Description).toEqual(" Sample Device Type Description 3");
+        };
+
+        var testClient = new Xomni.Management.Company.DeviceTypes.DeviceTypesClient();
+        testClient.getList(validSkip, validTake, expectedSuccess, err => { });
     });
 });
