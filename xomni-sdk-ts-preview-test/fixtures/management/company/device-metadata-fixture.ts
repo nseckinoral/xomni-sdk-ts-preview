@@ -1,9 +1,9 @@
 ﻿TestHelpers.InitalizeTestContext();
-var validLicenseId = 1;
-var invalidLicenseId = -1;
+var validLicenceId = 1;
+var invalidLicenceId = -1;
 var validMetadataKey = "Key";
 var validMetadataValue = "Value";
-var validUri: string = "/management/company/licences/" + validLicenseId + "/devices/" + TestHelpers.uniqeId + "/metadata";
+var validUri: string = "/management/company/licences/" + validLicenceId + "/devices/" + TestHelpers.uniqeId + "/metadata";
 var validUriForDelete: string = validUri + "/" + validMetadataKey;
 var metadata: Models.Management.Company.Metadata = {
     Key: "Sample metadata key",
@@ -24,19 +24,19 @@ describe('DeviceMetadataClient.post', () => {
     it("Should hit correct url", () => {
         TestHelpers.RequestUriTest($, validUri);
         var testClient = new Xomni.Management.Company.DeviceMetadata.DeviceMetadataClient();
-        testClient.post(validLicenseId, TestHelpers.uniqeId, metadata, suc => { }, err => { });
+        testClient.post(validLicenceId, TestHelpers.uniqeId, metadata, suc => { }, err => { });
     });
 
     it("Should use correct http method", () => {
         TestHelpers.RequestHttpMethodTest($, "Post");
         var testClient = new Xomni.Management.Company.DeviceMetadata.DeviceMetadataClient();
-        testClient.post(validLicenseId, TestHelpers.uniqeId, metadata, suc => { }, err => { });
+        testClient.post(validLicenceId, TestHelpers.uniqeId, metadata, suc => { }, err => { });
     });
 
     it("Should use correct http headers", () => {
         TestHelpers.RequestHttpHeadersTest($);
         var testClient = new Xomni.Management.Company.DeviceMetadata.DeviceMetadataClient();
-        testClient.post(validLicenseId, TestHelpers.uniqeId, metadata, suc => { }, err => { });
+        testClient.post(validLicenceId, TestHelpers.uniqeId, metadata, suc => { }, err => { });
     });
 
     it("Should parse response successfully", () => {
@@ -48,7 +48,7 @@ describe('DeviceMetadataClient.post', () => {
         };
 
         var testClient = new Xomni.Management.Company.DeviceMetadata.DeviceMetadataClient();
-        testClient.post(validLicenseId, TestHelpers.uniqeId, metadata, expectedSuccess, err => { });
+        testClient.post(validLicenceId, TestHelpers.uniqeId, metadata, expectedSuccess, err => { });
     });
 
     it("Should parse request successfully", () => {
@@ -61,7 +61,7 @@ describe('DeviceMetadataClient.post', () => {
         TestHelpers.RequestParseTest($, parseMethod);
 
         var testClient = new Xomni.Management.Company.DeviceMetadata.DeviceMetadataClient();
-        testClient.post(validLicenseId, TestHelpers.uniqeId, metadata, suc=> { }, err => { });
+        testClient.post(validLicenceId, TestHelpers.uniqeId, metadata, suc=> { }, err => { });
     });
 
     it("Should raise exception with invalid parameters", () => {
@@ -73,19 +73,19 @@ describe('DeviceMetadataClient.post', () => {
         expect(() => { testClient.post(undefined, TestHelpers.uniqeId, metadata, suc => { }, err => { }) })
             .toThrow(new Error("licenceId could not be null or empty"));
 
-        expect(() => { testClient.post(invalidLicenseId, TestHelpers.uniqeId, metadata, suc => { }, err => { }) })
+        expect(() => { testClient.post(invalidLicenceId, TestHelpers.uniqeId, metadata, suc => { }, err => { }) })
             .toThrow(new Error("licenceId must be greater than or equal to 1"));
 
-        expect(() => { testClient.post(validLicenseId, null, metadata, suc => { }, err => { }) })
+        expect(() => { testClient.post(validLicenceId, null, metadata, suc => { }, err => { }) })
             .toThrow(new Error("deviceId could not be null or empty"));
 
-        expect(() => { testClient.post(validLicenseId, undefined, metadata, suc => { }, err => { }) })
+        expect(() => { testClient.post(validLicenceId, undefined, metadata, suc => { }, err => { }) })
             .toThrow(new Error("deviceId could not be null or empty"));
 
-        expect(() => { testClient.post(validLicenseId, TestHelpers.uniqeId, null, suc => { }, err => { }) })
+        expect(() => { testClient.post(validLicenceId, TestHelpers.uniqeId, null, suc => { }, err => { }) })
             .toThrow(new Error("metadata could not be null or empty"));
 
-        expect(() => { testClient.post(validLicenseId, TestHelpers.uniqeId, undefined, suc => { }, err => { }) })
+        expect(() => { testClient.post(validLicenceId, TestHelpers.uniqeId, undefined, suc => { }, err => { }) })
             .toThrow(new Error("metadata could not be null or empty"));
 
         expect(() => {
@@ -93,7 +93,7 @@ describe('DeviceMetadataClient.post', () => {
                 Key: null,
                 Value: "Value"
             };
-            testClient.post(validLicenseId, TestHelpers.uniqeId, invalidMetadata, suc => { }, err => { })
+            testClient.post(validLicenceId, TestHelpers.uniqeId, invalidMetadata, suc => { }, err => { })
         }).toThrow(new Error("key could not be null or empty"));
 
         expect(() => {
@@ -101,7 +101,7 @@ describe('DeviceMetadataClient.post', () => {
                 Key: undefined,
                 Value: "Value"
             };
-            testClient.post(validLicenseId, TestHelpers.uniqeId, invalidMetadata, suc => { }, err => { })
+            testClient.post(validLicenceId, TestHelpers.uniqeId, invalidMetadata, suc => { }, err => { })
         }).toThrow(new Error("key could not be null or empty"));
 
         expect(() => {
@@ -109,7 +109,7 @@ describe('DeviceMetadataClient.post', () => {
                 Key: "Key",
                 Value: null
             };
-            testClient.post(validLicenseId, TestHelpers.uniqeId, invalidMetadata, suc => { }, err => { })
+            testClient.post(validLicenceId, TestHelpers.uniqeId, invalidMetadata, suc => { }, err => { })
         }).toThrow(new Error("value could not be null or empty"));
 
         expect(() => {
@@ -117,7 +117,7 @@ describe('DeviceMetadataClient.post', () => {
                 Key: "Key",
                 Value: undefined
             };
-            testClient.post(validLicenseId, TestHelpers.uniqeId, invalidMetadata, suc => { }, err => { })
+            testClient.post(validLicenceId, TestHelpers.uniqeId, invalidMetadata, suc => { }, err => { })
         }).toThrow(new Error("value could not be null or empty"));
 
     });
@@ -133,7 +133,7 @@ describe('DeviceMetadataClient.post', () => {
         };
 
         var testClient = new Xomni.Management.Company.DeviceMetadata.DeviceMetadataClient();
-        testClient.post(validLicenseId, TestHelpers.uniqeId, metadata, suc=> { }, expectedError);
+        testClient.post(validLicenceId, TestHelpers.uniqeId, metadata, suc=> { }, expectedError);
     });
 
     it("Should parse api exception response successfully (404)", () => {
@@ -147,7 +147,7 @@ describe('DeviceMetadataClient.post', () => {
         };
 
         var testClient = new Xomni.Management.Company.DeviceMetadata.DeviceMetadataClient();
-        testClient.post(validLicenseId, TestHelpers.uniqeId, metadata, suc=> { }, expectedError);
+        testClient.post(validLicenceId, TestHelpers.uniqeId, metadata, suc=> { }, expectedError);
     });
 });
 
@@ -155,19 +155,19 @@ describe('DeviceMetadataClient.put', () => {
     it("Should hit correct url", () => {
         TestHelpers.RequestUriTest($, validUri);
         var testClient = new Xomni.Management.Company.DeviceMetadata.DeviceMetadataClient();
-        testClient.put(validLicenseId, TestHelpers.uniqeId, metadata, suc => { }, err => { });
+        testClient.put(validLicenceId, TestHelpers.uniqeId, metadata, suc => { }, err => { });
     });
 
     it("Should use correct http method", () => {
         TestHelpers.RequestHttpMethodTest($, "Put");
         var testClient = new Xomni.Management.Company.DeviceMetadata.DeviceMetadataClient();
-        testClient.put(validLicenseId, TestHelpers.uniqeId, metadata, suc => { }, err => { });
+        testClient.put(validLicenceId, TestHelpers.uniqeId, metadata, suc => { }, err => { });
     });
 
     it("Should use correct http headers", () => {
         TestHelpers.RequestHttpHeadersTest($);
         var testClient = new Xomni.Management.Company.DeviceMetadata.DeviceMetadataClient();
-        testClient.put(validLicenseId, TestHelpers.uniqeId, metadata, suc => { }, err => { });
+        testClient.put(validLicenceId, TestHelpers.uniqeId, metadata, suc => { }, err => { });
     });
 
     it("Should parse response successfully", () => {
@@ -179,7 +179,7 @@ describe('DeviceMetadataClient.put', () => {
         };
 
         var testClient = new Xomni.Management.Company.DeviceMetadata.DeviceMetadataClient();
-        testClient.put(validLicenseId, TestHelpers.uniqeId, metadata, expectedSuccess, err => { });
+        testClient.put(validLicenceId, TestHelpers.uniqeId, metadata, expectedSuccess, err => { });
     });
 
     it("Should parse request successfully", () => {
@@ -192,7 +192,7 @@ describe('DeviceMetadataClient.put', () => {
         TestHelpers.RequestParseTest($, parseMethod);
 
         var testClient = new Xomni.Management.Company.DeviceMetadata.DeviceMetadataClient();
-        testClient.put(validLicenseId, TestHelpers.uniqeId, metadata, suc=> { }, err => { });
+        testClient.put(validLicenceId, TestHelpers.uniqeId, metadata, suc=> { }, err => { });
     });
 
     it("Should raise exception with invalid parameters", () => {
@@ -204,19 +204,19 @@ describe('DeviceMetadataClient.put', () => {
         expect(() => { testClient.put(undefined, TestHelpers.uniqeId, metadata, suc => { }, err => { }) })
             .toThrow(new Error("licenceId could not be null or empty"));
 
-        expect(() => { testClient.post(invalidLicenseId, TestHelpers.uniqeId, metadata, suc => { }, err => { }) })
+        expect(() => { testClient.post(invalidLicenceId, TestHelpers.uniqeId, metadata, suc => { }, err => { }) })
             .toThrow(new Error("licenceId must be greater than or equal to 1"));
 
-        expect(() => { testClient.put(validLicenseId, null, metadata, suc => { }, err => { }) })
+        expect(() => { testClient.put(validLicenceId, null, metadata, suc => { }, err => { }) })
             .toThrow(new Error("deviceId could not be null or empty"));
 
-        expect(() => { testClient.put(validLicenseId, undefined, metadata, suc => { }, err => { }) })
+        expect(() => { testClient.put(validLicenceId, undefined, metadata, suc => { }, err => { }) })
             .toThrow(new Error("deviceId could not be null or empty"));
 
-        expect(() => { testClient.put(validLicenseId, TestHelpers.uniqeId, null, suc => { }, err => { }) })
+        expect(() => { testClient.put(validLicenceId, TestHelpers.uniqeId, null, suc => { }, err => { }) })
             .toThrow(new Error("metadata could not be null or empty"));
 
-        expect(() => { testClient.put(validLicenseId, TestHelpers.uniqeId, undefined, suc => { }, err => { }) })
+        expect(() => { testClient.put(validLicenceId, TestHelpers.uniqeId, undefined, suc => { }, err => { }) })
             .toThrow(new Error("metadata could not be null or empty"));
 
         expect(() => {
@@ -224,7 +224,7 @@ describe('DeviceMetadataClient.put', () => {
                 Key: null,
                 Value: validMetadataValue
             };
-            testClient.put(validLicenseId, TestHelpers.uniqeId, invalidMetadata, suc => { }, err => { })
+            testClient.put(validLicenceId, TestHelpers.uniqeId, invalidMetadata, suc => { }, err => { })
         }).toThrow(new Error("key could not be null or empty"));
 
         expect(() => {
@@ -232,7 +232,7 @@ describe('DeviceMetadataClient.put', () => {
                 Key: undefined,
                 Value: validMetadataValue
             };
-            testClient.put(validLicenseId, TestHelpers.uniqeId, invalidMetadata, suc => { }, err => { })
+            testClient.put(validLicenceId, TestHelpers.uniqeId, invalidMetadata, suc => { }, err => { })
         }).toThrow(new Error("key could not be null or empty"));
 
         expect(() => {
@@ -240,7 +240,7 @@ describe('DeviceMetadataClient.put', () => {
                 Key: validMetadataKey,
                 Value: null
             };
-            testClient.put(validLicenseId, TestHelpers.uniqeId, invalidMetadata, suc => { }, err => { })
+            testClient.put(validLicenceId, TestHelpers.uniqeId, invalidMetadata, suc => { }, err => { })
         }).toThrow(new Error("value could not be null or empty"));
 
         expect(() => {
@@ -248,7 +248,7 @@ describe('DeviceMetadataClient.put', () => {
                 Key: validMetadataKey,
                 Value: undefined
             };
-            testClient.put(validLicenseId, TestHelpers.uniqeId, invalidMetadata, suc => { }, err => { })
+            testClient.put(validLicenceId, TestHelpers.uniqeId, invalidMetadata, suc => { }, err => { })
         }).toThrow(new Error("value could not be null or empty"));
 
     });
@@ -264,7 +264,7 @@ describe('DeviceMetadataClient.put', () => {
         };
 
         var testClient = new Xomni.Management.Company.DeviceMetadata.DeviceMetadataClient();
-        testClient.put(validLicenseId, TestHelpers.uniqeId, metadata, suc=> { }, expectedError);
+        testClient.put(validLicenceId, TestHelpers.uniqeId, metadata, suc=> { }, expectedError);
     });
 });
 
@@ -272,19 +272,19 @@ describe('DeviceMetadataClient.delete', () => {
     it("Should hit correct url", () => {
         TestHelpers.RequestUriTest($, validUriForDelete);
         var testClient = new Xomni.Management.Company.DeviceMetadata.DeviceMetadataClient();
-        testClient.delete(validLicenseId, TestHelpers.uniqeId, validMetadataKey, () => { }, err => { });
+        testClient.delete(validLicenceId, TestHelpers.uniqeId, validMetadataKey, () => { }, err => { });
     });
 
     it("Should use correct http method", () => {
         TestHelpers.RequestHttpMethodTest($, "Delete");
         var testClient = new Xomni.Management.Company.DeviceMetadata.DeviceMetadataClient();
-        testClient.delete(validLicenseId, TestHelpers.uniqeId, validMetadataKey, () => { }, err => { });
+        testClient.delete(validLicenceId, TestHelpers.uniqeId, validMetadataKey, () => { }, err => { });
     });
 
     it("Should use correct http headers", () => {
         TestHelpers.RequestHttpHeadersTest($);
         var testClient = new Xomni.Management.Company.DeviceMetadata.DeviceMetadataClient();
-        testClient.delete(validLicenseId, TestHelpers.uniqeId, validMetadataKey, () => { }, err => { });
+        testClient.delete(validLicenceId, TestHelpers.uniqeId, validMetadataKey, () => { }, err => { });
     });
 
     it("Should raise exception with invalid parameters", () => {
@@ -296,19 +296,19 @@ describe('DeviceMetadataClient.delete', () => {
         expect(() => { testClient.delete(undefined, TestHelpers.uniqeId, validMetadataKey, () => { }, err => { }) })
             .toThrow(new Error("licenceId could not be null or empty"));
 
-        expect(() => { testClient.post(invalidLicenseId, TestHelpers.uniqeId, metadata, suc => { }, err => { }) })
+        expect(() => { testClient.post(invalidLicenceId, TestHelpers.uniqeId, metadata, suc => { }, err => { }) })
             .toThrow(new Error("licenceId must be greater than or equal to 1"));
 
-        expect(() => { testClient.delete(validLicenseId, null, validMetadataKey, () => { }, err => { }) })
+        expect(() => { testClient.delete(validLicenceId, null, validMetadataKey, () => { }, err => { }) })
             .toThrow(new Error("deviceId could not be null or empty"));
 
-        expect(() => { testClient.delete(validLicenseId, undefined, validMetadataKey, () => { }, err => { }) })
+        expect(() => { testClient.delete(validLicenceId, undefined, validMetadataKey, () => { }, err => { }) })
             .toThrow(new Error("deviceId could not be null or empty"));
 
-        expect(() => { testClient.delete(validLicenseId, TestHelpers.uniqeId, null, () => { }, err => { }) })
+        expect(() => { testClient.delete(validLicenceId, TestHelpers.uniqeId, null, () => { }, err => { }) })
             .toThrow(new Error("metadataKey could not be null or empty"));
 
-        expect(() => { testClient.delete(validLicenseId, TestHelpers.uniqeId, undefined, () => { }, err => { }) })
+        expect(() => { testClient.delete(validLicenceId, TestHelpers.uniqeId, undefined, () => { }, err => { }) })
             .toThrow(new Error("metadataKey could not be null or empty"));
     });
 
@@ -323,7 +323,7 @@ describe('DeviceMetadataClient.delete', () => {
         };
 
         var testClient = new Xomni.Management.Company.DeviceMetadata.DeviceMetadataClient();
-        testClient.delete(validLicenseId, TestHelpers.uniqeId, validMetadataKey, () => { }, expectedError);
+        testClient.delete(validLicenceId, TestHelpers.uniqeId, validMetadataKey, () => { }, expectedError);
     });
 });
 
@@ -331,19 +331,19 @@ describe('DeviceMetadataClient.deleteAll', () => {
     it("Should hit correct url", () => {
         TestHelpers.RequestUriTest($, validUri);
         var testClient = new Xomni.Management.Company.DeviceMetadata.DeviceMetadataClient();
-        testClient.deleteAll(validLicenseId, TestHelpers.uniqeId, () => { }, err => { });
+        testClient.deleteAll(validLicenceId, TestHelpers.uniqeId, () => { }, err => { });
     });
 
     it("Should use correct http method", () => {
         TestHelpers.RequestHttpMethodTest($, "Delete");
         var testClient = new Xomni.Management.Company.DeviceMetadata.DeviceMetadataClient();
-        testClient.deleteAll(validLicenseId, TestHelpers.uniqeId, () => { }, err => { });
+        testClient.deleteAll(validLicenceId, TestHelpers.uniqeId, () => { }, err => { });
     });
 
     it("Should use correct http headers", () => {
         TestHelpers.RequestHttpHeadersTest($);
         var testClient = new Xomni.Management.Company.DeviceMetadata.DeviceMetadataClient();
-        testClient.deleteAll(validLicenseId, TestHelpers.uniqeId, () => { }, err => { });
+        testClient.deleteAll(validLicenceId, TestHelpers.uniqeId, () => { }, err => { });
     });
 
     it("Should raise exception with invalid parameters", () => {
@@ -355,13 +355,13 @@ describe('DeviceMetadataClient.deleteAll', () => {
         expect(() => { testClient.deleteAll(undefined, TestHelpers.uniqeId, () => { }, err => { }) })
             .toThrow(new Error("licenceId could not be null or empty"));
 
-        expect(() => { testClient.post(invalidLicenseId, TestHelpers.uniqeId, metadata, suc => { }, err => { }) })
+        expect(() => { testClient.post(invalidLicenceId, TestHelpers.uniqeId, metadata, suc => { }, err => { }) })
             .toThrow(new Error("licenceId must be greater than or equal to 1"));
 
-        expect(() => { testClient.deleteAll(validLicenseId, null, () => { }, err => { }) })
+        expect(() => { testClient.deleteAll(validLicenceId, null, () => { }, err => { }) })
             .toThrow(new Error("deviceId could not be null or empty"));
 
-        expect(() => { testClient.deleteAll(validLicenseId, undefined, () => { }, err => { }) })
+        expect(() => { testClient.deleteAll(validLicenceId, undefined, () => { }, err => { }) })
             .toThrow(new Error("deviceId could not be null or empty"));
     });
 
@@ -376,7 +376,7 @@ describe('DeviceMetadataClient.deleteAll', () => {
         };
 
         var testClient = new Xomni.Management.Company.DeviceMetadata.DeviceMetadataClient();
-        testClient.deleteAll(validLicenseId, TestHelpers.uniqeId, () => { }, expectedError);
+        testClient.deleteAll(validLicenceId, TestHelpers.uniqeId, () => { }, expectedError);
     });
 });
 
@@ -384,19 +384,19 @@ describe('DeviceMetadataClient.get', () => {
     it("Should hit correct url", () => {
         TestHelpers.RequestUriTest($, validUri);
         var testClient = new Xomni.Management.Company.DeviceMetadata.DeviceMetadataClient();
-        testClient.get(validLicenseId, TestHelpers.uniqeId, suc => { }, err => { });
+        testClient.get(validLicenceId, TestHelpers.uniqeId, suc => { }, err => { });
     });
 
     it("Should use correct http method", () => {
         TestHelpers.RequestHttpMethodTest($, "Get");
         var testClient = new Xomni.Management.Company.DeviceMetadata.DeviceMetadataClient();
-        testClient.get(validLicenseId, TestHelpers.uniqeId, suc => { }, err => { });
+        testClient.get(validLicenceId, TestHelpers.uniqeId, suc => { }, err => { });
     });
 
     it("Should use correct http headers", () => {
         TestHelpers.RequestHttpHeadersTest($);
         var testClient = new Xomni.Management.Company.DeviceMetadata.DeviceMetadataClient();
-        testClient.get(validLicenseId, TestHelpers.uniqeId, suc => { }, err => { });
+        testClient.get(validLicenceId, TestHelpers.uniqeId, suc => { }, err => { });
     });
 
     it("Should raise exception with invalid parameters", () => {
@@ -408,13 +408,13 @@ describe('DeviceMetadataClient.get', () => {
         expect(() => { testClient.get(undefined, TestHelpers.uniqeId, () => { }, err => { }) })
             .toThrow(new Error("licenceId could not be null or empty"));
 
-        expect(() => { testClient.post(invalidLicenseId, TestHelpers.uniqeId, metadata, suc => { }, err => { }) })
+        expect(() => { testClient.post(invalidLicenceId, TestHelpers.uniqeId, metadata, suc => { }, err => { }) })
             .toThrow(new Error("licenceId must be greater than or equal to 1"));
 
-        expect(() => { testClient.get(validLicenseId, null, () => { }, err => { }) })
+        expect(() => { testClient.get(validLicenceId, null, () => { }, err => { }) })
             .toThrow(new Error("deviceId could not be null or empty"));
 
-        expect(() => { testClient.get(validLicenseId, undefined, () => { }, err => { }) })
+        expect(() => { testClient.get(validLicenceId, undefined, () => { }, err => { }) })
             .toThrow(new Error("deviceId could not be null or empty"));
     });
 
@@ -457,6 +457,6 @@ describe('DeviceMetadataClient.get', () => {
         };
 
         var testClient = new Xomni.Management.Company.DeviceMetadata.DeviceMetadataClient();
-        testClient.get(validLicenseId, TestHelpers.uniqeId, expectedSuccess, err => { });
+        testClient.get(validLicenceId, TestHelpers.uniqeId, expectedSuccess, err => { });
     });
 });
