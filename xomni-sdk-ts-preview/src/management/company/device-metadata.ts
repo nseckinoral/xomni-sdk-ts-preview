@@ -4,8 +4,7 @@ module Xomni.Management.Company.DeviceMetadata {
         private baseUri: string = "/management/company/licences/{licenceId}/devices/{deviceId}/metadata/";
 
         post(licenceId: number, deviceId: string, metadata: Models.Management.Company.Metadata, success: (result: Models.Management.Company.Metadata) => void, error: (error: Models.ExceptionResult) => void) {
-            Xomni.Utils.Validator.isGreaterThanOrEqual("licenceId", licenceId, 0);
-            Xomni.Utils.Validator.isDefined("deviceId", deviceId);
+            this.ValidateLicenseAndDeviceId(licenceId, deviceId);
             Xomni.Utils.Validator.isDefined("metadata", metadata);
             Xomni.Utils.Validator.isDefined("key", metadata.Key);
             Xomni.Utils.Validator.isDefined("value", metadata.Value);
@@ -18,8 +17,7 @@ module Xomni.Management.Company.DeviceMetadata {
         }
 
         put(licenceId: number, deviceId: string, metadata: Models.Management.Company.Metadata, success: (result: Models.Management.Company.Metadata) => void, error: (error: Models.ExceptionResult) => void) {
-            Xomni.Utils.Validator.isGreaterThanOrEqual("licenceId", licenceId, 0);
-            Xomni.Utils.Validator.isDefined("deviceId", deviceId);
+            this.ValidateLicenseAndDeviceId(licenceId, deviceId);
             Xomni.Utils.Validator.isDefined("metadata", metadata);
             Xomni.Utils.Validator.isDefined("key", metadata.Key);
             Xomni.Utils.Validator.isDefined("value", metadata.Value);
@@ -32,8 +30,7 @@ module Xomni.Management.Company.DeviceMetadata {
         }
 
         delete(licenceId: number, deviceId: string, metadataKey: string, success: () => void, error: (error: Models.ExceptionResult) => void) {
-            Xomni.Utils.Validator.isGreaterThanOrEqual("licenceId", licenceId, 0);
-            Xomni.Utils.Validator.isDefined("deviceId", deviceId);
+            this.ValidateLicenseAndDeviceId(licenceId, deviceId);
             Xomni.Utils.Validator.isDefined("metadataKey", metadataKey);
             var uri = Xomni.Utils.UrlGenerator.ReplaceUri(this.baseUri, new Dictionary<string, string>([
                 { key: "{licenceId}", value: licenceId.toString() },
@@ -45,8 +42,7 @@ module Xomni.Management.Company.DeviceMetadata {
         }
 
         deleteAll(licenceId: number, deviceId: string, success: () => void, error: (error: Models.ExceptionResult) => void) {
-            Xomni.Utils.Validator.isGreaterThanOrEqual("licenceId", licenceId, 0);
-            Xomni.Utils.Validator.isDefined("deviceId", deviceId);
+            this.ValidateLicenseAndDeviceId(licenceId, deviceId);
             var uri = Xomni.Utils.UrlGenerator.ReplaceUri(this.baseUri, new Dictionary<string, string>([
                 { key: "{licenceId}", value: licenceId.toString() },
                 { key: "{deviceId}", value: deviceId },
@@ -56,14 +52,18 @@ module Xomni.Management.Company.DeviceMetadata {
         }
 
         get(licenceId: number, deviceId: string, success: (result: Array<Models.Management.Company.Metadata>) => void, error: (error: Models.ExceptionResult) => void) {
-            Xomni.Utils.Validator.isGreaterThanOrEqual("licenceId", licenceId, 0);
-            Xomni.Utils.Validator.isDefined("deviceId", deviceId);
+            this.ValidateLicenseAndDeviceId(licenceId, deviceId);
             var uri = Xomni.Utils.UrlGenerator.ReplaceUri(this.baseUri, new Dictionary<string, string>([
                 { key: "{licenceId}", value: licenceId.toString() },
                 { key: "{deviceId}", value: deviceId },
             ]));
 
             this.httpProvider.get(uri, success, error);
+        }
+
+        private ValidateLicenseAndDeviceId(licenceId: number, deviceId: string) {
+            Xomni.Utils.Validator.isGreaterThanOrEqual("licenceId", licenceId, 0);
+            Xomni.Utils.Validator.isDefined("deviceId", deviceId);
         }
     }
 } 
