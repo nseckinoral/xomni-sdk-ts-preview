@@ -7,7 +7,7 @@ var requestAndResponseJson = {
     "Description": "Sample Device Type Description"
 };
 
-var validUriForDelete: string = validUri + "/" + validId;
+var validUriForDeleteAndGet: string = validUri + "/" + validId;
 
 var validDeviceTypeForPost = <Models.Management.Company.DeviceType> {
     Description: "Sample Device Type Description"
@@ -279,7 +279,7 @@ describe('DeviceTypesClient.put', () => {
 
 describe('DeviceTypesClient.delete', () => {
     it("Should hit correct url", () => {
-        TestHelpers.RequestUriTest($, validUriForDelete);
+        TestHelpers.RequestUriTest($, validUriForDeleteAndGet);
         var testClient = new Xomni.Management.Company.DeviceTypes.DeviceTypesClient();
         testClient.delete(validId, () => { }, err => { });
     });
@@ -351,4 +351,63 @@ describe('DeviceTypesClient.delete', () => {
         testClient.delete(validId, () => { }, expectedError);
     });
 
+});
+
+describe('DeviceTypesClient.get', () => {
+    it("Should hit correct url", () => {
+        TestHelpers.RequestUriTest($, validUriForDeleteAndGet);
+        var testClient = new Xomni.Management.Company.DeviceTypes.DeviceTypesClient();
+        testClient.get(validId, suc => { }, err => { });
+    });
+
+    it("Should use correct http method", () => {
+        TestHelpers.RequestHttpMethodTest($, "Get");
+        var testClient = new Xomni.Management.Company.DeviceTypes.DeviceTypesClient();
+        testClient.get(validId, suc => { }, err => { });
+    });
+
+    it("Should use correct http headers", () => {
+        TestHelpers.RequestHttpHeadersTest($);
+        var testClient = new Xomni.Management.Company.DeviceTypes.DeviceTypesClient();
+        testClient.get(validId, suc => { }, err => { });
+    });
+
+    it("Should raise exception with invalid parameters", () => {
+        var testClient = new Xomni.Management.Company.DeviceTypes.DeviceTypesClient();
+
+        expect(() => { testClient.get(-1, suc => { }, err => { }) })
+            .toThrow(new Error("deviceTypeId must be greater than or equal to 1"));
+
+        expect(() => { testClient.get(null, suc => { }, err => { }) })
+            .toThrow(new Error("deviceTypeId could not be null or empty"));
+
+        expect(() => { testClient.get(undefined, suc => { }, err => { }) })
+            .toThrow(new Error("deviceTypeId could not be null or empty"));
+    });
+
+    it("Should parse response successfully", () => {
+        TestHelpers.ResponseParseTest($, requestAndResponseJson);
+
+        var expectedSuccess = (deviceType: Models.Management.Company.DeviceType) => {
+            expect(deviceType.Id).toEqual(15);
+            expect(deviceType.Description).toEqual("Sample Device Type Description");
+        };
+
+        var testClient = new Xomni.Management.Company.DeviceTypes.DeviceTypesClient();
+        testClient.get(validId, expectedSuccess, err => { });
+    });
+
+    it("Should parse api exception response successfully", () => {
+        TestHelpers.APIExceptionResponseTest($, 404);
+
+        var expectedError = (exception: Models.ExceptionResult) => {
+            expect(exception.HttpStatusCode).toEqual(404);
+            expect(exception.FriendlyDescription).toEqual("Generic error friendly description.");
+            expect(exception.IdentifierGuid).toEqual("7358fe16-3925-4951-9a77-fca4f9e167b0");
+            expect(exception.IdentifierTick).toEqual(635585478999549713);
+        };
+
+        var testClient = new Xomni.Management.Company.DeviceTypes.DeviceTypesClient();
+        testClient.get(validId, suc=> { }, expectedError);
+    });
 });
