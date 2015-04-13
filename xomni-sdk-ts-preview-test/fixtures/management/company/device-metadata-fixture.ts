@@ -1,5 +1,6 @@
 ﻿TestHelpers.InitalizeTestContext();
 var validLicenseId = 1;
+var invalidLicenseId = -1;
 var validMetadataKey = "Key";
 var validMetadataValue = "Value";
 var validUri: string = "/management/company/licences/" + validLicenseId + "/devices/" + TestHelpers.uniqeId + "/metadata";
@@ -71,6 +72,9 @@ describe('DeviceMetadataClient.post', () => {
 
         expect(() => { testClient.post(undefined, TestHelpers.uniqeId, metadata, suc => { }, err => { }) })
             .toThrow(new Error("licenceId could not be null or empty"));
+
+        expect(() => { testClient.post(invalidLicenseId, TestHelpers.uniqeId, metadata, suc => { }, err => { }) })
+            .toThrow(new Error("licenceId must be greater than or equal to 1"));
 
         expect(() => { testClient.post(validLicenseId, null, metadata, suc => { }, err => { }) })
             .toThrow(new Error("deviceId could not be null or empty"));
@@ -200,6 +204,9 @@ describe('DeviceMetadataClient.put', () => {
         expect(() => { testClient.put(undefined, TestHelpers.uniqeId, metadata, suc => { }, err => { }) })
             .toThrow(new Error("licenceId could not be null or empty"));
 
+        expect(() => { testClient.post(invalidLicenseId, TestHelpers.uniqeId, metadata, suc => { }, err => { }) })
+            .toThrow(new Error("licenceId must be greater than or equal to 1"));
+
         expect(() => { testClient.put(validLicenseId, null, metadata, suc => { }, err => { }) })
             .toThrow(new Error("deviceId could not be null or empty"));
 
@@ -289,6 +296,9 @@ describe('DeviceMetadataClient.delete', () => {
         expect(() => { testClient.delete(undefined, TestHelpers.uniqeId, validMetadataKey, () => { }, err => { }) })
             .toThrow(new Error("licenceId could not be null or empty"));
 
+        expect(() => { testClient.post(invalidLicenseId, TestHelpers.uniqeId, metadata, suc => { }, err => { }) })
+            .toThrow(new Error("licenceId must be greater than or equal to 1"));
+
         expect(() => { testClient.delete(validLicenseId, null, validMetadataKey, () => { }, err => { }) })
             .toThrow(new Error("deviceId could not be null or empty"));
 
@@ -345,6 +355,9 @@ describe('DeviceMetadataClient.deleteAll', () => {
         expect(() => { testClient.deleteAll(undefined, TestHelpers.uniqeId, () => { }, err => { }) })
             .toThrow(new Error("licenceId could not be null or empty"));
 
+        expect(() => { testClient.post(invalidLicenseId, TestHelpers.uniqeId, metadata, suc => { }, err => { }) })
+            .toThrow(new Error("licenceId must be greater than or equal to 1"));
+
         expect(() => { testClient.deleteAll(validLicenseId, null, () => { }, err => { }) })
             .toThrow(new Error("deviceId could not be null or empty"));
 
@@ -395,6 +408,9 @@ describe('DeviceMetadataClient.get', () => {
         expect(() => { testClient.get(undefined, TestHelpers.uniqeId, () => { }, err => { }) })
             .toThrow(new Error("licenceId could not be null or empty"));
 
+        expect(() => { testClient.post(invalidLicenseId, TestHelpers.uniqeId, metadata, suc => { }, err => { }) })
+            .toThrow(new Error("licenceId must be greater than or equal to 1"));
+
         expect(() => { testClient.get(validLicenseId, null, () => { }, err => { }) })
             .toThrow(new Error("deviceId could not be null or empty"));
 
@@ -441,6 +457,6 @@ describe('DeviceMetadataClient.get', () => {
         };
 
         var testClient = new Xomni.Management.Company.DeviceMetadata.DeviceMetadataClient();
-        testClient.get(validLicenseId,TestHelpers.uniqeId, expectedSuccess, err => { });
+        testClient.get(validLicenseId, TestHelpers.uniqeId, expectedSuccess, err => { });
     });
 });

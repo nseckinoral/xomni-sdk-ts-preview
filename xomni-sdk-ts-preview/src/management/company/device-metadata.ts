@@ -58,7 +58,7 @@ module Xomni.Management.Company.DeviceMetadata {
         }
 
         private validateLicenseIdAndDeviceId (licenceId: number, deviceId: string) {
-            Xomni.Utils.Validator.isGreaterThanOrEqual("licenceId", licenceId, 0);
+            Xomni.Utils.Validator.isGreaterThanOrEqual("licenceId", licenceId, 1);
             Xomni.Utils.Validator.isDefined("deviceId", deviceId);
         }
 
