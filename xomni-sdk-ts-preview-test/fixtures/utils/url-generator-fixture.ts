@@ -13,7 +13,7 @@ var listOperationAdditionalQuery: Xomni.Dictionary<string, string> = new Xomni.D
 
 var patterns: Xomni.Dictionary<string, string> = new Xomni.Dictionary<string, string>([
     { key: "{licenceId}", value: sampleLicenseId.toString() },
-    { key: "{deviceId}", value: TestHelpers.uniqeId },
+    { key: "{deviceId}", value: TestHelpers.uniqueId },
 ]);
 
 describe('UrlGenerator.PrepareOperationUrl', () => {
@@ -115,7 +115,7 @@ describe('UrlGenerator.ReplaceUri', () => {
     });
 
     it("Should generate right url", () => {
-        expect(Xomni.Utils.UrlGenerator.ReplaceUri(baseUrlForReplace, patterns)).toEqual("/management/company/licences/" + sampleLicenseId + "/devices/" + TestHelpers.uniqeId + "/metadata");
+        expect(Xomni.Utils.UrlGenerator.ReplaceUri(baseUrlForReplace, patterns)).toEqual("/management/company/licences/" + sampleLicenseId + "/devices/" + TestHelpers.uniqueId + "/metadata");
         expect(Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameters(listOperationUrl, listOperationAdditionalQuery)).toEqual(listOperationUrl + "?skip=2&take=5");
     });
 });
