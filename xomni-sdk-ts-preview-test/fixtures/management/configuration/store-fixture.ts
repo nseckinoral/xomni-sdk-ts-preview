@@ -1,5 +1,5 @@
 ﻿TestHelpers.InitalizeTestContext();
-var validStoreId: number = 0;
+var validStoreId: number = 1;
 var validSkip: number = 1;
 var validTake: number = 1000;
 var validUri: string = "/management/configuration/store/" + validStoreId;
@@ -48,7 +48,7 @@ describe('StoreClient.get', () => {
         var testClient = new Xomni.Management.Configuration.Store.StoreClient();
 
         expect(() => { testClient.get(-1, suc => { }, err => { }) })
-            .toThrow(new Error("storeId must be greater than or equal to 0"));
+            .toThrow(new Error("storeId must be greater than or equal to 1"));
 
         expect(() => { testClient.get(null, suc => { }, err => { }) })
             .toThrow(new Error("storeId could not be null or empty"));
@@ -140,7 +140,7 @@ describe('StoreClient.delete', () => {
             .toThrow(new Error("storeId could not be null or empty"));
 
         expect(() => { testClient.delete(-1, () => { }, err => { }) })
-            .toThrow(new Error("storeId must be greater than or equal to 0"));
+            .toThrow(new Error("storeId must be greater than or equal to 1"));
     });
 
     it("Should parse api exception response successfully (404)", () => {
@@ -526,7 +526,7 @@ describe('StoreClient.put', () => {
             };
 
             testClient.put(undefinedStoreName, suc => { }, err => { })
-        }).toThrow(new Error("id must be greater than or equal to 0"));
+        }).toThrow(new Error("id must be greater than or equal to 1"));
     });
 
     it("Should parse api exception response successfully (404)", () => {

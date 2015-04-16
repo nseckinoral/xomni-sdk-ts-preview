@@ -15,7 +15,7 @@ module Xomni.Management.Configuration.ImageSizeProfile {
         }
 
         get(imageSizeProfileId: number, success: (result: Models.Management.Configuration.ImageSizeProfile) => void, error: (error: Models.ExceptionResult) => void) {
-            Xomni.Utils.Validator.isGreaterThanOrEqual("imageSizeProfileId", imageSizeProfileId, 0);
+            Xomni.Utils.Validator.isGreaterThanOrEqual("imageSizeProfileId", imageSizeProfileId, 1);
             var uri: string = Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameters(this.singleOperationBaseUrl, new Dictionary<string, string>([
                 { key: "id", value: imageSizeProfileId.toString() }
             ]));
@@ -30,7 +30,7 @@ module Xomni.Management.Configuration.ImageSizeProfile {
         }
 
         delete(imageSizeProfileId: number, success: () => void, error: (error: Models.ExceptionResult) => void) {
-            Xomni.Utils.Validator.isGreaterThanOrEqual("imageSizeProfileId", imageSizeProfileId, 0);
+            Xomni.Utils.Validator.isGreaterThanOrEqual("imageSizeProfileId", imageSizeProfileId, 1);
             var uri: string = Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameters(this.singleOperationBaseUrl, new Dictionary<string, string>([
                 { key: "id", value: imageSizeProfileId.toString() }
             ]));

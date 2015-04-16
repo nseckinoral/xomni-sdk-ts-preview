@@ -15,13 +15,13 @@ module Xomni.Management.Security.PrivateApiUser {
         }
 
         get(privateApiUserId: number, success: (result: Models.Management.Security.ApiUser) => void, error: (error: Models.ExceptionResult) => void) {
-            Xomni.Utils.Validator.isGreaterThanOrEqual("privateApiUserId", privateApiUserId, 0);
+            Xomni.Utils.Validator.isGreaterThanOrEqual("privateApiUserId", privateApiUserId, 1);
             var uri: string = Xomni.Utils.UrlGenerator.PrepareOperationUrl(this.singleOperationBaseUrl, privateApiUserId.toString());
             this.httpProvider.get(uri, success, error);
         }
 
         delete(privateApiUserId: number, success: () => void, error: (error: Models.ExceptionResult) => void) {
-            Xomni.Utils.Validator.isGreaterThanOrEqual("privateApiUserId", privateApiUserId, 0);
+            Xomni.Utils.Validator.isGreaterThanOrEqual("privateApiUserId", privateApiUserId, 1);
             var uri: string = Xomni.Utils.UrlGenerator.PrepareOperationUrl(this.singleOperationBaseUrl, privateApiUserId.toString());
             this.httpProvider.delete(uri, success, error);
         }
@@ -35,7 +35,7 @@ module Xomni.Management.Security.PrivateApiUser {
 
         put(privateApiUser: Models.Management.Security.ApiUser, success: (result: Models.Management.Security.ApiUser) => void, error: (error: Models.ExceptionResult) => void) {
             Xomni.Utils.Validator.isDefined("privateApiUser", privateApiUser);
-            Xomni.Utils.Validator.isGreaterThanOrEqual("id", privateApiUser.Id, 0);
+            Xomni.Utils.Validator.isGreaterThanOrEqual("id", privateApiUser.Id, 1);
             Xomni.Utils.Validator.isDefined("name", privateApiUser.Name);
             Xomni.Utils.Validator.isDefined("password", privateApiUser.Password);
 
