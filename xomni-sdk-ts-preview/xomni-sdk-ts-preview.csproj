@@ -62,6 +62,7 @@
     <TypeScriptCompile Include="src\dictionary.ts" />
     <TypeScriptCompile Include="src\management\configuration\trending-action-types.ts" />
     <TypeScriptCompile Include="src\management\integration\endpoint.ts" />
+    <TypeScriptCompile Include="src\management\integration\msg.ts" />
     <TypeScriptCompile Include="src\management\security\license.ts" />
     <TypeScriptCompile Include="src\management\storage\assets.ts" />
     <TypeScriptCompile Include="src\models\ExceptionResult.ts">
@@ -81,6 +82,9 @@
     <TypeScriptCompile Include="src\models\management\integration\endpoint-create-request.ts" />
     <TypeScriptCompile Include="src\models\management\integration\endpoint-detail.ts" />
     <TypeScriptCompile Include="src\models\management\integration\endpoint-status-type.ts" />
+    <TypeScriptCompile Include="src\models\management\integration\msg-integration-request.ts" />
+    <TypeScriptCompile Include="src\models\management\integration\msg-integration-response.ts" />
+    <TypeScriptCompile Include="src\models\management\integration\msg-integration.ts" />
     <TypeScriptCompile Include="src\models\management\integration\service-tier-type.ts" />
     <TypeScriptCompile Include="src\management\security\private-api-user.ts" />
     <TypeScriptCompile Include="src\models\management\configuration\trending-action-type-value.ts">

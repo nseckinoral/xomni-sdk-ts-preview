@@ -67,6 +67,7 @@
     <TypeScriptCompile Include="fixtures\management\configuration\setting-fixture.ts" />
     <TypeScriptCompile Include="fixtures\management\configuration\trending-action-types-fixture.ts" />
     <TypeScriptCompile Include="fixtures\management\integration\endpoint-fixture.ts" />
+    <TypeScriptCompile Include="fixtures\management\integration\msg-fixture.ts" />
     <TypeScriptCompile Include="fixtures\management\security\private-api-user-fixture.ts" />
     <TypeScriptCompile Include="fixtures\management\security\license-fixture.ts" />
     <TypeScriptCompile Include="fixtures\management\social\facebook-fixture.ts" />
