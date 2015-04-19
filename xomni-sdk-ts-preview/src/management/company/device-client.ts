@@ -28,6 +28,34 @@ module Xomni.Management.Company.Device {
             }, error);
         }
 
+        get(deviceId: string, relatedLicenceId: number, success: (success: Models.Management.Company.Device) => void, error: (error: Models.ExceptionResult) => void) {
+            Xomni.Utils.Validator.isDefined("deviceId", deviceId);
+            Xomni.Utils.Validator.isGreaterThanOrEqual("relatedLicenceId", relatedLicenceId, 1);
+            var uri = Xomni.Utils.UrlGenerator.PrepareOperationUrl(this.baseUri, deviceId);
+            uri += Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameters(uri, new Dictionary<string, string>([
+                { key: "relatedLicenceId", value: relatedLicenceId.toString() }
+            ]));
+
+            this.httpProvider.get(uri, (deviceJson: any) => {
+                var device = this.convertToDate(deviceJson);
+                success(device);
+            }, error);
+        }
+
+        private convertToDate(deviceJson: any) {
+            var device: Models.Management.Company.Device = {
+                Description: deviceJson.Description,
+                DeviceId: deviceJson.DeviceId,
+                DeviceTypeDescription: deviceJson.DeviceTypeDescription,
+                DeviceTypeId: deviceJson.DeviceTypeId,
+                ExpirationDate: deviceJson.ExpirationDate ? new Date(deviceJson.ExpirationDate) : null,
+                RelatedLicenceId: deviceJson.RelatedLicenceId,
+                RelatedLicenceName: deviceJson.RelatedLicenceName
+            };
+
+            return device;
+        }
+
         private convertListToDate(list: any) {
             var device = <Models.Management.Company.Device>{};
             var deviceContainer: Models.PaginatedContainer<Models.Management.Company.Device> = {
@@ -36,15 +64,7 @@ module Xomni.Management.Company.Device {
             };
             deviceContainer.TotalCount = list.TotalCount;
             for (var i = 0; i < list.Results.length; i++) {
-                device = {
-                    Description: list.Results[i].Description,
-                    DeviceId: list.Results[i].DeviceId,
-                    DeviceTypeDescription: list.Results[i].DeviceTypeDescription,
-                    DeviceTypeId: list.Results[i].DeviceTypeId,
-                    ExpirationDate: list.Results[i].ExpirationDate ? new Date(list.Results[i].ExpirationDate) : null,
-                    RelatedLicenceId: list.Results[i].RelatedLicenceId,
-                    RelatedLicenceName: list.Results[i].RelatedLicenceName
-                };
+                device = this.convertToDate(list.Results[i]);
                 deviceContainer.Results.push(device);
             }
             return deviceContainer;

@@ -2,12 +2,12 @@
 var validrelatedLicenceId = 1;
 var validSkip = 1;
 var validTake = 2;
-var validUriForDelete = "/management/company/devices/" + TestHelpers.uniqueId + "?relatedLicenceId=" + validrelatedLicenceId;
+var validUriForDeleteAndGet = "/management/company/devices/" + TestHelpers.uniqueId + "?relatedLicenceId=" + validrelatedLicenceId;
 var validUriForGetList = "/management/company/devices?skip=" + validSkip + "&take=" + validTake;
 
 describe('DeviceClient.delete', () => {
     it("Should hit correct url", () => {
-        TestHelpers.RequestUriTest($, validUriForDelete);
+        TestHelpers.RequestUriTest($, validUriForDeleteAndGet);
         var testClient = new Xomni.Management.Company.Device.DeviceClient();
         testClient.delete(TestHelpers.uniqueId, validrelatedLicenceId, () => { }, err => { });
     });
@@ -162,5 +162,83 @@ describe('DeviceClient.getList', () => {
 
         var testClient = new Xomni.Management.Company.Device.DeviceClient();
         testClient.getList(validSkip, validTake, expectedSuccess, err => { });
+    });
+});
+
+describe('DeviceClient.get', () => {
+    it("Should hit correct url", () => {
+        TestHelpers.RequestUriTest($, validUriForDeleteAndGet);
+        var testClient = new Xomni.Management.Company.Device.DeviceClient();
+        testClient.get(TestHelpers.uniqueId, validrelatedLicenceId, suc => { }, err => { });
+    });
+
+    it("Should use correct http method", () => {
+        TestHelpers.RequestHttpMethodTest($, "Get");
+        var testClient = new Xomni.Management.Company.Device.DeviceClient();
+        testClient.get(TestHelpers.uniqueId, validrelatedLicenceId, suc => { }, err => { });
+    });
+
+    it("Should use correct http headers", () => {
+        TestHelpers.RequestHttpHeadersTest($);
+        var testClient = new Xomni.Management.Company.Device.DeviceClient();
+        testClient.get(TestHelpers.uniqueId, validrelatedLicenceId, suc => { }, err => { });
+    });
+
+    it("Should raise exception with invalid parameters", () => {
+        var testClient = new Xomni.Management.Company.Device.DeviceClient();
+
+        expect(() => { testClient.get(null, validrelatedLicenceId, () => { }, err => { }) })
+            .toThrow(new Error("deviceId could not be null or empty"));
+
+        expect(() => { testClient.get(undefined, validrelatedLicenceId, () => { }, err => { }) })
+            .toThrow(new Error("deviceId could not be null or empty"));
+
+        expect(() => { testClient.get(TestHelpers.uniqueId, null, suc => { }, err => { }) })
+            .toThrow(new Error("relatedLicenceId could not be null or empty"));
+
+        expect(() => { testClient.get(TestHelpers.uniqueId, undefined, () => { }, err => { }) })
+            .toThrow(new Error("relatedLicenceId could not be null or empty"));
+
+        expect(() => { testClient.get(TestHelpers.uniqueId, 0, () => { }, err => { }) })
+            .toThrow(new Error("relatedLicenceId must be greater than or equal to 1"));
+    });
+
+    it("Should parse response successfully", () => {
+        TestHelpers.ResponseParseTest($, {
+            "RelatedLicenceId": 7,
+            "RelatedLicenceName": "Test Licence",
+            "DeviceTypeId": 1,
+            "DeviceTypeDescription": "InStore",
+            "ExpirationDate": "2014-08-08T13:18:45.473",
+            "DeviceId": "f98d0f51-d748-442a-88eb-ffbd4ee3d626",
+            "Description": "Test Device"
+        });
+
+        var expectedSuccess = (device: Models.Management.Company.Device) => {
+            expect(device.RelatedLicenceId).toEqual(7);
+            expect(device.RelatedLicenceName).toEqual("Test Licence");
+            expect(device.DeviceTypeId).toEqual(1);
+            expect(device.DeviceTypeDescription).toEqual("InStore");
+            expect(device.ExpirationDate).toEqual(new Date("2014-08-08T13:18:45.473"));
+            expect(device.DeviceId).toEqual("f98d0f51-d748-442a-88eb-ffbd4ee3d626");
+            expect(device.Description).toEqual("Test Device");
+        };
+
+        var testClient = new Xomni.Management.Company.Device.DeviceClient();
+        testClient.get(TestHelpers.uniqueId, validrelatedLicenceId, expectedSuccess, err => { });
+    });
+
+    it("Should parse api exception response successfully", () => {
+        TestHelpers.APIExceptionResponseTest($, 404);
+
+        var expectedError = (exception: Models.ExceptionResult) => {
+            expect(exception.HttpStatusCode).toEqual(404);
+            expect(exception.FriendlyDescription).toEqual("Generic error friendly description.");
+            expect(exception.IdentifierGuid).toEqual("7358fe16-3925-4951-9a77-fca4f9e167b0");
+            expect(exception.IdentifierTick).toEqual(635585478999549713);
+        };
+
+        var testClient = new Xomni.Management.Company.Device.DeviceClient();
+        testClient.get(TestHelpers.uniqueId, validrelatedLicenceId, () => { }, expectedError);
     });
 });
