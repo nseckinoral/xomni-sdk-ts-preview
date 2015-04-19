@@ -70,6 +70,7 @@
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\models\management\company\metadata.ts" />
     <TypeScriptCompile Include="src\models\management\company\device-type.ts" />
+    <TypeScriptCompile Include="src\models\management\company\device.ts" />
     <TypeScriptCompile Include="src\models\management\configuration\image-size-profile.ts" />
     <TypeScriptCompile Include="src\models\management\configuration\licenses.ts" />
     <TypeScriptCompile Include="src\models\management\configuration\location.ts" />

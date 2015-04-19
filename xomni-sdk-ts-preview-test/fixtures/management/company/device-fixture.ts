@@ -1,10 +1,13 @@
 ﻿TestHelpers.InitalizeTestContext();
 var validrelatedLicenceId = 1;
-var validUri = "/management/company/devices/" + TestHelpers.uniqueId + "?relatedLicenceId=" + validrelatedLicenceId;
+var validSkip = 1;
+var validTake = 2;
+var validUriForDelete = "/management/company/devices/" + TestHelpers.uniqueId + "?relatedLicenceId=" + validrelatedLicenceId;
+var validUriForGetList = "/management/company/devices?skip=" + validSkip + "&take=" + validTake;
 
 describe('DeviceClient.delete', () => {
     it("Should hit correct url", () => {
-        TestHelpers.RequestUriTest($, validUri);
+        TestHelpers.RequestUriTest($, validUriForDelete);
         var testClient = new Xomni.Management.Company.Device.DeviceClient();
         testClient.delete(TestHelpers.uniqueId, validrelatedLicenceId, () => { }, err => { });
     });
@@ -52,5 +55,112 @@ describe('DeviceClient.delete', () => {
 
         var testClient = new Xomni.Management.Company.Device.DeviceClient();
         testClient.delete(TestHelpers.uniqueId, validrelatedLicenceId, () => { }, expectedError);
+    });
+});
+
+describe('DeviceClient.getList', () => {
+    it("Should hit correct url", () => {
+        TestHelpers.RequestUriTest($, validUriForGetList);
+        var testClient = new Xomni.Management.Company.Device.DeviceClient();
+        testClient.getList(validSkip, validTake, suc => { }, err => { });
+    });
+
+    it("Should use correct http method", () => {
+        TestHelpers.RequestHttpMethodTest($, "Get");
+        var testClient = new Xomni.Management.Company.Device.DeviceClient();
+        testClient.getList(validSkip, validTake, suc => { }, err => { });
+    });
+
+    it("Should use correct http headers", () => {
+        TestHelpers.RequestHttpHeadersTest($);
+        var testClient = new Xomni.Management.Company.Device.DeviceClient();
+        testClient.getList(validSkip, validTake, suc => { }, err => { });
+    });
+
+    it("Should raise exception with invalid parameters", () => {
+        var testClient = new Xomni.Management.Company.Device.DeviceClient();
+
+        expect(() => { testClient.getList(null, 1, suc => { }, err => { }) })
+            .toThrow(new Error("skip could not be null or empty"));
+
+        expect(() => { testClient.getList(undefined, 1, suc => { }, err => { }) })
+            .toThrow(new Error("skip could not be null or empty"));
+
+        expect(() => { testClient.getList(-5, 1, suc => { }, err => { }) })
+            .toThrow(new Error("skip must be greater than or equal to 0"));
+
+        expect(() => { testClient.getList(5, null, suc => { }, err => { }) })
+            .toThrow(new Error("take could not be null or empty"));
+
+        expect(() => { testClient.getList(5, undefined, suc => { }, err => { }) })
+            .toThrow(new Error("take could not be null or empty"));
+
+        expect(() => { testClient.getList(5, 0, suc => { }, err => { }) })
+            .toThrow(new Error("take must be greater than or equal to 1"));
+
+    });
+
+    it("Should parse response successfully", () => {
+        TestHelpers.ResponseParseTest($, {
+            "Results": [
+                {
+                    "RelatedLicenceId": 1,
+                    "RelatedLicenceName": "Test Licence",
+                    "DeviceTypeId": 1,
+                    "DeviceTypeDescription": "InStore",
+                    "ExpirationDate": null,
+                    "DeviceId": "18b808c3-d3ef-4fc3-a3c6-c773d3fd2b8f",
+                    "Description": "Test Device 1"
+                },
+                {
+                    "RelatedLicenceId": 1,
+                    "RelatedLicenceName": "Test Licence",
+                    "DeviceTypeId": 1,
+                    "DeviceTypeDescription": "InStore",
+                    "ExpirationDate": null,
+                    "DeviceId": "ed4c7d90-1f7d-46fe-8db1-76812e26aa94",
+                    "Description": "Test Device 2"
+                },
+                {
+                    "RelatedLicenceId": 6,
+                    "RelatedLicenceName": "Test Licence 1",
+                    "DeviceTypeId": 1,
+                    "DeviceTypeDescription": "InStore",
+                    "ExpirationDate": "2014-08-08T12:56:46.217",
+                    "DeviceId": "7f83fd6f-0ff8-4a21-b6df-e6da6562b500",
+                    "Description": "Test Device 3"
+                }
+            ],
+            "TotalCount": 3
+        });
+
+        var expectedSuccess = (list: Models.PaginatedContainer<Models.Management.Company.Device>) => {
+            expect(list.TotalCount).toEqual(3);
+            expect(list.Results.length).toEqual(3);
+            expect(list.Results[0].RelatedLicenceId).toEqual(1);
+            expect(list.Results[0].RelatedLicenceName).toEqual("Test Licence");
+            expect(list.Results[0].DeviceTypeId).toEqual(1);
+            expect(list.Results[0].DeviceTypeDescription).toEqual("InStore");
+            expect(list.Results[0].ExpirationDate).toEqual(null);
+            expect(list.Results[0].DeviceId).toEqual("18b808c3-d3ef-4fc3-a3c6-c773d3fd2b8f");
+            expect(list.Results[0].Description).toEqual("Test Device 1");
+            expect(list.Results[1].RelatedLicenceId).toEqual(1);
+            expect(list.Results[1].RelatedLicenceName).toEqual("Test Licence");
+            expect(list.Results[1].DeviceTypeId).toEqual(1);
+            expect(list.Results[1].DeviceTypeDescription).toEqual("InStore");
+            expect(list.Results[1].ExpirationDate).toEqual(null);
+            expect(list.Results[1].DeviceId).toEqual("ed4c7d90-1f7d-46fe-8db1-76812e26aa94");
+            expect(list.Results[1].Description).toEqual("Test Device 2");
+            expect(list.Results[2].RelatedLicenceId).toEqual(6);
+            expect(list.Results[2].RelatedLicenceName).toEqual("Test Licence 1");
+            expect(list.Results[2].DeviceTypeId).toEqual(1);
+            expect(list.Results[2].DeviceTypeDescription).toEqual("InStore");
+            expect(list.Results[2].ExpirationDate).toEqual(new Date("2014-08-08T12:56:46.217"));
+            expect(list.Results[2].DeviceId).toEqual("7f83fd6f-0ff8-4a21-b6df-e6da6562b500");
+            expect(list.Results[2].Description).toEqual("Test Device 3");
+        };
+
+        var testClient = new Xomni.Management.Company.Device.DeviceClient();
+        testClient.getList(validSkip, validTake, expectedSuccess, err => { });
     });
 });
