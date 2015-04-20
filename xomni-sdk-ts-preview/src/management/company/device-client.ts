@@ -23,7 +23,7 @@ module Xomni.Management.Company.Device {
             ]));
 
             this.httpProvider.get(uri, (deviceListJson: any) => {
-                var deviceList = this.convertListToDate(deviceListJson);
+                var deviceList = this.convertToDeviceList(deviceListJson);
                 success(deviceList);
             }, error);
         }
@@ -74,14 +74,14 @@ module Xomni.Management.Company.Device {
                 DeviceId: deviceJson.DeviceId,
                 DeviceTypeDescription: deviceJson.DeviceTypeDescription,
                 DeviceTypeId: deviceJson.DeviceTypeId,
-                ExpirationDate: deviceJson.ExpirationDate ? new Models.UTCDate(deviceJson.ExpirationDate): null,
+                ExpirationDate: deviceJson.ExpirationDate ? new Models.UTCDate(deviceJson.ExpirationDate) : null,
                 RelatedLicenceId: deviceJson.RelatedLicenceId,
                 RelatedLicenceName: deviceJson.RelatedLicenceName
             };
             return device;
         }
 
-        private convertListToDate(list: any) {
+        private convertToDeviceList(list: any) {
             var device = <Models.Management.Company.Device>{};
             var deviceContainer: Models.PaginatedContainer<Models.Management.Company.Device> = {
                 Results: [],
