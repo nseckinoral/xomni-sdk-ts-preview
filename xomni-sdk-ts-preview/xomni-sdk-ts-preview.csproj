@@ -56,6 +56,7 @@
     <TypeScriptCompile Include="definitions\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="src\management\company\device-metadata.ts" />
     <TypeScriptCompile Include="src\management\company\device-types.ts" />
+    <TypeScriptCompile Include="src\management\company\device-client.ts" />
     <TypeScriptCompile Include="src\management\configuration\image-size-profiles.ts" />
     <TypeScriptCompile Include="src\management\configuration\store.ts" />
     <TypeScriptCompile Include="src\management\configuration\settings.ts" />
@@ -70,6 +71,7 @@
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\models\management\company\metadata.ts" />
     <TypeScriptCompile Include="src\models\management\company\device-type.ts" />
+    <TypeScriptCompile Include="src\models\management\company\device.ts" />
     <TypeScriptCompile Include="src\models\management\configuration\image-size-profile.ts" />
     <TypeScriptCompile Include="src\models\management\configuration\licenses.ts" />
     <TypeScriptCompile Include="src\models\management\configuration\location.ts" />
@@ -95,6 +97,7 @@
     <TypeScriptCompile Include="src\models\management\security\license-audit-logs.ts" />
     <TypeScriptCompile Include="src\models\management\security\license.ts" />
     <TypeScriptCompile Include="src\models\management\storage\tenant-asset-detail.ts" />
+    <TypeScriptCompile Include="src\models\utc-date.ts" />
     <TypeScriptCompile Include="src\models\PaginatedContainer.ts" />
     <TypeScriptCompile Include="src\models\private\analytics\base-analytics-summary.ts">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

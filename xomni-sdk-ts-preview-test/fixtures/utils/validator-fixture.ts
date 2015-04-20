@@ -5,6 +5,7 @@ var sampleMinParameterName: string = "sampleMinParameterName";
 var sampleMinParameter: number = -1;
 var sampleMaxParameterName: string = "sampleMaxParameterName";
 var sampleMaxParameter: number = 5;
+var sampleDate = new Date().toString();
 
 describe('Validator.isDefined', () => {
     it("Should throw could not be null or empty exception", () => {
@@ -101,5 +102,49 @@ describe('Validator.isLessThan', () => {
     it("Should not throw could not be greater than exception", () => {
         expect(() => { Xomni.Utils.Validator.isLessThan(sampleMinParameter, sampleMinParameterName, sampleMaxParameter, sampleMaxParameterName) })
             .not.toThrow(new Error("sampleMinParameterName could not be greater than sampleMaxParameterName"));
+    });
+});
+
+describe('Validator.isDateValid', () => {
+    it("Should throw could not be null or empty exception", () => {
+        expect(() => { Xomni.Utils.Validator.isDateValid(null, sampleDate) })
+            .toThrow(new Error("Argument name could not be null or empty"));
+
+        expect(() => { Xomni.Utils.Validator.isDateValid(undefined, sampleDate) })
+            .toThrow(new Error("Argument name could not be null or empty"));
+
+        expect(() => { Xomni.Utils.Validator.isDateValid(sampleArgName, null) })
+            .toThrow(new Error("sampleArgName could not be null or empty"));
+
+        expect(() => { Xomni.Utils.Validator.isDateValid(sampleArgName, undefined) })
+            .toThrow(new Error("sampleArgName could not be null or empty"));
+    });
+
+    it("Should not throw could not be null or empty exception", () => {
+        expect(() => { Xomni.Utils.Validator.isDateValid(sampleArgName, sampleDate) })
+            .not.toThrow(new Error("Argument name could not be null or empty"));
+
+        expect(() => { Xomni.Utils.Validator.isDateValid(sampleArgName, sampleDate) })
+            .not.toThrow(new Error("sampleArgName could not be null or empty"));
+
+    });
+
+    it("Should throw Date format is invalid exception", () => {
+        expect(() => { Xomni.Utils.Validator.isDateValid(sampleArgName, "Sun Apr 19 2015 16:54:05 GMT0300 (Turkey Dlight Time)") })
+            .toThrow(new Error("sampleArgName format is invalid"));
+
+        expect(() => { Xomni.Utils.Validator.isDateValid(sampleArgName, "Test") })
+            .toThrow(new Error("sampleArgName format is invalid"));
+    });
+
+    it("Should not throw Date format is invalid exception", () => {
+        expect(() => { Xomni.Utils.Validator.isDateValid(sampleArgName, "1") })
+            .not.toThrow(new Error("sampleArgName format is invalid"));
+
+        expect(() => { Xomni.Utils.Validator.isDateValid(sampleArgName, sampleDate) })
+            .not.toThrow(new Error("sampleArgName format is invalid"));
+
+        expect(() => { Xomni.Utils.Validator.isDateValid(sampleArgName, sampleDate) })
+            .not.toThrow(new Error("sampleArgName format is invalid"));
     });
 }); 
