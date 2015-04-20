@@ -43,15 +43,29 @@ module Xomni.Management.Company.Device {
         }
 
         post(device: Models.Management.Company.Device, success: (result: Models.Management.Company.Device) => void, error: (error: Models.ExceptionResult) => void) {
-            Xomni.Utils.Validator.isDefined("device", device);
+            this.validateDevice(device);
             Xomni.Utils.Validator.isDefined("deviceId", device.DeviceId);
-            Xomni.Utils.Validator.isDefined("description", device.Description);
-            Xomni.Utils.Validator.isGreaterThanOrEqual("relatedLicenceId", device.RelatedLicenceId, 1);
-
             this.httpProvider.post(this.baseUri, device, (deviceJson: any) => {
                 var device = this.convertToDate(deviceJson);
                 success(device);
             }, error);
+        }
+
+        put(deviceId: string, device: Models.Management.Company.Device, success: (result: Models.Management.Company.Device) => void, error: (error: Models.ExceptionResult) => void) {
+            this.validateDevice(device);
+            Xomni.Utils.Validator.isDefined("deviceId", deviceId);
+            var uri = Xomni.Utils.UrlGenerator.PrepareOperationUrl(this.baseUri, deviceId);
+
+            this.httpProvider.put(uri, device, (deviceJson: any) => {
+                var device = this.convertToDate(deviceJson);
+                success(device);
+            }, error);
+        }
+
+        private validateDevice(device: Models.Management.Company.Device) {
+            Xomni.Utils.Validator.isDefined("device", device);
+            Xomni.Utils.Validator.isDefined("description", device.Description);
+            Xomni.Utils.Validator.isGreaterThanOrEqual("relatedLicenceId", device.RelatedLicenceId, 1);
         }
 
         private convertToDate(deviceJson: any) {
