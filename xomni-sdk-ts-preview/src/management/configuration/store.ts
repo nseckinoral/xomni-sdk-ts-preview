@@ -5,13 +5,13 @@ module Xomni.Management.Configuration.Store {
         private listOperationBaseUrl: string = "/management/configuration/stores"
 
         get(storeId: number, success: (result: Models.Management.Configuration.Store) => void, error: (error: Models.ExceptionResult) => void) {
-            Xomni.Utils.Validator.isGreaterThanOrEqual("storeId", storeId, 0);
+            Xomni.Utils.Validator.isGreaterThanOrEqual("storeId", storeId, 1);
             var uri: string = Xomni.Utils.UrlGenerator.PrepareOperationUrl(this.singleOperationBaseUrl, storeId.toString());
             this.httpProvider.get(uri, success, error);
         }
 
         delete(storeId: number, success: () => void, error: (error: Models.ExceptionResult) => void) {
-            Xomni.Utils.Validator.isGreaterThanOrEqual("storeId", storeId, 0);
+            Xomni.Utils.Validator.isGreaterThanOrEqual("storeId", storeId, 1);
             var uri = Xomni.Utils.UrlGenerator.PrepareOperationUrl(this.singleOperationBaseUrl, storeId.toString());
             this.httpProvider.delete(uri, success, error);
         }
@@ -22,7 +22,7 @@ module Xomni.Management.Configuration.Store {
         }
 
         put(store: Models.Management.Configuration.Store, success: (result: Models.Management.Configuration.Store) => void, error: (error: Models.ExceptionResult) => void) {
-            Xomni.Utils.Validator.isGreaterThanOrEqual("id", store.Id, 0);
+            Xomni.Utils.Validator.isGreaterThanOrEqual("id", store.Id, 1);
             Xomni.Utils.Validator.isDefined("name", store.Name);
             this.httpProvider.put(this.singleOperationBaseUrl, store, success, error);
         }

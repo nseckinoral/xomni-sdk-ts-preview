@@ -110,7 +110,7 @@ describe('AssetClient.get', () => {
         var testClient = new Xomni.Management.Storage.Assets.AssetClient();
 
         expect(() => { testClient.get(-1, suc => { }, err => { }) })
-            .toThrow(new Error("assetId must be greater than or equal to 0"));
+            .toThrow(new Error("assetId must be greater than or equal to 1"));
 
         expect(() => { testClient.get(null, suc => { }, err => { }) })
             .toThrow(new Error("assetId could not be null or empty"));
@@ -176,7 +176,7 @@ describe('AssetClient.delete', () => {
         var testClient = new Xomni.Management.Storage.Assets.AssetClient();
 
         expect(() => { testClient.delete(-1, () => { }, err => { }) })
-            .toThrow(new Error("assetId must be greater than or equal to 0"));
+            .toThrow(new Error("assetId must be greater than or equal to 1"));
 
         expect(() => { testClient.delete(null, () => { }, err => { }) })
             .toThrow(new Error("assetId could not be null or empty"));
