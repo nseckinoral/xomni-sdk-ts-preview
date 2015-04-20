@@ -6,7 +6,7 @@ module Xomni.Management.Security.License {
         private auditBaseUrl: string = "/management/security/licenses/audits";
 
         get(licenseId: number, success: (result: Models.Management.Security.License) => void, error: (error: Models.ExceptionResult) => void) {
-            Xomni.Utils.Validator.isGreaterThanOrEqual("licenseId", licenseId, 0);
+            Xomni.Utils.Validator.isGreaterThanOrEqual("licenseId", licenseId, 1);
             var uri: string = Xomni.Utils.UrlGenerator.PrepareOperationUrl(this.singleOperationBaseUrl, licenseId.toString());
             this.httpProvider.get(uri, success, error);
         }
@@ -30,14 +30,14 @@ module Xomni.Management.Security.License {
 
         put(license: Models.Management.Security.License, success: (result: Models.Management.Security.License) => void, error: (error: Models.ExceptionResult) => void) {
             Xomni.Utils.Validator.isDefined("license", license);
-            Xomni.Utils.Validator.isDefined("id", license.Id);
+            Xomni.Utils.Validator.isGreaterThanOrEqual("id", license.Id,1);
             Xomni.Utils.Validator.isDefined("username", license.Username);
             Xomni.Utils.Validator.isDefined("password", license.Password);
             this.httpProvider.put(this.singleOperationBaseUrl, license, success, error);
         }
 
         delete(licenseId: number, success: () => void, error: (error: Models.ExceptionResult) => void) {
-            Xomni.Utils.Validator.isGreaterThanOrEqual("licenseId", licenseId, 0);
+            Xomni.Utils.Validator.isGreaterThanOrEqual("licenseId", licenseId, 1);
             this.httpProvider.delete(this.singleOperationBaseUrl, success, error);
         }
 

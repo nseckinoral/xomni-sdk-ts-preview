@@ -47,7 +47,7 @@ describe('LicenseClient.get', () => {
         var testClient = new Xomni.Management.Security.License.LicenseClient();
 
         expect(() => { testClient.get(-1, suc => { }, err => { }) })
-            .toThrow(new Error("licenseId must be greater than or equal to 0"));
+            .toThrow(new Error("licenseId must be greater than or equal to 1"));
 
         expect(() => { testClient.get(null, suc => { }, err => { }) })
             .toThrow(new Error("licenseId could not be null or empty"));
@@ -470,7 +470,7 @@ describe('LicenseClient.delete', () => {
         var testClient = new Xomni.Management.Security.License.LicenseClient();
 
         expect(() => { testClient.delete(-1, () => { }, err => { }) })
-            .toThrow(new Error("licenseId must be greater than or equal to 0"));
+            .toThrow(new Error("licenseId must be greater than or equal to 1"));
 
         expect(() => { testClient.delete(null, () => { }, err => { }) })
             .toThrow(new Error("licenseId could not be null or empty"));

@@ -179,7 +179,7 @@ describe('PrivateApiUserClient.get', () => {
             .toThrow(new Error("privateApiUserId could not be null or empty"));
 
         expect(() => { testClient.get(-1, suc => { }, err => { }) })
-            .toThrow(new Error("privateApiUserId must be greater than or equal to 0"));
+            .toThrow(new Error("privateApiUserId must be greater than or equal to 1"));
     });
 
     it("Should parse api exception response successfully", () => {
@@ -224,7 +224,7 @@ describe('PrivateApiUserClient.delete', () => {
             .toThrow(new Error("privateApiUserId could not be null or empty"));
 
         expect(() => { testClient.delete(-1, () => { }, err => { }) })
-            .toThrow(new Error("privateApiUserId must be greater than or equal to 0"));
+            .toThrow(new Error("privateApiUserId must be greater than or equal to 1"));
     });
 
     it("Should parse api exception response successfully", () => {
@@ -477,7 +477,7 @@ describe('PrivateApiUserClient.put', () => {
             };
 
             testClient.put(idLessThanZero, suc => { }, err => { })
-        }).toThrow(new Error("id must be greater than or equal to 0"));
+        }).toThrow(new Error("id must be greater than or equal to 1"));
 
         expect(() => {
             var nullName = <Models.Management.Security.ApiUser> {
