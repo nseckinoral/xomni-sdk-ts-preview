@@ -93,6 +93,7 @@
     <TypeScriptCompile Include="src\models\management\security\license-audit-logs.ts" />
     <TypeScriptCompile Include="src\models\management\security\license.ts" />
     <TypeScriptCompile Include="src\models\management\storage\tenant-asset-detail.ts" />
+    <TypeScriptCompile Include="src\models\utc-date.ts" />
     <TypeScriptCompile Include="src\models\PaginatedContainer.ts" />
     <TypeScriptCompile Include="src\models\private\analytics\base-analytics-summary.ts">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

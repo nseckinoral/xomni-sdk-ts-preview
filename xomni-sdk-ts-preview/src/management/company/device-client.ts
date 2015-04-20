@@ -42,17 +42,28 @@ module Xomni.Management.Company.Device {
             }, error);
         }
 
+        post(device: Models.Management.Company.Device, success: (result: Models.Management.Company.Device) => void, error: (error: Models.ExceptionResult) => void) {
+            Xomni.Utils.Validator.isDefined("device", device);
+            Xomni.Utils.Validator.isDefined("deviceId", device.DeviceId);
+            Xomni.Utils.Validator.isDefined("description", device.Description);
+            Xomni.Utils.Validator.isGreaterThanOrEqual("relatedLicenceId", device.RelatedLicenceId, 1);
+
+            this.httpProvider.post(this.baseUri, device, (deviceJson: any) => {
+                var device = this.convertToDate(deviceJson);
+                success(device);
+            }, error);
+        }
+
         private convertToDate(deviceJson: any) {
             var device: Models.Management.Company.Device = {
                 Description: deviceJson.Description,
                 DeviceId: deviceJson.DeviceId,
                 DeviceTypeDescription: deviceJson.DeviceTypeDescription,
                 DeviceTypeId: deviceJson.DeviceTypeId,
-                ExpirationDate: deviceJson.ExpirationDate ? new Date(deviceJson.ExpirationDate) : null,
+                ExpirationDate: deviceJson.ExpirationDate ? new Models.UTCDate(deviceJson.ExpirationDate): null,
                 RelatedLicenceId: deviceJson.RelatedLicenceId,
                 RelatedLicenceName: deviceJson.RelatedLicenceName
             };
-
             return device;
         }
 

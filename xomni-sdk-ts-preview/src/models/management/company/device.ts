@@ -4,7 +4,7 @@
         Description: string;
         DeviceTypeId: number;
         DeviceTypeDescription: string;
-        ExpirationDate: Date;
+        ExpirationDate: Models.UTCDate;
         RelatedLicenceId: number;
         RelatedLicenceName: string;
     }

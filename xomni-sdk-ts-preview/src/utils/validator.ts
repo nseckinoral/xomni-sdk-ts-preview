@@ -33,5 +33,12 @@
                 }
             }
         }
+
+        static isDateValid(argName: string, date: string) {
+            this.isDefined(argName, date);
+            if (isNaN(Date.parse(date))) {
+                throw new Error(argName + " format is invalid");
+            }
+        }
     }
 }  
