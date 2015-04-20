@@ -15,7 +15,7 @@ module Xomni.Management.Storage.Assets {
         }
 
         get(assetId: number, success: (result: Models.Management.Storage.TenantAssetDetail) => void, error: (error: Models.ExceptionResult) => void) {
-            Xomni.Utils.Validator.isGreaterThanOrEqual("assetId", assetId, 0);
+            Xomni.Utils.Validator.isGreaterThanOrEqual("assetId", assetId, 1);
             var uri: string = Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameters(this.singleOperationBaseUrl, new Dictionary<string, string>([
                 { key: "id", value: assetId.toString() }
             ]));
@@ -30,7 +30,7 @@ module Xomni.Management.Storage.Assets {
         }
 
         delete(assetId: number, success: () => void, error: (error: Models.ExceptionResult) => void) {
-            Xomni.Utils.Validator.isGreaterThanOrEqual("assetId", assetId, 0);
+            Xomni.Utils.Validator.isGreaterThanOrEqual("assetId", assetId, 1);
             var uri: string = Xomni.Utils.UrlGenerator.PrepareOperationUrlWithMultipleParameters(this.singleOperationBaseUrl, new Dictionary<string, string>([
                 { key: "id", value: assetId.toString() }
             ]));
