@@ -37,7 +37,7 @@ module Xomni.Management.Company.Device {
             ]));
 
             this.httpProvider.get(uri, (deviceJson: any) => {
-                var device = this.convertToDate(deviceJson);
+                var device = this.convertToDevice(deviceJson);
                 success(device);
             }, error);
         }
@@ -46,7 +46,7 @@ module Xomni.Management.Company.Device {
             this.validateDevice(device);
             Xomni.Utils.Validator.isDefined("deviceId", device.DeviceId);
             this.httpProvider.post(this.baseUri, device, (deviceJson: any) => {
-                var device = this.convertToDate(deviceJson);
+                var device = this.convertToDevice(deviceJson);
                 success(device);
             }, error);
         }
@@ -57,7 +57,7 @@ module Xomni.Management.Company.Device {
             var uri = Xomni.Utils.UrlGenerator.PrepareOperationUrl(this.baseUri, deviceId);
 
             this.httpProvider.put(uri, device, (deviceJson: any) => {
-                var device = this.convertToDate(deviceJson);
+                var device = this.convertToDevice(deviceJson);
                 success(device);
             }, error);
         }
@@ -68,7 +68,7 @@ module Xomni.Management.Company.Device {
             Xomni.Utils.Validator.isGreaterThanOrEqual("relatedLicenceId", device.RelatedLicenceId, 1);
         }
 
-        private convertToDate(deviceJson: any) {
+        private convertToDevice(deviceJson: any) {
             var device: Models.Management.Company.Device = {
                 Description: deviceJson.Description,
                 DeviceId: deviceJson.DeviceId,
@@ -89,7 +89,7 @@ module Xomni.Management.Company.Device {
             };
             deviceContainer.TotalCount = list.TotalCount;
             for (var i = 0; i < list.Results.length; i++) {
-                device = this.convertToDate(list.Results[i]);
+                device = this.convertToDevice(list.Results[i]);
                 deviceContainer.Results.push(device);
             }
             return deviceContainer;
