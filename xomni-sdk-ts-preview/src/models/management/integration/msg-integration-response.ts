@@ -3,5 +3,7 @@
         Email: string;
         SsoUrl: string;
         Password: string;
+        SubscriptionKey: string;
+        Endpoints: Array<string>;
     }
 } 

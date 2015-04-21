@@ -2,13 +2,23 @@
 
 var validGetResponse = {
     "Email": "developer@xomni.com",
-    "SsoUrl": "http://xomni.com"
+    "SsoUrl": "http://xomni.com",
+    "SubscriptionKey": "SampleSubscriptionKey",
+    "Endpoints": [
+        "http://www.xomni.com/endpoint1",
+        "http://www.xomni.com/endpoint2"
+    ]
 };
 
 var validPostResponseJson = {
     "Email": "developer@xomni.com",
     "SsoUrl": "http://xomni.com",
-    "Password" : "Password"
+    "Password": "Password",
+    "SubscriptionKey": "SampleSubscriptionKey",
+    "Endpoints": [
+        "http://www.xomni.com/endpoint1",
+        "http://www.xomni.com/endpoint2"
+    ]
 };
 
 var validPostRequestJson = {
@@ -46,12 +56,16 @@ describe('MSGClient.get', () => {
         var expectedSuccess = (r: Models.Management.Integration.MSGIntegration) => {
             expect(r.Email).toEqual("developer@xomni.com");
             expect(r.SsoUrl).toEqual("http://xomni.com");
+            expect(r.SubscriptionKey).toEqual("SampleSubscriptionKey");
+            expect(r.Endpoints.length).toEqual(2);
+            expect(r.Endpoints[0]).toEqual("http://www.xomni.com/endpoint1");
+            expect(r.Endpoints[1]).toEqual("http://www.xomni.com/endpoint2");
         };
 
         var testClient = new Xomni.Management.Integration.MSG.MSGClient();
         testClient.get(expectedSuccess, err => { });
     });
-    
+
     it("Should parse api exception response successfully", () => {
         TestHelpers.APIExceptionResponseTest($, 400);
 
@@ -108,10 +122,15 @@ describe('MSGClient.post', () => {
         TestHelpers.ResponseParseTest($, validPostResponseJson);
 
         var testClientX = new Xomni.Management.Integration.MSG.MSGClient();
-        testClientX.post(validPostRequestJson, (t : Models.Management.Integration.MSGIntegrationResponse) => {
+        testClientX.post(validPostRequestJson, (t: Models.Management.Integration.MSGIntegrationResponse) => {
             expect(t.Email).toEqual("developer@xomni.com");
             expect(t.Password).toEqual("Password");
             expect(t.SsoUrl).toEqual("http://xomni.com");
+            expect(t.SubscriptionKey).toEqual("SampleSubscriptionKey");
+            expect(t.Endpoints.length).toEqual(2);
+            expect(t.Endpoints[0]).toEqual("http://www.xomni.com/endpoint1");
+            expect(t.Endpoints[1]).toEqual("http://www.xomni.com/endpoint2");
+
         }, err => { });
     });
 
@@ -125,7 +144,7 @@ describe('MSGClient.post', () => {
                 post(invalidRequest, () => { }, err => { })
             })
             .toThrow(new Error("Email could not be null or empty.")
-        );
+            );
 
         expect(() => {
             var invalidRequest = <Models.Management.Integration.MSGIntegrationRequest>
@@ -137,7 +156,7 @@ describe('MSGClient.post', () => {
                 post(invalidRequest, () => { }, err => { })
             })
             .toThrow(new Error("FirstName could not be null or empty.")
-        );
+            );
 
         expect(() => {
             var invalidRequest = <Models.Management.Integration.MSGIntegrationRequest>
@@ -150,7 +169,7 @@ describe('MSGClient.post', () => {
                 post(invalidRequest, () => { }, err => { })
             })
             .toThrow(new Error("LastName could not be null or empty.")
-        );
+            );
     });
 
     it("Should parse api exception response successfully", () => {
