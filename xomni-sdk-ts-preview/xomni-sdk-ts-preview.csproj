@@ -66,7 +66,7 @@
     <TypeScriptCompile Include="src\management\integration\msg.ts" />
     <TypeScriptCompile Include="src\management\security\license.ts" />
     <TypeScriptCompile Include="src\management\storage\assets.ts" />
-    <TypeScriptCompile Include="src\models\ExceptionResult.ts">
+    <TypeScriptCompile Include="src\models\exception-result.ts">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\models\management\company\metadata.ts" />
@@ -98,7 +98,7 @@
     <TypeScriptCompile Include="src\models\management\security\license.ts" />
     <TypeScriptCompile Include="src\models\management\storage\tenant-asset-detail.ts" />
     <TypeScriptCompile Include="src\models\utc-date.ts" />
-    <TypeScriptCompile Include="src\models\PaginatedContainer.ts" />
+    <TypeScriptCompile Include="src\models\paginated-container.ts" />
     <TypeScriptCompile Include="src\models\private\analytics\base-analytics-summary.ts">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </TypeScriptCompile>
