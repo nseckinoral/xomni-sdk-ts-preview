@@ -1,13 +1,15 @@
 ﻿module Models {
     export class UTCDate {
         private date: Date;
-        private excessMillisecond: string = "0000";
+        private excessMillisecond: string;
 
         constructor(date?: string) {
-            this.setDate(date);
+            if (date) {
+                this.setDate(date);
+            }
         }
 
-        toJSON(key?: any) {
+        toJSON() {
             return this.toUTCString()
         }
 
@@ -15,26 +17,19 @@
             return this.date;
         }
 
-        setDate(date?: string) {
-            if (date) {
-                Xomni.Utils.Validator.isDateValid("date",date);
-                this.keepExcessMillisecond(date);
-                this.date = new Date(date);
-                this.date.toJSON = this.toJSON;
-            }
+        setDate(date: string) {
+            Xomni.Utils.Validator.isDateValid("date", date);
+            this.keepExcessMillisecond(date);
+            this.date = new Date(date);
+            this.date.toJSON = this.toJSON;
         }
 
         toUTCString() {
             if (this.date) {
-                var dateAndTime = this.date.toString().split("T");
-                var timeZone = dateAndTime[1];
-                timeZone = timeZone.substr(0, 5);
                 var combinedDate = this.date.toISOString().substr(0, 11) +
                     this.date.toLocaleTimeString() + "." +
-                    this.date.getMilliseconds() + this.excessMillisecond + "" +
-                    timeZone.substr(0, 3) + ":" +
-                    timeZone.substr(3, 5);
-
+                    this.date.getMilliseconds() + this.excessMillisecond +
+                    this.getTimeZone();
                 return combinedDate;
             }
             else {
@@ -44,12 +39,25 @@
 
         private keepExcessMillisecond(date: string) {
             Xomni.Utils.Validator.isDateValid("date", date);
-            var dateAndTime = date.split("T");
-            var date = dateAndTime[0];
-            var time = dateAndTime[1];
-            var index = time.indexOf("+") || time.indexOf("-");
-            time = time.substring(index - 4, index);
-            this.excessMillisecond = time;
+            this.excessMillisecond = "";
+            if (date.indexOf("T") != -1 && (date.indexOf("+") != -1 || date.indexOf("-") != -1)) {
+                var dateAndTime = date.split("T");
+                var time = dateAndTime[1];
+                var index = time.indexOf("+");
+                index = index < 0 ? time.indexOf("-") : index;
+                time = time.substring(index - 4, index);
+                this.excessMillisecond = time;
+            }
+        }
+
+        getTimeZone() {
+            if (this.date) {
+                var splittedDate = this.date.toString().split(" ");
+                var timeZone = splittedDate[5];
+                timeZone = timeZone.substring(3, 8);
+                timeZone = timeZone.slice(0, 3) + ":" + timeZone.slice(3, 5);
+                return timeZone;
+            }
         }
     }
 }
