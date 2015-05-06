@@ -97,6 +97,7 @@
     <TypeScriptCompile Include="src\models\management\security\license-audit-logs.ts" />
     <TypeScriptCompile Include="src\models\management\security\license.ts" />
     <TypeScriptCompile Include="src\models\management\storage\tenant-asset-detail.ts" />
+    <TypeScriptCompile Include="src\models\private\mail\mail-subscription-purpose-type.ts" />
     <TypeScriptCompile Include="src\models\utc-date.ts" />
     <TypeScriptCompile Include="src\models\paginated-container.ts" />
     <TypeScriptCompile Include="src\models\private\analytics\base-analytics-summary.ts">
@@ -120,6 +121,7 @@
     <TypeScriptCompile Include="src\private\analytics\client-counters.ts" />
     <TypeScriptCompile Include="src\private\analytics\client-side-analytics-summary.ts" />
     <TypeScriptCompile Include="src\management\social\facebook.ts" />
+    <TypeScriptCompile Include="src\private\mail\status.ts" />
     <TypeScriptCompile Include="src\utils\url-generator.ts" />
     <TypeScriptCompile Include="src\utils\validator.ts" />
     <TypeScriptCompile Include="src\xomni.ts" />
@@ -129,6 +131,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bower.json" />
+    <TypeScriptCompile Include="src\models\private\mail\mail-subscription-status.ts" />
+    <TypeScriptCompile Include="src\models\private\mail\mail-subscription.ts" />
     <TypeScriptCompile Include="src\models\management\storage\tenant-asset.ts" />
   </ItemGroup>
   <ItemGroup />
