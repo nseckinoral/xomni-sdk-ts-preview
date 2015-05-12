@@ -71,7 +71,7 @@ module Xomni.Management.Storage.Assets {
         }
 
 
-        private StringToUint8Array(str: string): ArrayBuffer {
+        private StringToUint8Array(str: string): Uint8Array {
             var bufView = new Uint8Array(str.length);
             for (var i = 0, strLen = str.length; i < strLen; i++) {
                 bufView[i] = str.charCodeAt(i);
