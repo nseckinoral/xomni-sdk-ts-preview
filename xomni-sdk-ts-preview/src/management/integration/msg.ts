@@ -23,5 +23,9 @@ module Xomni.Management.Integration.MSG {
 
             this.httpProvider.post(this.uri, createRequest, success, error);
         }
+
+        delete(success: () => void, error: (error: Models.ExceptionResult) => void) {
+            this.httpProvider.delete(this.uri, success, error);
+        }
     }
 }
