@@ -28,29 +28,29 @@ var validPostRequestJson = {
 };
 
 
-describe('MSGClient.get', () => {
-    it("Should hit correct url", () => {
+describe('MSGClient.get',() => {
+    it("Should hit correct url",() => {
         TestHelpers.RequestUriTest($, "/management/integration/msg");
 
         var testClient = new Xomni.Management.Integration.MSG.MSGClient();
         testClient.get((r) => { }, err => { });
     });
 
-    it("Should use correct http method", () => {
+    it("Should use correct http method",() => {
         TestHelpers.RequestHttpMethodTest($, "Get");
 
         var testClient = new Xomni.Management.Integration.MSG.MSGClient();
         testClient.get((r) => { }, err => { });
     });
 
-    it("Should use correct http headers", () => {
+    it("Should use correct http headers",() => {
         TestHelpers.RequestHttpHeadersTest($);
 
         var testClient = new Xomni.Management.Integration.MSG.MSGClient();
         testClient.get((r) => { }, err => { });
     });
 
-    it("Should parse response successfully", () => {
+    it("Should parse response successfully",() => {
         TestHelpers.ResponseParseTest($, validGetResponse);
 
         var expectedSuccess = (r: Models.Management.Integration.MSGIntegration) => {
@@ -66,7 +66,7 @@ describe('MSGClient.get', () => {
         testClient.get(expectedSuccess, err => { });
     });
 
-    it("Should parse api exception response successfully", () => {
+    it("Should parse api exception response successfully",() => {
         TestHelpers.APIExceptionResponseTest($, 400);
 
         var expectedError = (exception: Models.ExceptionResult) => {
@@ -82,29 +82,29 @@ describe('MSGClient.get', () => {
 });
 
 
-describe('MSGClient.post', () => {
-    it("Should hit correct url", () => {
+describe('MSGClient.post',() => {
+    it("Should hit correct url",() => {
         TestHelpers.RequestUriTest($, "/management/integration/msg");
 
         var testClientX = new Xomni.Management.Integration.MSG.MSGClient();
-        testClientX.post(validPostRequestJson, (t) => { }, err => { });
+        testClientX.post(validPostRequestJson,(t) => { }, err => { });
     });
 
-    it("Should use correct http method", () => {
+    it("Should use correct http method",() => {
         TestHelpers.RequestHttpMethodTest($, "Post");
 
         var testClientX = new Xomni.Management.Integration.MSG.MSGClient();
-        testClientX.post(validPostRequestJson, (t) => { }, err => { });
+        testClientX.post(validPostRequestJson,(t) => { }, err => { });
     });
 
-    it("Should use correct http headers", () => {
+    it("Should use correct http headers",() => {
         TestHelpers.RequestHttpHeadersTest($);
 
         var testClientX = new Xomni.Management.Integration.MSG.MSGClient();
-        testClientX.post(validPostRequestJson, (t) => { }, err => { });
+        testClientX.post(validPostRequestJson,(t) => { }, err => { });
     });
 
-    it("Should parse request successfully", () => {
+    it("Should parse request successfully",() => {
         var parseMethod = (request: Models.Management.Integration.MSGIntegrationRequest) => {
             expect(request).toEqual(validPostRequestJson);
             expect(request.Email).toEqual("developer@xomni.com");
@@ -115,14 +115,14 @@ describe('MSGClient.post', () => {
         TestHelpers.RequestParseTest($, parseMethod);
 
         var testClientX = new Xomni.Management.Integration.MSG.MSGClient();
-        testClientX.post(validPostRequestJson, (t) => { }, err => { });
+        testClientX.post(validPostRequestJson,(t) => { }, err => { });
     });
 
-    it("Should parse response successfully", () => {
+    it("Should parse response successfully",() => {
         TestHelpers.ResponseParseTest($, validPostResponseJson);
 
         var testClientX = new Xomni.Management.Integration.MSG.MSGClient();
-        testClientX.post(validPostRequestJson, (t: Models.Management.Integration.MSGIntegrationResponse) => {
+        testClientX.post(validPostRequestJson,(t: Models.Management.Integration.MSGIntegrationResponse) => {
             expect(t.Email).toEqual("developer@xomni.com");
             expect(t.Password).toEqual("Password");
             expect(t.SsoUrl).toEqual("http://xomni.com");
@@ -134,15 +134,15 @@ describe('MSGClient.post', () => {
         }, err => { });
     });
 
-    it("Should raise exception with invalid parameters.", () => {
+    it("Should raise exception with invalid parameters.",() => {
         expect(() => {
             var invalidRequest = <Models.Management.Integration.MSGIntegrationRequest>
                 {
                 };
 
             new Xomni.Management.Integration.MSG.MSGClient().
-                post(invalidRequest, () => { }, err => { })
-            })
+                post(invalidRequest,() => { }, err => { })
+        })
             .toThrow(new Error("Email could not be null or empty.")
             );
 
@@ -153,8 +153,8 @@ describe('MSGClient.post', () => {
                 };
 
             new Xomni.Management.Integration.MSG.MSGClient().
-                post(invalidRequest, () => { }, err => { })
-            })
+                post(invalidRequest,() => { }, err => { })
+        })
             .toThrow(new Error("FirstName could not be null or empty.")
             );
 
@@ -166,13 +166,13 @@ describe('MSGClient.post', () => {
                 };
 
             new Xomni.Management.Integration.MSG.MSGClient().
-                post(invalidRequest, () => { }, err => { })
-            })
+                post(invalidRequest,() => { }, err => { })
+        })
             .toThrow(new Error("LastName could not be null or empty.")
             );
     });
 
-    it("Should parse api exception response successfully", () => {
+    it("Should parse api exception response successfully",() => {
         TestHelpers.APIExceptionResponseTest($, 400);
 
         var expectedError = (exception: Models.ExceptionResult) => {
@@ -183,6 +183,43 @@ describe('MSGClient.post', () => {
         };
 
         var testClientX = new Xomni.Management.Integration.MSG.MSGClient();
-        testClientX.post(validPostRequestJson, (t) => { }, expectedError);
+        testClientX.post(validPostRequestJson,(t) => { }, expectedError);
+    });
+});
+
+describe('MSGClient.delete',() => {
+    it("Should hit correct url",() => {
+        TestHelpers.RequestUriTest($, "/management/integration/msg");
+
+        var testClient = new Xomni.Management.Integration.MSG.MSGClient();
+        testClient.delete(() => { }, err => { });
+    });
+
+    it("Should use correct http method",() => {
+        TestHelpers.RequestHttpMethodTest($, "Delete");
+
+        var testClient = new Xomni.Management.Integration.MSG.MSGClient();
+        testClient.delete(() => { }, err => { });
+    });
+
+    it("Should use correct http headers",() => {
+        TestHelpers.RequestHttpHeadersTest($);
+
+        var testClient = new Xomni.Management.Integration.MSG.MSGClient();
+        testClient.delete(() => { }, err => { });
+    });
+
+    it("Should parse api exception response successfully",() => {
+        TestHelpers.APIExceptionResponseTest($, 404);
+
+        var expectedError = (exception: Models.ExceptionResult) => {
+            expect(exception.HttpStatusCode).toEqual(404);
+            expect(exception.FriendlyDescription).toEqual("Generic error friendly description.");
+            expect(exception.IdentifierGuid).toEqual("7358fe16-3925-4951-9a77-fca4f9e167b0");
+            expect(exception.IdentifierTick).toEqual(635585478999549713);
+        };
+
+        var testClient = new Xomni.Management.Integration.MSG.MSGClient();
+        testClient.delete(() => { }, expectedError);
     });
 });
