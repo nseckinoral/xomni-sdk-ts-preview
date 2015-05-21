@@ -2,7 +2,4 @@
 src/**/*.js
 src/**/*.js.map
 src/**/*.d.ts
-dist/**/*.js
-dist/**/*.js.map
-dist/**/*.d.ts
 bower_components/
