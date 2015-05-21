@@ -1,6 +1,6 @@
 {
     "name": "xomni-sdk-ts",
-    "version": "v3.0.0-alpha",
+    "version": "v3.1.0-alpha",
     "main": [ "xomni-sdk-ts-preview/dist/xomni.js", "xomni-sdk-ts-preview/dist/xomni.js.map", "xomni-sdk-ts-preview/dist/xomni.d.ts" ],
     "keywords": "",
     "dependencies": {
