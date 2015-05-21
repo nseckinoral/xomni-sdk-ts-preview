@@ -1,9 +1,26 @@
 {
-    "name": "xomni-sdk-ts",
-    "version": "v3.1.0-alpha",
-    "main": [ "xomni-sdk-ts-preview/dist/xomni.js", "xomni-sdk-ts-preview/dist/xomni.js.map", "xomni-sdk-ts-preview/dist/xomni.d.ts" ],
-    "keywords": "",
-    "dependencies": {
-        "jquery": "~2.0.0"
-    }
+  "name": "xomni-sdk-ts-preview",
+  "version": "3.1.0",
+  "homepage": "https://github.com/XomniCloud/xomni-sdk-ts-preview",
+  "authors": [
+    "XOMNI, Inc."
+  ],
+  "main": [ 
+	"xomni-sdk-ts-preview/dist/xomni.js", 
+	"xomni-sdk-ts-preview/dist/xomni.js.map", 
+	"xomni-sdk-ts-preview/dist/xomni.d.ts" 
+  ],
+  "description": "xomni ts typescript sdk",
+  "moduleType": [
+    "amd"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+	"xomni-sdk-ts-preview-test"
+  ]
 }
