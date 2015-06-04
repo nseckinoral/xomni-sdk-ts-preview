@@ -16,11 +16,15 @@
   ],
   "license": "MIT",
   "ignore": [
+    "xomni-sdk-ts-preview.sln",
     "**/.*",
     "node_modules",
-    "bower_components",
+    "bower_components",    
     "test",
     "tests",
-	"xomni-sdk-ts-preview-test"
+	  "xomni-sdk-ts-preview-test",
+    "definitions",
+    "src",
+    "xomni-sdk-ts-preview.csproj"
   ]
 }
