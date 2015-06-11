@@ -555,7 +555,10 @@ var Xomni;
                         this.uri = "/management/integration/endpoint";
                     }
                     EndpointClient.prototype.get = function (success, error) {
-                        this.httpProvider.get(this.uri, success, error);
+                        var _this = this;
+                        this.httpProvider.get(this.uri, function (detailJson) {
+                            success(_this.convertToEndpointDetail(detailJson));
+                        }, error);
                     };
                     EndpointClient.prototype.post = function (endpointCreateRequest, success, error) {
                         if (!endpointCreateRequest.AdminMail) {
@@ -570,6 +573,15 @@ var Xomni;
                     };
                     EndpointClient.prototype.delete = function (success, error) {
                         this.httpProvider.delete(this.uri, success, error);
+                    };
+                    EndpointClient.prototype.convertToEndpointDetail = function (detailJson) {
+                        var endpointDetail = {
+                            ManagementPortalUrl: detailJson.ManagementPortalUrl,
+                            ServiceName: detailJson.ServiceName,
+                            Status: detailJson.Status,
+                            CreationDate: detailJson.CreationDate ? new Models.UTCDate(detailJson.CreationDate) : null,
+                        };
+                        return endpointDetail;
                     };
                     return EndpointClient;
                 })(Xomni.BaseClient);

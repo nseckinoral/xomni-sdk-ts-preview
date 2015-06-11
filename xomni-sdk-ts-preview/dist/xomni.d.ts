@@ -125,6 +125,7 @@ declare module Xomni.Management.Integration.Endpoint {
         get(success: (result: Models.Management.Integration.EndpointDetail) => void, error: (error: Models.ExceptionResult) => void): void;
         post(endpointCreateRequest: Models.Management.Integration.EndpointCreateRequest, success: () => void, error: (error: Models.ExceptionResult) => void): void;
         delete(success: () => void, error: (error: Models.ExceptionResult) => void): void;
+        private convertToEndpointDetail(detailJson);
     }
 }
 declare module Xomni.Management.Integration.MSG {
