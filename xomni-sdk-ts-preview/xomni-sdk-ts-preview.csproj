@@ -130,7 +130,6 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bower.json" />
     <TypeScriptCompile Include="src\models\private\mail\mail-subscription-status.ts" />
     <TypeScriptCompile Include="src\models\private\mail\mail-subscription.ts" />
     <TypeScriptCompile Include="src\models\management\storage\tenant-asset.ts" />
