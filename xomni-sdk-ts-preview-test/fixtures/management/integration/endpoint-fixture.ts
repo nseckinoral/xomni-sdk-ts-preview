@@ -3,7 +3,8 @@
 var validResponse = {
     "ServiceName": "test",
     "ManagementPortalUrl": "http://xomni.com",
-    "Status": 1
+    "Status": 1,
+    "CreationDate": "2014-08-08T13:18:45.473"
 };
 
 var validRequestJson = {
@@ -12,43 +13,44 @@ var validRequestJson = {
     "ServiceTier": 0
 };
 
-var validCreateRequest : Models.Management.Integration.EndpointCreateRequest = {
+var validCreateRequest: Models.Management.Integration.EndpointCreateRequest = {
     "AdminMail": "test@xomni.com",
     "ServiceName": "test",
     "ServiceTier": 0
 };
 
 
-describe('EndpointClient.get', () => {
-    it("Should hit correct url", () => {
+describe('EndpointClient.get',() => {
+    it("Should hit correct url",() => {
         TestHelpers.RequestUriTest($, "/management/integration/endpoint");
 
         var testClient = new Xomni.Management.Integration.Endpoint.EndpointClient();
         testClient.get((r) => { }, err => { });
     });
 
-    it("Should use correct http method", () => {
+    it("Should use correct http method",() => {
         TestHelpers.RequestHttpMethodTest($, "Get");
 
         var testClient = new Xomni.Management.Integration.Endpoint.EndpointClient();
         testClient.get((r) => { }, err => { });
     });
 
-    it("Should use correct http headers", () => {
+    it("Should use correct http headers",() => {
         TestHelpers.RequestHttpHeadersTest($);
 
         var testClient = new Xomni.Management.Integration.Endpoint.EndpointClient();
         testClient.get((r) => { }, err => { });
     });
 
-    it("Should parse response successfully", () => {
+    it("Should parse response successfully",() => {
         TestHelpers.ResponseParseTest($, validResponse);
 
-        var expectedSuccess = (r : Models.Management.Integration.EndpointDetail) => {
+        var expectedSuccess = (r: Models.Management.Integration.EndpointDetail) => {
             expect(r.ServiceName).toEqual("test");
             expect(r.ManagementPortalUrl).toEqual("http://xomni.com");
             expect(r.Status).toEqual(1);
             expect(r.Status).toEqual(Models.Management.Integration.EndpointStatusType.InProgress);
+            expect(r.CreationDate).toEqual(new Models.UTCDate("2014-08-08T13:18:45.473"));
         };
 
         var testClient = new Xomni.Management.Integration.Endpoint.EndpointClient();
@@ -57,7 +59,7 @@ describe('EndpointClient.get', () => {
 
 
 
-    it("Should parse api exception response successfully", () => {
+    it("Should parse api exception response successfully",() => {
         TestHelpers.APIExceptionResponseTest($, 400);
 
         var expectedError = (exception: Models.ExceptionResult) => {
@@ -73,29 +75,29 @@ describe('EndpointClient.get', () => {
 });
 
 
-describe('EndpointClient.post', () => {
-    it("Should hit correct url", () => {
+describe('EndpointClient.post',() => {
+    it("Should hit correct url",() => {
         TestHelpers.RequestUriTest($, "/management/integration/endpoint");
 
         var testClientX = new Xomni.Management.Integration.Endpoint.EndpointClient();
-        testClientX.post(validCreateRequest, () => { }, err => { });
+        testClientX.post(validCreateRequest,() => { }, err => { });
     });
 
-    it("Should use correct http method", () => {
+    it("Should use correct http method",() => {
         TestHelpers.RequestHttpMethodTest($, "Post");
 
         var testClientX = new Xomni.Management.Integration.Endpoint.EndpointClient();
-        testClientX.post(validCreateRequest, () => { }, err => { });
+        testClientX.post(validCreateRequest,() => { }, err => { });
     });
 
-    it("Should use correct http headers", () => {
+    it("Should use correct http headers",() => {
         TestHelpers.RequestHttpHeadersTest($);
 
         var testClientX = new Xomni.Management.Integration.Endpoint.EndpointClient();
-        testClientX.post(validCreateRequest, () => { }, err => { });
+        testClientX.post(validCreateRequest,() => { }, err => { });
     });
 
-    it("Should parse request seccessfully", () => {
+    it("Should parse request seccessfully",() => {
         var parseMethod = (request: Models.Management.Integration.EndpointCreateRequest) => {
             expect(request).toEqual(validRequestJson);
             expect(request.AdminMail).toEqual("test@xomni.com");
@@ -107,20 +109,20 @@ describe('EndpointClient.post', () => {
         TestHelpers.RequestParseTest($, parseMethod);
 
         var testClientX = new Xomni.Management.Integration.Endpoint.EndpointClient();
-        testClientX.post(validCreateRequest, () => { }, err => { });
+        testClientX.post(validCreateRequest,() => { }, err => { });
     });
 
-    it("Should raise exception with invalid parameters.", () => {
+    it("Should raise exception with invalid parameters.",() => {
         expect(() => {
             var invalidRequest = <Models.Management.Integration.EndpointCreateRequest>
-            {
-            };
+                {
+                };
 
             new Xomni.Management.Integration.Endpoint.EndpointClient().
-                post(invalidRequest, () => { }, err => { })
-            })
+                post(invalidRequest,() => { }, err => { })
+        })
             .toThrow(new Error("AdminMail could not be null or empty.")
-        );
+            );
 
         expect(() => {
             var invalidRequest = <Models.Management.Integration.EndpointCreateRequest>
@@ -129,13 +131,13 @@ describe('EndpointClient.post', () => {
                 };
 
             new Xomni.Management.Integration.Endpoint.EndpointClient().
-                post(invalidRequest, () => { }, err => { })
-            })
+                post(invalidRequest,() => { }, err => { })
+        })
             .toThrow(new Error("ServiceName could not be null or empty.")
-        );
+            );
     });
 
-    it("Should parse api exception response successfully", () => {
+    it("Should parse api exception response successfully",() => {
         TestHelpers.APIExceptionResponseTest($, 400);
 
         var expectedError = (exception: Models.ExceptionResult) => {
@@ -146,33 +148,33 @@ describe('EndpointClient.post', () => {
         };
 
         var testClientX = new Xomni.Management.Integration.Endpoint.EndpointClient();
-        testClientX.post(validCreateRequest, () => { }, expectedError);
+        testClientX.post(validCreateRequest,() => { }, expectedError);
     });
 });
 
-describe('EndpointClient.delete', () => {
-    it("Should hit correct url", () => {
+describe('EndpointClient.delete',() => {
+    it("Should hit correct url",() => {
         TestHelpers.RequestUriTest($, "/management/integration/endpoint");
 
         var testClient = new Xomni.Management.Integration.Endpoint.EndpointClient();
         testClient.delete(() => { }, err => { });
     });
 
-    it("Should use correct http method", () => {
+    it("Should use correct http method",() => {
         TestHelpers.RequestHttpMethodTest($, "Delete");
 
         var testClient = new Xomni.Management.Integration.Endpoint.EndpointClient();
         testClient.delete(() => { }, err => { });
     });
 
-    it("Should use correct http headers", () => {
+    it("Should use correct http headers",() => {
         TestHelpers.RequestHttpHeadersTest($);
 
         var testClient = new Xomni.Management.Integration.Endpoint.EndpointClient();
         testClient.delete(() => { }, err => { });
     });
 
-    it("Should parse api exception response successfully", () => {
+    it("Should parse api exception response successfully",() => {
         TestHelpers.APIExceptionResponseTest($, 400);
 
         var expectedError = (exception: Models.ExceptionResult) => {

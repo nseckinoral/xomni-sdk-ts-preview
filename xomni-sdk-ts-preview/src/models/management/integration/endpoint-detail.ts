@@ -4,5 +4,6 @@ module Models.Management.Integration {
         ServiceName: string;
         ManagementPortalUrl: string;
         Status: EndpointStatusType;
+        CreationDate: UTCDate;
     }
 }
