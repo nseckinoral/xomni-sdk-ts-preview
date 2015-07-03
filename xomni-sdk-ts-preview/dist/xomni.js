@@ -509,7 +509,7 @@ var Xomni;
                     __extends(TrendingActionTypesClient, _super);
                     function TrendingActionTypesClient() {
                         _super.apply(this, arguments);
-                        this.uri = "/management/configuration/tenantactiontypes";
+                        this.uri = "/management/configuration/trendingactiontypes";
                     }
                     TrendingActionTypesClient.prototype.put = function (actionTypes, success, error) {
                         this.httpProvider.put(this.uri, actionTypes, success, error);

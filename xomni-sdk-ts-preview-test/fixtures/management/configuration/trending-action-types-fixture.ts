@@ -32,7 +32,7 @@ var samplePutRequest: Array<Models.Management.Configuration.TrendingActionTypeVa
 describe('TrendingActionTypesClient.put', () => {
 
     it("Should hit correct url", () => {
-        TestHelpers.RequestUriTest($, "/management/configuration/tenantactiontypes");
+        TestHelpers.RequestUriTest($, "/management/configuration/trendingactiontypes");
         var testClient = new Xomni.Management.Configuration.TrendingActionTypes.TrendingActionTypesClient;
         testClient.put(samplePutRequest, suc => { }, err => { });
     })
@@ -122,7 +122,7 @@ describe('TrendingActionTypesClient.put', () => {
 describe('TrendingActionTypesClient.get', () => {
 
     it("Should hit correct url", () => {
-        TestHelpers.RequestUriTest($, "/management/configuration/tenantactiontypes");
+        TestHelpers.RequestUriTest($, "/management/configuration/trendingactiontypes");
         var testClient = new Xomni.Management.Configuration.TrendingActionTypes.TrendingActionTypesClient;
         testClient.get(suc => { }, err => { });
     })
