@@ -4,16 +4,16 @@ var Xomni;
         function HttpProvider() {
         }
         HttpProvider.prototype.get = function (uri, success, error) {
-            this.sendHttpRequest(0 /* Get */, uri, success, error);
+            this.sendHttpRequest(HttpMethod.Get, uri, success, error);
         };
         HttpProvider.prototype.put = function (uri, data, success, error) {
-            this.sendHttpRequest(2 /* Put */, uri, success, error, data);
+            this.sendHttpRequest(HttpMethod.Put, uri, success, error, data);
         };
         HttpProvider.prototype.post = function (uri, data, success, error) {
-            this.sendHttpRequest(1 /* Post */, uri, success, error, data);
+            this.sendHttpRequest(HttpMethod.Post, uri, success, error, data);
         };
         HttpProvider.prototype.delete = function (uri, success, error) {
-            this.sendHttpRequest(4 /* Delete */, uri, success, error);
+            this.sendHttpRequest(HttpMethod.Delete, uri, success, error);
         };
         HttpProvider.prototype.sendHttpRequest = function (httpMethod, uri, success, error, data) {
             var currentClientContext = this.getCurrentClientContext();
@@ -83,12 +83,13 @@ var Xomni;
     Xomni.ClientContext = ClientContext;
     Xomni.currentContext;
 })(Xomni || (Xomni = {}));
-var __extends = this.__extends || function (d, b) {
+var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
     d.prototype = new __();
 };
+/// <reference path="../../xomni.ts" />
 var Xomni;
 (function (Xomni) {
     var Management;
@@ -163,6 +164,7 @@ var Xomni;
         })(Company = Management.Company || (Management.Company = {}));
     })(Management = Xomni.Management || (Xomni.Management = {}));
 })(Xomni || (Xomni = {}));
+/// <reference path="../../xomni.ts" />
 var Xomni;
 (function (Xomni) {
     var Management;
@@ -217,6 +219,7 @@ var Xomni;
         })(Company = Management.Company || (Management.Company = {}));
     })(Management = Xomni.Management || (Xomni.Management = {}));
 })(Xomni || (Xomni = {}));
+/// <reference path="../../xomni.ts" />
 var Xomni;
 (function (Xomni) {
     var Management;
@@ -322,6 +325,7 @@ var Xomni;
         })(Company = Management.Company || (Management.Company = {}));
     })(Management = Xomni.Management || (Xomni.Management = {}));
 })(Xomni || (Xomni = {}));
+/// <reference path="../../xomni.ts" />
 var Xomni;
 (function (Xomni) {
     var Management;
@@ -373,6 +377,7 @@ var Xomni;
         })(Configuration = Management.Configuration || (Management.Configuration = {}));
     })(Management = Xomni.Management || (Xomni.Management = {}));
 })(Xomni || (Xomni = {}));
+/// <reference path="../../xomni.ts" />
 var Xomni;
 (function (Xomni) {
     var Management;
@@ -423,6 +428,7 @@ var Xomni;
         })(Configuration = Management.Configuration || (Management.Configuration = {}));
     })(Management = Xomni.Management || (Xomni.Management = {}));
 })(Xomni || (Xomni = {}));
+/// <reference path="../../xomni.ts" />
 var Xomni;
 (function (Xomni) {
     var Management;
@@ -497,6 +503,7 @@ var Xomni;
     })();
     Xomni.Dictionary = Dictionary;
 })(Xomni || (Xomni = {}));
+/// <reference path="../../xomni.ts" />
 var Xomni;
 (function (Xomni) {
     var Management;
@@ -540,6 +547,9 @@ var Models;
     })(Management = Models.Management || (Models.Management = {}));
 })(Models || (Models = {}));
 ;
+/// <reference path="endpoint-status-type.ts" />
+/// <reference path="../../xomni.ts" />
+/// <reference path="../../models/management/integration/endpoint-detail.ts" />
 var Xomni;
 (function (Xomni) {
     var Management;
@@ -567,9 +577,7 @@ var Xomni;
                         if (!endpointCreateRequest.ServiceName) {
                             throw new Error("ServiceName could not be null or empty.");
                         }
-                        this.httpProvider.post(this.uri, endpointCreateRequest, function (t) {
-                            success();
-                        }, error);
+                        this.httpProvider.post(this.uri, endpointCreateRequest, function (t) { success(); }, error);
                     };
                     EndpointClient.prototype.delete = function (success, error) {
                         this.httpProvider.delete(this.uri, success, error);
@@ -590,6 +598,7 @@ var Xomni;
         })(Integration = Management.Integration || (Management.Integration = {}));
     })(Management = Xomni.Management || (Xomni.Management = {}));
 })(Xomni || (Xomni = {}));
+/// <reference path="../../xomni.ts" />
 var Xomni;
 (function (Xomni) {
     var Management;
@@ -629,6 +638,7 @@ var Xomni;
         })(Integration = Management.Integration || (Management.Integration = {}));
     })(Management = Xomni.Management || (Xomni.Management = {}));
 })(Xomni || (Xomni = {}));
+/// <reference path="../../xomni.ts" />
 var Xomni;
 (function (Xomni) {
     var Management;
@@ -699,6 +709,7 @@ var Xomni;
         })(Security = Management.Security || (Management.Security = {}));
     })(Management = Xomni.Management || (Xomni.Management = {}));
 })(Xomni || (Xomni = {}));
+/// <reference path="../../xomni.ts" />
 var Xomni;
 (function (Xomni) {
     var Management;
@@ -829,6 +840,7 @@ var Models;
     })(Management = Models.Management || (Models.Management = {}));
 })(Models || (Models = {}));
 ;
+/// <reference path="../../xomni.ts" />
 var Xomni;
 (function (Xomni) {
     var Management;
@@ -920,7 +932,10 @@ var Models;
         };
         UTCDate.prototype.toUTCString = function () {
             if (this.date) {
-                var combinedDate = this.date.toISOString().substr(0, 11) + this.date.toLocaleTimeString() + "." + this.date.getMilliseconds() + this.excessMillisecond + this.getTimeZone();
+                var combinedDate = this.date.toISOString().substr(0, 11) +
+                    this.date.toLocaleTimeString() + "." +
+                    this.date.getMilliseconds() + this.excessMillisecond +
+                    this.getTimeZone();
                 return combinedDate;
             }
             else {
@@ -952,6 +967,7 @@ var Models;
     })();
     Models.UTCDate = UTCDate;
 })(Models || (Models = {}));
+/// <reference path="../../xomni.ts" />
 var Xomni;
 (function (Xomni) {
     var Private;
@@ -982,6 +998,7 @@ var Xomni;
         })(Analytics = Private.Analytics || (Private.Analytics = {}));
     })(Private = Xomni.Private || (Xomni.Private = {}));
 })(Xomni || (Xomni = {}));
+/// <reference path="../../xomni.ts" />
 var Xomni;
 (function (Xomni) {
     var Private;
@@ -1046,6 +1063,7 @@ var Xomni;
         })(Analytics = Private.Analytics || (Private.Analytics = {}));
     })(Private = Xomni.Private || (Xomni.Private = {}));
 })(Xomni || (Xomni = {}));
+/// <reference path="../../xomni.ts" />
 var Xomni;
 (function (Xomni) {
     var Management;
@@ -1083,6 +1101,7 @@ var Xomni;
         })(Social = Management.Social || (Management.Social = {}));
     })(Management = Xomni.Management || (Xomni.Management = {}));
 })(Xomni || (Xomni = {}));
+/// <reference path="../../xomni.ts" />
 var Xomni;
 (function (Xomni) {
     var Private;

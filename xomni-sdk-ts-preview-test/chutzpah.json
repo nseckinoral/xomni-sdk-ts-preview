@@ -1,13 +1,20 @@
 ﻿{
-    "References": [
-        { "Path": "definitions/jquery/jquery.d.ts" },
-        { "Path": "bower_components/jquery/jquery.js" },
-        { "Path": "definitions/jasmine/jasmine.d.ts" },
-        { "Path": "test-helpers.ts" },
-        { "Path": "../xomni-sdk-ts-preview/dist/xomni.d.ts" },
-        { "Path": "../xomni-sdk-ts-preview/dist/xomni.js" }
-    ],
-    "Tests": [
-        { "Path": "fixtures" }
-    ]
+  "Compile": {
+    "Mode": "External",
+    "Extensions": [ ".ts" ],
+    "ExtensionsWithNoOutput": [ ".d.ts" ]
+  },
+  "References": [
+    { "Path": "bower_components/jquery/jquery.js" },
+    { "Path": "bower_components/jasmine/lib/jasmine-core/jasmine.js" },
+    { "Path": "bower_components/jasmine-ajax/lib/moc-ajax.js"},
+    { "Path": "test-helpers.ts","Exclude": "test-helpers.d.ts" },    
+    { "Path": "../xomni-sdk-ts-preview/dist/xomni.js" }
+  ],
+  "Tests": [
+    {
+      "Include": "*/fixtures/*.ts",
+      "Exclude": "*/fixtures/*.d.ts"
+    }
+  ]
 }
