@@ -299,14 +299,6 @@ describe('DeviceClient.post', () => {
 
     it("Should parse request successfully", () => {
         var parseMethod = (request: Models.Management.Company.Device) => {
-            expect(request).toEqual({
-                "DeviceId": "def1d372-21b5-49af-824b-2d62e3e9f840",
-                "Description": "Test Device",
-                "DeviceTypeId": 1,
-                "ExpirationDate": "2014-08-08T12:37:28.8573855+03:00",
-                "RelatedLicenceId": 5
-            });
-
             expect(request.DeviceId).toEqual(validDeviceForPost.DeviceId);
             expect(request.Description).toEqual(validDeviceForPost.Description);
             expect(request.DeviceTypeId).toEqual(validDeviceForPost.DeviceTypeId);
@@ -469,12 +461,9 @@ describe('DeviceClient.put', () => {
 
     it("Should parse request successfully", () => {
         var parseMethod = (request: Models.Management.Company.Device) => {
-            expect(request).toEqual({
-                "Description": "Test Device",
-                "DeviceTypeId": 2,
-                "ExpirationDate": "2014-08-08T15:30:27.2415417+03:00",
-                "RelatedLicenceId": 10,
-            });
+            expect(request.Description).toEqual("Test Device");
+            expect(request.DeviceTypeId).toEqual(2);
+            expect(request.RelatedLicenceId).toEqual(10);
 
             expect(request.Description).toEqual(validDeviceForPut.Description);
             expect(request.DeviceTypeId).toEqual(validDeviceForPut.DeviceTypeId);

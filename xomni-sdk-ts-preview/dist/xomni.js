@@ -933,8 +933,8 @@ var Models;
         UTCDate.prototype.toUTCString = function () {
             if (this.date) {
                 var combinedDate = this.date.toISOString().substr(0, 11) +
-                    this.date.toLocaleTimeString() + "." +
-                    this.date.getMilliseconds() + this.excessMillisecond +
+                    this.date.getHours() + ":" + this.date.getMinutes() + ":" + this.date.getSeconds() + "." +
+                    this.date.getUTCMilliseconds() + this.excessMillisecond +
                     this.getTimeZone();
                 return combinedDate;
             }
