@@ -164,7 +164,9 @@ declare module Xomni.Management.Storage.Assets {
     }
 }
 declare module Models {
-    interface ExceptionResult {
+    class ExceptionResult implements Error {
+        name: string;
+        message: string;
         IdentifierGuid: string;
         IdentifierTick: number;
         FriendlyDescription: string;

@@ -810,6 +810,15 @@ var Xomni;
 })(Xomni || (Xomni = {}));
 var Models;
 (function (Models) {
+    var ExceptionResult = (function () {
+        function ExceptionResult() {
+        }
+        return ExceptionResult;
+    })();
+    Models.ExceptionResult = ExceptionResult;
+})(Models || (Models = {}));
+var Models;
+(function (Models) {
     var Management;
     (function (Management) {
         var Configuration;
