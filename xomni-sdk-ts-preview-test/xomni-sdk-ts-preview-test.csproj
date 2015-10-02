@@ -77,6 +77,7 @@
     <TypeScriptCompile Include="fixtures\private\analytics\client-counters-fixture.ts" />
     <TypeScriptCompile Include="fixtures\private\analytics\client-side-analytics-summary-fixture.ts" />
     <TypeScriptCompile Include="fixtures\private\mail\status-fixture.ts" />
+    <TypeScriptCompile Include="fixtures\utils\exception-fixture.ts" />
     <TypeScriptCompile Include="fixtures\utils\url-generator-fixture.ts" />
     <TypeScriptCompile Include="fixtures\utils\validator-fixture.ts" />
     <TypeScriptCompile Include="fixtures\xomni-fixture.ts" />
